@@ -122,6 +122,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CRUDactor.cs" />
+    <Compile Include="Models\CRUDcomment.cs" />
+    <Compile Include="Models\CRUDcomplaint.cs" />
+    <Compile Include="Models\CRUDmovie.cs" />
+    <Compile Include="Models\CRUDmovieActor.cs" />
+    <Compile Include="Models\CRUDrating.cs" />
     <Compile Include="Models\CRUDuser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
