@@ -1,12 +1,11 @@
-﻿@model System.Data.SqlClient.SqlDataReader
-@{ 
-    System.Data.SqlClient.SqlDataReader reader = Model;
-}
-@*@{
+﻿@{
     ViewBag.Title = "Home Page";
 }
-
-<h2>Home Page</h2>*@
+@model System.Data.SqlClient.SqlDataReader
+@{
+    System.Data.SqlClient.SqlDataReader reader = Model;
+}
+<h2>Home Page</h2>
 
 
 @while (reader.Read())
@@ -15,6 +14,6 @@
 }
 
 
-@*<br />
+<br />
 <a href="../../Home/SignUp">Signup</a><br /><br />
-<a href="../../Home/LogIn">Login</a><br /><br />*@
+<a href="../../Home/LogIn">Login</a><br /><br />

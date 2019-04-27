@@ -11,7 +11,7 @@ namespace DB_Project.Models
     {
         public static SqlDataReader GetUsers()
         {
-            string connectionString = "Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
+            string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
             string queryString = "SELECT * FROM Users";
             SqlConnection connection = new SqlConnection(connectionString);
