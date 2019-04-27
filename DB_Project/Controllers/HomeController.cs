@@ -28,7 +28,7 @@ namespace DB_Project.Controllers
         }
         public ActionResult Signupfunc(string email, string name, string usertype, string dateOfBirth, string password)
         {
-            int ret;
+            int ret = 4;
             //userProc uproc = new userProc();
             //ObjectParameter flag = new ObjectParameter("flag", typeof(int));
             //var value = uproc.add_user(name, usertype, email, password, dateOfBirth, flag);
@@ -38,7 +38,7 @@ namespace DB_Project.Controllers
         }
         public ActionResult Loginfunc(string email, string password)
         {
-            int ret;
+            int ret = 5;
             //userProc uproc = new userProc();
             //ObjectParameter flag = new ObjectParameter("flag", typeof(int));
             //var value = uproc.login_user(email, password, flag);
