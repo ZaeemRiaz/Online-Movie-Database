@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DB_Project.Models;
 
 namespace DB_Project.Controllers
 {
@@ -12,7 +13,7 @@ namespace DB_Project.Controllers
         //GET: Home
         public ActionResult Index()
         {
-            return View();
+            return View(CRUDuser.GetUsers());
         }
         public ActionResult Signup()
         {
@@ -39,6 +40,9 @@ namespace DB_Project.Controllers
         public ActionResult Loginfunc(string email, string password)
         {
             int ret = 5;
+
+            
+
             //userProc uproc = new userProc();
             //ObjectParameter flag = new ObjectParameter("flag", typeof(int));
             //var value = uproc.login_user(email, password, flag);
