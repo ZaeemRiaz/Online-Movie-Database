@@ -29,3 +29,15 @@ public static SqlDataReader GetUsers()
         return null;
     }
 }
+//code for old models
+
+userProc uproc = new userProc();
+ObjectParameter flag = new ObjectParameter("flag", typeof(int));
+var value = uproc.login_user(email, password, flag);
+int ret = Convert.ToInt32(flag.Value);
+ret += 2;
+
+userProc uproc = new userProc();
+ObjectParameter flag = new ObjectParameter("flag", typeof(int));
+var value = uproc.add_user(name, usertype, email, password, dateOfBirth, flag);
+int ret = Convert.ToInt32(flag.Value);
