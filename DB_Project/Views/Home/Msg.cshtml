@@ -1,0 +1,33 @@
+﻿@model int
+@{
+    ViewBag.Title = "Msg";
+}
+<html>
+<body>
+    <br />
+    <br />
+    @if (Model == 0)
+    {
+        <p>Sign-Up Failed!</p>
+    }
+    else if (Model == 1)
+    {
+        <p>User Registered!</p>
+    }
+    else if (Model == 2)
+    {
+        <p>Log-In Failed!</p>
+    }
+    else if (Model == 3)
+    {
+        <p>User Logged-In!</p>
+    }
+    <br />
+    <br />
+    <a href="../../Home/Index">Index</a><br />
+    <a href="../../Home/SignUp">SignUp</a><br />
+    <a href="../../Home/Login">Login</a><br />
+</body>
+</html>
+
+
