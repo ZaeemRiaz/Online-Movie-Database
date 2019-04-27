@@ -3,18 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DB_Project.Models;
 
 namespace DB_Project.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: Home
+
+        //GET: Home
         public ActionResult Index()
-        {
-            return View();
-        }
-        public ActionResult Login()
         {
             return View();
         }
@@ -22,9 +18,9 @@ namespace DB_Project.Controllers
         {
             return View();
         }
-        public ActionResult Msg(int param)
+        public ActionResult Login()
         {
-            return View(param);
+            return View();
         }
         public ActionResult Signupfunc(string email, string name, string usertype, string dateOfBirth, string password)
         {
@@ -44,6 +40,10 @@ namespace DB_Project.Controllers
             ret += 2;
 
             return RedirectToAction("Msg", new { param = ret });
+        }
+        public ActionResult Msg(int param)
+        {
+            return View(param);
         }
     }
 }
