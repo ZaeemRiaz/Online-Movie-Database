@@ -1,18 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-@model System.Data.SqlClient.SqlDataReader
-@{
-    System.Data.SqlClient.SqlDataReader reader = Model;
-}
 <h2>Home Page</h2>
-
-
-@while (reader.Read())
-{
-    <p> @reader[0] <br /> @reader[1] <br /> @reader[2] </p>
-}
-
 
 <br />
 <a href="../../Home/SignUp">Signup</a><br /><br />

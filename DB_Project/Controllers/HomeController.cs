@@ -13,7 +13,7 @@ namespace DB_Project.Controllers
         //GET: Home
         public ActionResult Index()
         {
-            return View(CRUDuser.GetUsers());
+            return View();
         }
         public ActionResult Signup()
         {
@@ -27,28 +27,17 @@ namespace DB_Project.Controllers
         {
             return View(param);
         }
-        public ActionResult Signupfunc(string email, string name, string usertype, string dateOfBirth, string password)
+        public ActionResult SignupAction(string email, string name, string usertype, string dateOfBirth, string password)
         {
             int ret = 4;
-            //userProc uproc = new userProc();
-            //ObjectParameter flag = new ObjectParameter("flag", typeof(int));
-            //var value = uproc.add_user(name, usertype, email, password, dateOfBirth, flag);
-            //int ret = Convert.ToInt32(flag.Value);
-
+            ret = CRUDuser.SignupFunc(email, name, usertype, dateOfBirth, password);
             return RedirectToAction("Msg", new { param = ret });
         }
-        public ActionResult Loginfunc(string email, string password)
+        public ActionResult LoginAction(string email, string password)
         {
-            int ret = 5;
-
-            
-
-            //userProc uproc = new userProc();
-            //ObjectParameter flag = new ObjectParameter("flag", typeof(int));
-            //var value = uproc.login_user(email, password, flag);
-            //int ret = Convert.ToInt32(flag.Value);
-            //ret += 2;
-
+            int ret = 3;
+            ret = CRUDuser.LoginFunc(email, password);
+            ret += 2;
             return RedirectToAction("Msg", new { param = ret });
         }
     }

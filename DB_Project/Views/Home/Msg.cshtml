@@ -6,7 +6,11 @@
 <body>
     <br />
     <br />
-    @if (Model == 0)
+    @if (Model == -1)
+    {
+        <p>Connection to Database Failed!</p>
+    }
+    else if (Model == 0)
     {
         <p>Sign-Up Failed!</p>
     }
@@ -24,11 +28,11 @@
     }
     else if (Model == 4)
     {
-        <p>Default Signup func</p>
+        <p>Signup Action Error!</p>
     }
     else if (Model == 5)
     {
-        <p>Default Login func</p>
+        <p>Login Action Error!</p>
     }
     else
     {

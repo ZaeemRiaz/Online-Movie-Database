@@ -6,7 +6,7 @@
 <html>
 <body>
     <h2>Create new account</h2>
-    <form action="../../Home/Signupfunc" method="post" name="signupform">
+    <form action="../../Home/SignupAction" method="post" name="signupform">
         <fieldset>
             <legend>Sign up</legend>
 
@@ -15,7 +15,6 @@
             <br />
             <br />
 
-
             Name:<br />
             <input type="text" required name="name" pattern="[A-Za-z ]{3,100}" />
             <br />
@@ -23,8 +22,8 @@
 
             Account Type:<br />
             <select name="usertype">
-                <option value="U">User</option>
-                <option value="A" selected>Administrator</option>
+                <option value="U" selected>User</option>
+                <option value="A">Administrator</option>
             </select>
             <br />
             <br />
@@ -48,7 +47,6 @@
     </form>
 
     <br /><br />
-
     <a href="../../Home/Index">Index</a><br /><br />
 
 </body>
