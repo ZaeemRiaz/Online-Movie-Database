@@ -26,7 +26,7 @@ namespace DB_Project.Controllers
         {
             return View(param);
         }
-        public ActionResult SignUpfunc(string email, string name, string usertype, string dateOfBirth, string password)
+        public ActionResult Signupfunc(string email, string name, string usertype, string dateOfBirth, string password)
         {
             userProc uproc = new userProc();
             ObjectParameter flag = new ObjectParameter("flag", typeof(int));
@@ -35,7 +35,7 @@ namespace DB_Project.Controllers
 
             return RedirectToAction("Msg", new { param = ret });
         }
-        public ActionResult LogInfunc(string email, string password)
+        public ActionResult Loginfunc(string email, string password)
         {
             userProc uproc = new userProc();
             ObjectParameter flag = new ObjectParameter("flag", typeof(int));
