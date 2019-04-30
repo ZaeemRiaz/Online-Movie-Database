@@ -44,7 +44,7 @@ namespace DB_Project.Controllers
         }
         public ActionResult SignupAction(string email, string name, string usertype, string dateOfBirth, string password)
         {
-            int ret = 4;
+            int ret;
             ret = CRUDuser.SignupFunc(email, name, usertype, dateOfBirth, password);
             if (ret == 1)//user signed up successfully
             {
@@ -57,16 +57,17 @@ namespace DB_Project.Controllers
         }
         public ActionResult LoginAction(string email, string password)
         {
-            int ret = 3;
+            int ret;
             ret = CRUDuser.LoginFunc(email, password);
-            ret += 2;
-            if (ret == 3)
+            if (ret == 1)
             {
                 Session["UserId"] = 12;//user id
-                return RedirectToAction(Session["CurrentView"].ToString(), new { param = ret });
+                //check prev or curent session
+                //return RedirectToAction(Session["CurrentView"].ToString());
             }
             else
             {
+                ret = 2;
                 return RedirectToAction("Msg", new { param = ret });
             }
         }
