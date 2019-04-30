@@ -11,12 +11,14 @@ namespace DB_Project.Models
     {
         public static int LoginFunc(string email, string password)
         {
+            //set connection string and open connection
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
             SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command;
             int result = 0;
 
+            //try executing procedure
             try
             {
                 connection.Open();
@@ -32,12 +34,12 @@ namespace DB_Project.Models
                 command.ExecuteNonQuery();
                 result = Convert.ToInt32(command.Parameters["@flag"].Value);
             }
-            catch (SqlException ex)
+            catch (SqlException ex)//print error if execution failed
             {
                 Console.WriteLine("SQL Error" + ex.Message.ToString());
                 result = -1; //-1 will be interpreted as "error while connecting with the database."
             }
-            finally
+            finally//close connection
             {
                 connection.Close();
             }
@@ -45,12 +47,14 @@ namespace DB_Project.Models
         }
         public static int SignupFunc(string email, string name, string usertype, string dateOfBirth, string password)
         {
+            //set connection string and open connection
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
             SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command;
             int result = 0;
 
+            //try executing procedure
             try
             {
                 connection.Open();
@@ -69,21 +73,51 @@ namespace DB_Project.Models
                 command.ExecuteNonQuery();
                 result = Convert.ToInt32(command.Parameters["@flag"].Value);
             }
-            catch (SqlException ex)
+            catch (SqlException ex)//print error if execution failed
             {
                 Console.WriteLine("SQL Error" + ex.Message.ToString());
                 result = -1; //-1 will be interpreted as "error while connecting with the database."
             }
-            finally
+            finally//close connection
             {
                 connection.Close();
             }
             return result;
         }
-        public static int DelUserFunc(string email, string password)
+        public static int DelUserFunc(int userId)
         {
+            //set connection string and open connection
+            string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
-            return 0;
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command;
+            int result = 0;
+
+            //try executing procedure
+            try
+            {
+                connection.Open();
+
+                command = new SqlCommand("delete_user", connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.Add("@userID", SqlDbType.Int).Value = userId;
+
+                command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                command.ExecuteNonQuery();
+                result = Convert.ToInt32(command.Parameters["@flag"].Value);
+            }
+            catch (SqlException ex)//print error if execution failed
+            {
+                Console.WriteLine("SQL Error" + ex.Message.ToString());
+                result = -1; //-1 will be interpreted as "error while connecting with the database."
+            }
+            finally//close connection
+            {
+                connection.Close();
+            }
+            return result;
         }
     }
 }
