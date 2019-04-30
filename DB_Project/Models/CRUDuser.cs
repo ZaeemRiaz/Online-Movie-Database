@@ -83,6 +83,7 @@ namespace DB_Project.Models
         public static int DelUserFunc(string email, string password)
         {
 
+            return 0;
         }
     }
 }

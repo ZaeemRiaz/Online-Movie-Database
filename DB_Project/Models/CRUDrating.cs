@@ -11,11 +11,13 @@ namespace DB_Project.Models
     {
         public static int AddRatingFunc(string email, string password)
         {
-            
+
+            return 0;
         }
         public static int CalRatingFunc(string email, string password)
         {
 
+            return 0;
         }
     }
 }

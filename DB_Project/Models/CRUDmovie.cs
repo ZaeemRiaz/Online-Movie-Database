@@ -12,26 +12,32 @@ namespace DB_Project.Models
         public static int SearchMovieFunc(string email, string password)
         {
 
+            return 0;
         }
         public static int DelMovieFunc(string email, string password)
         {
 
+            return 0;
         }
         public static int AddMovieFunc(string email, string password)
         {
 
+            return 0;
         }
         public static int MovieDetailFunc(string email, string password)
         {
 
+            return 0;
         }
         public static int AllMovieFunc(string email, string password)
         {
 
+            return 0;
         }
         public static int TopMovieFunc(string email, string password)
         {
 
+            return 0;
         }
     }
 }

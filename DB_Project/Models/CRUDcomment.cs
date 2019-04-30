@@ -12,10 +12,12 @@ namespace DB_Project.Models
         public static int AddCommentFunc(string email, string password)
         {
 
+            return 0;
         }
         public static int MovieCommentFunc(string email, string password)
         {
 
+            return 0;
         }
     }
 }

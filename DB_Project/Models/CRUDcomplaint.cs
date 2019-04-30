@@ -12,10 +12,12 @@ namespace DB_Project.Models
         public static int AddComplaintFunc(string email, string password)
         {
 
+            return 0;
         }
         public static int ChangeComplaintFunc(string email, string password)
         {
 
+            return 0;
         }
     }
 }

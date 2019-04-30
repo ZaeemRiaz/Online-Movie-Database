@@ -9,7 +9,6 @@ namespace DB_Project.Controllers
 {
     public class HomeController : Controller
     {
-
         //GET: Home
         public ActionResult Index()
         {
@@ -20,6 +19,22 @@ namespace DB_Project.Controllers
             return View();
         }
         public ActionResult Login()
+        {
+            return View();
+        }
+        public ActionResult Complaint()
+        {
+            return View();
+        }
+        public ActionResult MovieDetails()
+        {
+            return View();
+        }
+        public ActionResult ActorDetails()
+        {
+            return View();
+        }
+        public ActionResult MovieCast()
         {
             return View();
         }
