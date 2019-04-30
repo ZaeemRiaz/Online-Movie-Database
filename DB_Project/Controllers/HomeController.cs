@@ -46,14 +46,29 @@ namespace DB_Project.Controllers
         {
             int ret = 4;
             ret = CRUDuser.SignupFunc(email, name, usertype, dateOfBirth, password);
-            return RedirectToAction("Msg", new { param = ret });
+            if (ret == 1)//user signed up successfully
+            {
+                return RedirectToAction("Login");
+            }
+            else//error
+            {
+                return RedirectToAction("Msg", new { param = ret });
+            }
         }
         public ActionResult LoginAction(string email, string password)
         {
             int ret = 3;
             ret = CRUDuser.LoginFunc(email, password);
             ret += 2;
-            return RedirectToAction("Msg", new { param = ret });
+            if (ret == 3)
+            {
+                Session["UserId"] = 12;//user id
+                return RedirectToAction(Session["CurrentView"].ToString(), new { param = ret });
+            }
+            else
+            {
+                return RedirectToAction("Msg", new { param = ret });
+            }
         }
     }
 }
