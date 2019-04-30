@@ -11,7 +11,6 @@ namespace DB_Project.Models
     {
         public static int LoginFunc(string email, string password)
         {
-
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
             SqlConnection connection = new SqlConnection(connectionString);
@@ -81,6 +80,9 @@ namespace DB_Project.Models
             }
             return result;
         }
+        public static int DelUserFunc(string email, string password)
+        {
 
+        }
     }
 }
