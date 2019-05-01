@@ -44,36 +44,29 @@ namespace DB_Project.Controllers
         }
         public ActionResult SignupAction(string email, string name, string usertype, string dateOfBirth, string password)
         {
-            int ret;
+            int ret = 4;
             ret = CRUDuser.SignupFunc(email, name, usertype, dateOfBirth, password);
-            if (ret == 1)//user signed up successfully, goto login
+            if (ret == 1)//user signed up successfully
             {
                 return RedirectToAction("Login");
             }
-            else//print error
+            else//error
             {
                 return RedirectToAction("Msg", new { param = ret });
             }
         }
         public ActionResult LoginAction(string email, string password)
         {
-            int ret;
+            int ret = 3;
             ret = CRUDuser.LoginFunc(email, password);
-            if (ret == 1)
+            ret += 2;
+            if (ret == 3)
             {
                 Session["UserId"] = 12;//user id
-                if (Session["LoginRedirect"] != null)//goto prev page after login
-                {
-                    return RedirectToAction(Session["LoginRedirect"].ToString());
-                }
-                else//goto home page if no redirect
-                {
-                    return RedirectToAction("Index");
-                }
+                return RedirectToAction(Session["CurrentView"].ToString(), new { param = ret });
             }
-            else//print error
+            else
             {
-                ret = 2;
                 return RedirectToAction("Msg", new { param = ret });
             }
         }
