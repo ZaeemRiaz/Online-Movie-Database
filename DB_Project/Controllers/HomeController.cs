@@ -46,11 +46,11 @@ namespace DB_Project.Controllers
         {
             int ret;
             ret = CRUDuser.SignupFunc(email, name, usertype, dateOfBirth, password);
-            if (ret == 1)//user signed up successfully
+            if (ret == 1)//user signed up successfully, goto login page
             {
                 return RedirectToAction("Login");
             }
-            else//error
+            else//print error msg
             {
                 return RedirectToAction("Msg", new { param = ret });
             }
@@ -62,10 +62,16 @@ namespace DB_Project.Controllers
             if (ret == 1)
             {
                 Session["UserId"] = 12;//user id
-                //check prev or curent session
-                //return RedirectToAction(Session["CurrentView"].ToString());
+                if (Session["LoginRedirect"] != null)//goto prev page login or signup called from
+                {
+                    return RedirectToAction(Session["LoginRedirect"].ToString());
+                }
+                else//goto homepage if not redirect availabe
+                {
+                    return RedirectToAction("Index");
+                }
             }
-            else
+            else//print error msg
             {
                 ret = 2;
                 return RedirectToAction("Msg", new { param = ret });
