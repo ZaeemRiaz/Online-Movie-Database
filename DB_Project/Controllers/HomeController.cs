@@ -37,9 +37,9 @@ namespace DB_Project.Controllers
         }
         public ActionResult ActorDetails()
         {
-            int actorId = 0;
-            Actor actor = CRUDactor.DisplayActorFunc(actorId);
-            return View();
+            int actorId = 1;
+            Actor a = CRUDactor.DisplayActorFunc(actorId);
+            return View(a);
         }
         public ActionResult MovieCast()
         {
@@ -66,7 +66,7 @@ namespace DB_Project.Controllers
         {
             int uid, ret;
             string utype = "";
-            ret = uid = CRUDuser.LoginFunc(email, password, &utype);
+            ret = uid = CRUDuser.LoginFunc(email, password, utype);
             //store session info after login
             if (ret != 0 && ret != -1)
             {

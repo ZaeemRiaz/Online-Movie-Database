@@ -1,7 +1,7 @@
 ﻿@using DB_Project.Models
 
 @model Movie
-@model List<String>
+@*@model List<String>*@
 @{
     int i = 1;
 }
@@ -39,12 +39,12 @@
     @Model.releasedate <br />
     @Model.picture <br />
 
-    <p>The cast includes:</p>
+    @*<p>The cast includes:</p>
     @foreach (String element in Model)
     {
         <p> </p>
         i = i + 1;
-    }
+    }*@
 
 
     <form action="../../Home/AddComent" method="post">

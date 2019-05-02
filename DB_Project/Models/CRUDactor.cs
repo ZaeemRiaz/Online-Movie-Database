@@ -9,10 +9,54 @@ namespace DB_Project.Models
 {
     public class CRUDactor
     {
-        public static List<Actor> SearchActorFunc(string email, string password)
+        public static List<Actor> SearchActorFunc(string stext)
         {
-            List<Actor> alist = null;
-            return alist;
+            List<Actor> aList = new List<Actor>();
+            //open connection to db
+            string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
+
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command = null;
+            SqlDataReader reader = null;
+
+            //try execution
+            try
+            {
+                connection.Open();
+
+                command = new SqlCommand("search_actor", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@name", SqlDbType.VarChar, 100).Value = stext;
+                reader = command.ExecuteReader();
+                Actor a;
+                while (reader.Read())
+                {
+                    a = new Actor();
+                    a.id = reader[0].ToString();
+                    a.name = reader[1].ToString();
+                    aList.Add(a);
+                }
+                return aList;
+            }
+            catch (SqlException ex)//print error message
+            {
+                Console.WriteLine("SQL Error" + ex.Message.ToString());
+                return null;
+            }
+            finally//close connection
+            {
+                // close reader
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+            }
         }
         public static int DelActorFunc(int actorId)
         {
@@ -20,7 +64,7 @@ namespace DB_Project.Models
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
             SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
+            SqlCommand command = null;
             int result = 0;
 
             //try execution
@@ -45,7 +89,11 @@ namespace DB_Project.Models
             }
             finally//close connection
             {
-                connection.Close();
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
             }
             return result;
         }
@@ -55,7 +103,7 @@ namespace DB_Project.Models
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
             SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
+            SqlCommand command = null;
             int result = 0;
 
             //try execution
@@ -83,19 +131,112 @@ namespace DB_Project.Models
             }
             finally//close connection
             {
-                connection.Close();
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
             }
             return result;
         }
         public static Actor DisplayActorFunc(int actorId)
         {
-            Actor a= null;
-            return a;
+            Actor a = null;
+            //open connection to db
+            string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
+
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command = null;
+            SqlDataReader reader = null;
+
+            //try execution
+            try
+            {
+                connection.Open();
+
+                command = new SqlCommand("actor_details", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@input", SqlDbType.Int).Value = actorId;
+                reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    a = new Actor();
+                    a.id = reader[0].ToString();
+                    a.name = reader[1].ToString();
+                    a.bdate = reader[2].ToString();
+                    a.gender = reader[3].ToString();
+                    a.description = reader[4].ToString();
+                }
+                return a;
+            }
+            catch (SqlException ex)//print error message
+            {
+                Console.WriteLine("SQL Error" + ex.Message.ToString());
+                return null;
+            }
+            finally//close connection
+            {
+                // close reader
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+            }
         }
-        public static List<String> MovieCastFunc(int movieId)
+        public static List<Actor> MovieCastFunc(int movieId)
         {
-            List<String> alist = null;
-            return alist;
+            List<Actor> aList = new List<Actor>();
+            //open connection to db
+            string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
+
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command = null;
+            SqlDataReader reader = null;
+
+            //try execution
+            try
+            {
+                connection.Open();
+
+                command = new SqlCommand("cast_movie", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@mID", SqlDbType.Int).Value = movieId;
+                reader = command.ExecuteReader();
+                Actor a;
+                while (reader.Read())
+                {
+                    a = new Actor();
+                    a.id = reader[0].ToString();
+                    a.name = reader[1].ToString();
+                    aList.Add(a);
+                }
+                return aList;
+            }
+            catch (SqlException ex)//print error message
+            {
+                Console.WriteLine("SQL Error" + ex.Message.ToString());
+                return null;
+            }
+            finally//close connection
+            {
+                // close reader
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+            }
         }
     }
 }

@@ -19,7 +19,7 @@ namespace DB_Project.Models
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
             SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
+            SqlCommand command = null;
             int result = 0;
 
             //try execution
@@ -47,7 +47,11 @@ namespace DB_Project.Models
             }
             finally//close connection
             {
-                connection.Close();
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
             }
             return result;
         }
@@ -57,7 +61,7 @@ namespace DB_Project.Models
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
             SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
+            SqlCommand command = null;
             int result = 0;
 
             //try execution
@@ -86,7 +90,11 @@ namespace DB_Project.Models
             }
             finally//close connection
             {
-                connection.Close();
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
             }
             return result;
         }
@@ -96,7 +104,7 @@ namespace DB_Project.Models
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
             SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
+            SqlCommand command = null;
             int result = 0;
 
             //try execution
@@ -121,7 +129,11 @@ namespace DB_Project.Models
             }
             finally//close connection
             {
-                connection.Close();
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
             }
             return result;
         }

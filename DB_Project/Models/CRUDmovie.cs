@@ -16,7 +16,8 @@ namespace DB_Project.Models
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
             SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
+            SqlCommand command = null;
+            SqlDataReader reader = null;
 
             //try execution
             try
@@ -24,17 +25,20 @@ namespace DB_Project.Models
                 connection.Open();
 
                 command = new SqlCommand("search_movie", connection);
-                SqlDataReader reader = command.ExecuteReader();
-                //TODO: add parameter 
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@name", SqlDbType.VarChar, 100).Value = stext;
+                reader = command.ExecuteReader();
                 Movie m;
                 while (reader.Read())
                 {
                     m = new Movie();
                     m.movieID = reader[0].ToString();
                     m.title = reader[1].ToString();
-                    m.releasedate = reader[2].ToString();
-                    m.rating = reader[3].ToString();
-                    //TODO: add picture 
+                    m.rating = reader[2].ToString();
+                    m.descript = reader[3].ToString();
+                    m.genre = reader[4].ToString();
+                    m.releasedate = reader[5].ToString();
+                    m.picture = reader[6].ToString();
                     mList.Add(m);
                 }
                 return mList;
@@ -46,7 +50,17 @@ namespace DB_Project.Models
             }
             finally//close connection
             {
-                connection.Close();
+                // close reader
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
             }
         }
         public static int DelMovieFunc(int movieId)
@@ -55,7 +69,7 @@ namespace DB_Project.Models
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
             SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
+            SqlCommand command = null;
             int result = 0;
 
             //try execution
@@ -80,7 +94,11 @@ namespace DB_Project.Models
             }
             finally//close connection
             {
-                connection.Close();
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
             }
             return result;
         }
@@ -90,7 +108,7 @@ namespace DB_Project.Models
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
             SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
+            SqlCommand command = null;
             int result = 0;
 
             //try execution
@@ -118,7 +136,11 @@ namespace DB_Project.Models
             }
             finally//close connection
             {
-                connection.Close();
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
             }
             return result;
         }
@@ -128,8 +150,8 @@ namespace DB_Project.Models
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
             SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
-            SqlDataReader reader;
+            SqlCommand command = null;
+            SqlDataReader reader = null;
 
             //try execution
             try
@@ -140,15 +162,19 @@ namespace DB_Project.Models
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.Add("@input", SqlDbType.Int).Value = movieId;
                 reader = command.ExecuteReader();
-
-                Movie m = new Movie();
-                m.movieID = reader[0].ToString();
-                m.title = reader[1].ToString();
-                m.rating = reader[2].ToString();
-                m.descript = reader[3].ToString();
-                m.genre = reader[4].ToString();
-                m.releasedate = reader[5].ToString();
-                m.picture = reader[6].ToString();
+                Movie m = null;
+                if (reader.Read())
+                {
+                    m = new Movie();
+                    m.movieID = reader[0].ToString();
+                    m.title = reader[1].ToString();
+                    m.rating = reader[2].ToString();
+                    m.descript = reader[3].ToString();
+                    m.genre = reader[4].ToString();
+                    m.releasedate = reader[5].ToString();
+                    m.picture = reader[6].ToString();
+                }
+                
                 return m;
             }
             catch (SqlException ex)//print error message
@@ -178,7 +204,8 @@ namespace DB_Project.Models
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
             SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
+            SqlCommand command = null;
+            SqlDataReader reader = null;
 
             //try execution
             try
@@ -186,7 +213,7 @@ namespace DB_Project.Models
                 connection.Open();
 
                 command = new SqlCommand("all_movies", connection);
-                SqlDataReader reader = command.ExecuteReader();
+                reader = command.ExecuteReader();
                 Movie m;
                 while (reader.Read())
                 {
@@ -206,7 +233,17 @@ namespace DB_Project.Models
             }
             finally//close connection
             {
-                connection.Close();
+                // close reader
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
             }
         }
         public static List<Movie> TopMovieFunc()
@@ -216,7 +253,8 @@ namespace DB_Project.Models
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
             SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
+            SqlCommand command = null;
+            SqlDataReader reader = null;
 
             //try execution
             try
@@ -224,7 +262,7 @@ namespace DB_Project.Models
                 connection.Open();
 
                 command = new SqlCommand("top_movies", connection);
-                SqlDataReader reader = command.ExecuteReader();
+                reader = command.ExecuteReader();
                 Movie m;
                 while (reader.Read())
                 {
@@ -245,7 +283,17 @@ namespace DB_Project.Models
             }
             finally//close connection
             {
-                connection.Close();
+                // close reader
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
             }
         }
     }
