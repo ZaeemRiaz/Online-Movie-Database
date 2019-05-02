@@ -23,12 +23,12 @@ namespace DB_Project.Models
 
             return 0;
         }
-        public static int DisplayActorFunc(string email, string password)
+        public static Actor DisplayActorFunc(int actorId)
         {
 
             return 0;
         }
-        public static int MovieCastFunc(string email, string password)
+        public static List<Actor> MovieCastFunc(int movieId)
         {
 
             return 0;

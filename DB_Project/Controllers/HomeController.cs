@@ -28,11 +28,14 @@ namespace DB_Project.Controllers
         }
         public ActionResult MovieDetails()
         {
+            int movieId = 0;
+            List<Actor> aList = CRUDactor.MovieCastFunc(movieId);
             return View();
         }
         public ActionResult ActorDetails()
         {
-
+            int actorId = 0;
+            Actor actor = CRUDactor.DisplayActorFunc(actorId);
             return View();
         }
         public ActionResult MovieCast()
