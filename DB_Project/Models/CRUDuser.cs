@@ -11,6 +11,10 @@ namespace DB_Project.Models
     {
         public static int LoginFunc(string email, string password)
         {
+            //@email varchar(50),
+            //@passcode varchar(50),
+            //@eOUT varchar(50) OUTPUT,
+            //@uTypeOUT varchar(50) OUTPUT
             //open connection to db
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
