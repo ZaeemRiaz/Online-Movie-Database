@@ -9,15 +9,67 @@ namespace DB_Project.Models
 {
     public class CRUDmovie
     {
-        public static int SearchMovieFunc(string email, string password)
+        public static SqlDataReader SearchMovieFunc(string stext)
         {
+            //open connection to db
+            string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
-            return 0;
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command;
+
+            //try execution
+            try
+            {
+                connection.Open();
+
+                command = new SqlCommand("search_movie", connection);
+                SqlDataReader reader = command.ExecuteReader();
+                return reader;
+            }
+            catch (SqlException ex)//print error message
+            {
+                Console.WriteLine("SQL Error" + ex.Message.ToString());
+                return null;
+            }
+            finally//close connection
+            {
+                connection.Close();
+            }
         }
         public static int DelMovieFunc(int movieId)
         {
+            //open connection to db
+            string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
-            return 0;
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command;
+            int result = 0;
+
+            //try execution
+            try
+            {
+                connection.Open();
+
+                command = new SqlCommand("delete_movie", connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.Add("@mID", SqlDbType.Int).Value = movieId;
+
+                command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                command.ExecuteNonQuery();
+                result = Convert.ToInt32(command.Parameters["@flag"].Value);
+            }
+            catch (SqlException ex)//print error message
+            {
+                Console.WriteLine("SQL Error" + ex.Message.ToString());
+                result = -1; //-1 will be interpreted as "error while connecting with the database."
+            }
+            finally//close connection
+            {
+                connection.Close();
+            }
+            return result;
         }
         public static int AddMovieFunc(string title, string descript, string genre, string releasedate)
         {
@@ -57,12 +109,11 @@ namespace DB_Project.Models
             }
             return result;
         }
-        public static int MovieDetailFunc(string email, string password)
+        public static int MovieDetailFunc(int movieId)
         {
-
             return 0;
         }
-        public static SqlDataReader AllMovieFunc(string email, string password)
+        public static SqlDataReader AllMovieFunc()
         {
             //open connection to db
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
@@ -89,7 +140,7 @@ namespace DB_Project.Models
                 connection.Close();
             }
         }
-        public static SqlDataReader TopMovieFunc(string email, string password)
+        public static SqlDataReader TopMovieFunc()
         {
             //open connection to db
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
