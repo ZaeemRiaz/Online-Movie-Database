@@ -9,15 +9,80 @@ namespace DB_Project.Models
 {
     public class CRUDmovie
     {
-        public static int SearchMovieFunc(string email, string password)
+        public static List<Movie> SearchMovieFunc(string stext)
         {
+            List<Movie> mList = new List<Movie>();
+            //open connection to db
+            string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
-            return 0;
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command;
+
+            //try execution
+            try
+            {
+                connection.Open();
+
+                command = new SqlCommand("search_movie", connection);
+                SqlDataReader reader = command.ExecuteReader();
+                //TODO: add parameter 
+                Movie m;
+                while (reader.Read())
+                {
+                    m = new Movie();
+                    m.movieID = reader[0].ToString();
+                    m.title = reader[1].ToString();
+                    m.releasedate = reader[2].ToString();
+                    m.rating = reader[3].ToString();
+                    //TODO: add picture 
+                    mList.Add(m);
+                }
+                return mList;
+            }
+            catch (SqlException ex)//print error message
+            {
+                Console.WriteLine("SQL Error" + ex.Message.ToString());
+                return null;
+            }
+            finally//close connection
+            {
+                connection.Close();
+            }
         }
         public static int DelMovieFunc(int movieId)
         {
+            //open connection to db
+            string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
-            return 0;
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command;
+            int result = 0;
+
+            //try execution
+            try
+            {
+                connection.Open();
+
+                command = new SqlCommand("delete_movie", connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.Add("@mID", SqlDbType.Int).Value = movieId;
+
+                command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                command.ExecuteNonQuery();
+                result = Convert.ToInt32(command.Parameters["@flag"].Value);
+            }
+            catch (SqlException ex)//print error message
+            {
+                Console.WriteLine("SQL Error" + ex.Message.ToString());
+                result = -1; //-1 will be interpreted as "error while connecting with the database."
+            }
+            finally//close connection
+            {
+                connection.Close();
+            }
+            return result;
         }
         public static int AddMovieFunc(string title, string descript, string genre, string releasedate)
         {
@@ -57,13 +122,44 @@ namespace DB_Project.Models
             }
             return result;
         }
-        public static int MovieDetailFunc(string email, string password)
+        public static Movie MovieDetailFunc(int movieId)
         {
+            //open connection to db
+            string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
-            return 0;
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command;
+
+            //try execution
+            try
+            {
+                connection.Open();
+
+                command = new SqlCommand("movie_details" , connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.Parameters.Add("@input", SqlDbType.Int).Value = movieId;
+                SqlDataReader reader = command.execute
+                Movie m = new Movie();
+                m.movieID = reader[0].ToString();
+                m.title = reader[1].ToString();
+                m.releasedate = reader[2].ToString();
+                m.rating = reader[3].ToString();
+                //TODO: add picture 
+                return m;
+            }
+            catch (SqlException ex)//print error message
+            {
+                Console.WriteLine("SQL Error" + ex.Message.ToString());
+                return null;
+            }
+            finally//close connection
+            {
+                connection.Close();
+            }
         }
-        public static SqlDataReader AllMovieFunc(string email, string password)
+        public static List<Movie> AllMovieFunc()
         {
+            List<Movie> mList = new List<Movie>();
             //open connection to db
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
@@ -77,7 +173,18 @@ namespace DB_Project.Models
 
                 command = new SqlCommand("all_movies", connection);
                 SqlDataReader reader = command.ExecuteReader();
-                return reader;
+                Movie m;
+                while (reader.Read())
+                {
+                    m = new Movie();
+                    m.movieID = reader[0].ToString();
+                    m.title = reader[1].ToString();
+                    m.releasedate = reader[2].ToString();
+                    m.rating = reader[3].ToString();
+                    //TODO: add picture 
+                    mList.Add(m);
+                }
+                return mList;
             }
             catch (SqlException ex)//print error message
             {
@@ -89,8 +196,9 @@ namespace DB_Project.Models
                 connection.Close();
             }
         }
-        public static SqlDataReader TopMovieFunc(string email, string password)
+        public static List<Movie> TopMovieFunc()
         {
+            List<Movie> mList = new List<Movie>();
             //open connection to db
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
@@ -104,7 +212,18 @@ namespace DB_Project.Models
 
                 command = new SqlCommand("top_movies", connection);
                 SqlDataReader reader = command.ExecuteReader();
-                return reader;
+                Movie m;
+                while (reader.Read())
+                {
+                    m = new Movie();
+                    m.movieID = reader[0].ToString();
+                    m.title = reader[1].ToString();
+                    m.releasedate = reader[2].ToString();
+                    m.rating = reader[3].ToString();
+                    //TODO: add picture 
+                    mList.Add(m);
+                }
+                return mList;
             }
             catch (SqlException ex)//print error message
             {
