@@ -25,13 +25,13 @@ namespace DB_Project.Models
         }
         public static Actor DisplayActorFunc(int actorId)
         {
-
-            return 0;
+            Actor a;
+            return a;
         }
         public static List<Actor> MovieCastFunc(int movieId)
         {
-
-            return 0;
+            List<Actor> alist;
+            return alist;
         }
     }
 }
