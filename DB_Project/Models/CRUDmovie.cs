@@ -129,22 +129,26 @@ namespace DB_Project.Models
 
             SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command;
+            SqlDataReader reader;
 
             //try execution
             try
             {
                 connection.Open();
 
-                command = new SqlCommand("movie_details" , connection);
-                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command = new SqlCommand("movie_details", connection);
+                command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.Add("@input", SqlDbType.Int).Value = movieId;
-                SqlDataReader reader = command.execute;
+                reader = command.ExecuteReader();
+
                 Movie m = new Movie();
                 m.movieID = reader[0].ToString();
                 m.title = reader[1].ToString();
-                m.releasedate = reader[2].ToString();
-                m.rating = reader[3].ToString();
-                //TODO: add picture 
+                m.rating = reader[2].ToString();
+                m.descript = reader[3].ToString();
+                m.genre = reader[4].ToString();
+                m.releasedate = reader[5].ToString();
+                m.picture = reader[6].ToString();
                 return m;
             }
             catch (SqlException ex)//print error message
@@ -154,7 +158,17 @@ namespace DB_Project.Models
             }
             finally//close connection
             {
-                connection.Close();
+                // close reader
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
             }
         }
         public static List<Movie> AllMovieFunc()
@@ -181,7 +195,6 @@ namespace DB_Project.Models
                     m.title = reader[1].ToString();
                     m.releasedate = reader[2].ToString();
                     m.rating = reader[3].ToString();
-                    //TODO: add picture 
                     mList.Add(m);
                 }
                 return mList;
