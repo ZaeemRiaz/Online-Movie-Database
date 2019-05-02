@@ -35,8 +35,11 @@ namespace DB_Project.Models
                 command.ExecuteNonQuery();
                 u = new userLoginStruct();
                 u.ret = Convert.ToInt32(command.Parameters["@uIDOUT"].Value);
-                u.id = u.ret.ToString();
-                u.type = Convert.ToString(command.Parameters["@uTypeOUT"].Value);
+                if (u.ret != 0)
+                {
+                    u.id = u.ret.ToString();
+                    u.type = Convert.ToString(command.Parameters["@uTypeOUT"].Value);
+                }
             }
             catch (SqlException ex)//print error message
             {
