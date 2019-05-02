@@ -32,6 +32,7 @@ namespace DB_Project.Controllers
         }
         public ActionResult ActorDetails()
         {
+
             return View();
         }
         public ActionResult MovieCast()
