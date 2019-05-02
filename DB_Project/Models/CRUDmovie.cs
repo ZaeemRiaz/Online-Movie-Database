@@ -129,16 +129,18 @@ namespace DB_Project.Models
 
             SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command;
+            SqlDataReader reader;
 
             //try execution
             try
             {
                 connection.Open();
 
-                command = new SqlCommand("movie_details" , connection);
-                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command = new SqlCommand("movie_details", connection);
+                command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.Add("@input", SqlDbType.Int).Value = movieId;
-                SqlDataReader reader = command.ExecuteReader();
+                reader = command.ExecuteReader();
+
                 Movie m = new Movie();
                 m.movieID = reader[0].ToString();
                 m.title = reader[1].ToString();
@@ -156,7 +158,17 @@ namespace DB_Project.Models
             }
             finally//close connection
             {
-                connection.Close();
+                // close reader
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
             }
         }
         public static List<Movie> AllMovieFunc()
