@@ -92,9 +92,9 @@ namespace DB_Project.Models
             Actor a= null;
             return a;
         }
-        public static List<Actor> MovieCastFunc(int movieId)
+        public static List<String> MovieCastFunc(int movieId)
         {
-            List<Actor> alist = null;
+            List<String> alist = null;
             return alist;
         }
     }

@@ -9,12 +9,12 @@ namespace DB_Project.Models
 {
     public class CRUDuser
     {
-        public static int LoginFunc(string email, string password)
+        public static int LoginFunc(string email, string password, string utype)
         {
             //@email varchar(50),
             //@passcode varchar(50),
-            //@eOUT varchar(50) OUTPUT,
-            //@uTypeOUT varchar(50) OUTPUT
+            //@uIDOUT     int OUTPUT,
+            //@uTypeOUT   char(1) OUTPUT
             //open connection to db
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
@@ -33,10 +33,12 @@ namespace DB_Project.Models
                 command.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = email;
                 command.Parameters.Add("@passcode", SqlDbType.VarChar, 50).Value = password;
 
-                command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
+                command.Parameters.Add("@uIDOUT", SqlDbType.Int).Direction = ParameterDirection.Output;
+                command.Parameters.Add("@uTypeOUT", SqlDbType.Char, 1).Direction = ParameterDirection.Output;
 
                 command.ExecuteNonQuery();
-                result = Convert.ToInt32(command.Parameters["@flag"].Value);
+                result = Convert.ToInt32(command.Parameters["@uIDOUT"].Value);
+                utype = Convert.ToString(command.Parameters["@uTypeOUT"].Value);
             }
             catch (SqlException ex)//print error message
             {

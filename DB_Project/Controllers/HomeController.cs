@@ -64,11 +64,14 @@ namespace DB_Project.Controllers
         }
         public ActionResult LoginAction(string email, string password)
         {
-            int ret;
-            ret = CRUDuser.LoginFunc(email, password);
-            if (ret == 1)
+            int uid, ret;
+            string utype = "";
+            ret = uid = CRUDuser.LoginFunc(email, password, &utype);
+            //store session info after login
+            if (ret != 0 && ret != -1)
             {
-                Session["UserId"] = 12;//user id
+                Session["uId"] = uid.ToString();
+                Session["uType"] = utype;
                 if (Session["LoginRedirect"] != null)//goto prev page login or signup called from
                 {
                     return RedirectToAction(Session["LoginRedirect"].ToString());
