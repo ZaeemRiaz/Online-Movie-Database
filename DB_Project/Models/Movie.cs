@@ -7,12 +7,12 @@ namespace DB_Project.Models
 {
     public class Movie
     {
-        String movieID { get; set; }
-        String title { get; set; }
-        String rating { get; set; }
-        String descript { get; set; }
-        String genre { get; set; }
-        String releasedate { get; set; }
-        String picture { get; set; }
+        public String movieID { get; set; }
+        public String title { get; set; }
+        public String rating { get; set; }
+        public String descript { get; set; }
+        public String genre { get; set; }
+        public String releasedate { get; set; }
+        public String picture { get; set; }
     }
 }

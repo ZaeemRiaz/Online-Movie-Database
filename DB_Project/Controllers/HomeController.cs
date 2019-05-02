@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DB_Project.Models;
+using System.Data.SqlClient;
 
 namespace DB_Project.Controllers
 {
@@ -28,9 +29,11 @@ namespace DB_Project.Controllers
         }
         public ActionResult MovieDetails()
         {
-            int movieId = 0;
-            List<Actor> aList = CRUDactor.MovieCastFunc(movieId);
-            return View();
+            //int movieId = 1;
+            Movie m = CRUDmovie.MovieDetailFunc(1);
+            //List<Movie> mList = CRUDmovie.AllMovieFunc();
+           // List<Actor> aList = CRUDactor.MovieCastFunc(movieId);
+            return View(m);
         }
         public ActionResult ActorDetails()
         {
