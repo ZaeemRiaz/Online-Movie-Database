@@ -1,1 +1,2 @@
 change comments on movie to not display mId
+change add_movie release date type to string and type cast to date
