@@ -138,7 +138,7 @@ namespace DB_Project.Models
                 command = new SqlCommand("movie_details" , connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
                 command.Parameters.Add("@input", SqlDbType.Int).Value = movieId;
-                SqlDataReader reader = command.execute
+                SqlDataReader reader = command.execute;
                 Movie m = new Movie();
                 m.movieID = reader[0].ToString();
                 m.title = reader[1].ToString();
