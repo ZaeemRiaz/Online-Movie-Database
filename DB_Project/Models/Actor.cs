@@ -7,7 +7,7 @@ namespace DB_Project.Models
 {
     public class Actor
     {
-        public String id { get; set; }
+        public String actorID { get; set; }
         public String name { get; set; }
         public String bdate { get; set; }
         public String gender { get; set; }

@@ -32,7 +32,7 @@ namespace DB_Project.Models
                 while (reader.Read())
                 {
                     a = new Actor();
-                    a.id = reader[0].ToString();
+                    a.actorID = reader[0].ToString();
                     a.name = reader[1].ToString();
                     aList.Add(a);
                 }
@@ -161,7 +161,7 @@ namespace DB_Project.Models
                 if (reader.Read())
                 {
                     a = new Actor();
-                    a.id = reader[0].ToString();
+                    a.actorID = reader[0].ToString();
                     a.name = reader[1].ToString();
                     a.bdate = reader[2].ToString();
                     a.gender = reader[3].ToString();
@@ -212,7 +212,7 @@ namespace DB_Project.Models
                 while (reader.Read())
                 {
                     a = new Actor();
-                    a.id = reader[0].ToString();
+                    a.actorID = reader[0].ToString();
                     a.name = reader[1].ToString();
                     aList.Add(a);
                 }

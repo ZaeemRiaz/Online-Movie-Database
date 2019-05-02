@@ -120,6 +120,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Actor.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\Complaint.cs" />
     <Compile Include="Models\CRUDactor.cs" />
     <Compile Include="Models\CRUDcomment.cs" />
     <Compile Include="Models\CRUDcomplaint.cs" />

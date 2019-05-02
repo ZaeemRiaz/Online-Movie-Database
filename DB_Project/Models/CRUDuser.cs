@@ -9,18 +9,14 @@ namespace DB_Project.Models
 {
     public class CRUDuser
     {
-        public static int LoginFunc(string email, string password, string utype)
+        public static userLoginStruct LoginFunc(string email, string password)
         {
-            //@email varchar(50),
-            //@passcode varchar(50),
-            //@uIDOUT     int OUTPUT,
-            //@uTypeOUT   char(1) OUTPUT
+            userLoginStruct u = null;
             //open connection to db
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
             SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = null;
-            int result = 0;
 
             //try execution
             try
@@ -37,13 +33,15 @@ namespace DB_Project.Models
                 command.Parameters.Add("@uTypeOUT", SqlDbType.Char, 1).Direction = ParameterDirection.Output;
 
                 command.ExecuteNonQuery();
-                result = Convert.ToInt32(command.Parameters["@uIDOUT"].Value);
-                utype = Convert.ToString(command.Parameters["@uTypeOUT"].Value);
+                u = new userLoginStruct();
+                u.ret = Convert.ToInt32(command.Parameters["@uIDOUT"].Value);
+                u.id = u.ret.ToString();
+                u.type = Convert.ToString(command.Parameters["@uTypeOUT"].Value);
             }
             catch (SqlException ex)//print error message
             {
                 Console.WriteLine("SQL Error" + ex.Message.ToString());
-                result = -1; //-1 will be interpreted as "error while connecting with the database."
+                u.ret = -1; //-1 will be interpreted as "error while connecting with the database."
             }
             finally//close connection
             {
@@ -53,7 +51,7 @@ namespace DB_Project.Models
                     connection.Close();
                 }
             }
-            return result;
+            return u;
         }
         public static int SignupFunc(string email, string name, string usertype, string dateOfBirth, string password)
         {

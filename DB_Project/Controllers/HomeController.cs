@@ -64,14 +64,13 @@ namespace DB_Project.Controllers
         }
         public ActionResult LoginAction(string email, string password)
         {
-            int uid, ret;
-            string utype = "";
-            ret = uid = CRUDuser.LoginFunc(email, password, utype);
+            userLoginStruct u = null;
+            u = CRUDuser.LoginFunc(email, password);
             //store session info after login
-            if (ret != 0 && ret != -1)
+            if (u.ret != 0 && u.ret != -1)
             {
-                Session["uId"] = uid.ToString();
-                Session["uType"] = utype;
+                Session["uId"] = u.id;
+                Session["uType"] = u.type;
                 if (Session["LoginRedirect"] != null)//goto prev page login or signup called from
                 {
                     return RedirectToAction(Session["LoginRedirect"].ToString());
@@ -83,8 +82,8 @@ namespace DB_Project.Controllers
             }
             else//print error msg
             {
-                ret = 2;
-                return RedirectToAction("Msg", new { param = ret });
+                u.ret = 2;
+                return RedirectToAction("Msg", new { param = u.ret });
             }
         }
     }
