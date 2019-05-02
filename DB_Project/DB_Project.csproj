@@ -126,6 +126,7 @@
     <Compile Include="Models\CRUDmovie.cs" />
     <Compile Include="Models\CRUDrating.cs" />
     <Compile Include="Models\CRUDuser.cs" />
+    <Compile Include="Models\Movie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
