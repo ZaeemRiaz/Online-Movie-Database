@@ -119,7 +119,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ActorDetail.cs" />
+    <Compile Include="Models\Actor.cs" />
     <Compile Include="Models\CRUDactor.cs" />
     <Compile Include="Models\CRUDcomment.cs" />
     <Compile Include="Models\CRUDcomplaint.cs" />
