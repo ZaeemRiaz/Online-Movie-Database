@@ -2,4 +2,5 @@ login user returns uID and uType //done
 change comments on movie to not display mId //done
 change add_movie release date type to string and type cast to date //done
 
-a seperate get id func for movies and actors OR include id in existing procs
+OPTIONAL:
+1. Delete user functionality
