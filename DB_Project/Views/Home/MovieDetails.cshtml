@@ -2,19 +2,28 @@
 
 @model movieDetailStruct
 
-@*@model List<String>*@
 @{
     int i = 1;
 }
-@Model.movieDetail
-@Model.cast[0]
-@Model.commentList[0]
 <!DOCTYPE html>
 <html>
 <head>
-    <h1>Movie Details</h1>
+    <title>Movie Details</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+
+
+    <h1>@Model.movieDetail.title</h1>
+    <p>Rating: @Model.movieDetail.rating </p>
+    <h2>What is the movie about?</h2>
+    <p>Category: @Model.movieDetail.genre</p>
+    <p>@Model.movieDetail.descript</p>
+    <!--@Model.movieDetail.movieID <br />-->
+    <p>Release Date: @Model.movieDetail.releasedate</p>
+    
+
+    <h3>Rate the movie</h3>
     <form action="../../Home/Rating" method="post">
         <fieldset>
             <h2> Rate the movie (1-10) </h2>
@@ -33,24 +42,22 @@
         </fieldset>
     </form>
 
-    <p>Movie details</p>
-    @Model.movieDetail.movieID <br />
-    @Model.movieDetail.title <br />
-    @Model.movieDetail.rating <br />
-    @Model.movieDetail.descript <br />
-    @Model.movieDetail.genre <br />
-    @Model.movieDetail.releasedate <br />
-    @Model.movieDetail.picture <br />
-
     @*<p>The cast includes:</p>
-    @foreach (String element in Model)
+        @foreach (String element in Model)
+        {
+            <!-- output syntax-->
+            <p> </p>
+            i = i + 1;
+        }*@
+    <h2>The cast includes:</h2>
+    @foreach (Actor a in Model.cast)
     {
-        <!-- output syntax-->
-        <p> </p>
+        <li> a.name</li>
         i = i + 1;
-    }*@
+    }
 
 
+    <h3>Add Comment on this movie</h3>
     <form action="../../Home/AddComent" method="post">
         <fieldset>
             <h2> Add a comment </h2>

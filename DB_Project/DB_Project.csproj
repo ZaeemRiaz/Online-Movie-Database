@@ -97,6 +97,10 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\1.jpeg" />
+    <Content Include="Content\Images\2.jpeg" />
+    <Content Include="Content\Images\3.jpeg" />
+    <Content Include="Content\Images\4.jpeg" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

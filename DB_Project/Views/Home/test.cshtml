@@ -9,7 +9,8 @@
 @Model.descript <br />
 @Model.genre <br />
 @Model.releasedate <br />
-@if (Model.picture2 != null)
+@*@if (Model.picture2 != null)
 {
     ViewBag.Base64String = "data:image/png;base64," + Convert.ToBase64String(Model.picture2, 0, Model.picture2.Length);
-}
+}*@
+<img src="~/Content/Images/1.jpeg" alt="pic" width="104" height="142">

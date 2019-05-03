@@ -34,11 +34,10 @@ namespace DB_Project.Controllers
                 return View();
             }
         }
-        public ActionResult MovieDetails()
+        public ActionResult MovieDetails(int movieID)
         {
-            if (Session["MovieID"] != null)
+            if (movieID != 0)
             {
-                int movieID = Int32.Parse(Session["MovieID"].ToString());
                 movieDetailStruct mdstruct = new movieDetailStruct();
                 mdstruct.movieDetail = CRUDmovie.MovieDetailFunc(movieID);
                 mdstruct.cast = CRUDactor.MovieCastFunc(movieID);
@@ -111,6 +110,12 @@ namespace DB_Project.Controllers
                     return RedirectToAction("Msg", new { param = u.ret });
                 }
             }
+        }
+
+        public ActionResult test()
+        {
+            Movie m = CRUDmovie.MovieDetailFunc(1);
+            return View(m);
         }
     }
 }
