@@ -1,16 +1,14 @@
 ﻿body {
     background-color: #F1FBFB;
 }
-
 #formwrapper {
     /*width: 300px;*/
     width: 50vw;
-    margin-left: 24vw;
+    margin-left: 20vw;
     text-align: center;
     height: auto;
     background-color: #F1FBFB;
 }
-
 form {
     width: 400px;
     height: auto;
@@ -53,13 +51,15 @@ textarea {
 }
 
 .btn {
-    width: 50px;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding-bottom:  30px ;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
     height: 20px;
-    font-family: "Trebuchet MS", Helvetica, sans-serif;
-    color: #FFF;
-    font-weight: bold;
-    background-color: #6CF;
-    margin-left: 10px;
-    float: left;
+    width: 350px;
 }
 

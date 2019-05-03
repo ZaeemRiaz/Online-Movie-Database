@@ -47,7 +47,7 @@ namespace DB_Project.Controllers
             }
             else
             {
-                return RedirectToAction("Msg", new { param = 1 });
+                return RedirectToAction("Error", new { param = 1 });
             }
         }
         public ActionResult ActorDetails()
@@ -74,9 +74,13 @@ namespace DB_Project.Controllers
                 {
                     return RedirectToAction("Login");
                 }
-                else//print error msg
+                else if (ret == -1)//DB connection failed
                 {
-                    return RedirectToAction("Msg", new { param = ret });
+                    return RedirectToAction("Error", new { param = -1 });
+                }
+                else
+                {
+                    return RedirectToAction("Error", new { param = 3 });
                 }
             }
         }
@@ -104,9 +108,13 @@ namespace DB_Project.Controllers
                         return RedirectToAction("Index");
                     }
                 }
-                else//print error msg
+                else if (u.ret == -1)//DB connection failed
                 {
-                    return RedirectToAction("Msg", new { param = u.ret });
+                    return RedirectToAction("Error", new { param = -1 });
+                }
+                else
+                {
+                    return RedirectToAction("Error", new { param = 4 });
                 }
             }
         }
