@@ -1,0 +1,22 @@
+﻿@using DB_Project.Models
+
+@Model  Comment
+
+@{ 
+    int i = 1;
+}
+
+<html>
+<head>
+    <title>View Complaints</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <h1>Complaints include:</h1>
+    @foreach (Complaint c in Model.complaint)
+    {
+        <p>@c.text and @c.status</p>
+        i = i + 1;
+    }
+</body>
+</html>
