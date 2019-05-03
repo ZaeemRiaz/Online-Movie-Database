@@ -18,11 +18,25 @@ namespace DB_Project.Controllers
         }
         public ActionResult Signup()
         {
-            return View();
+            if (Session["uId"] != null)//user already logged in
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
         }
         public ActionResult Login()
         {
-            return View();
+            if (Session["uId"] != null)//user already logged in
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
         }
         public ActionResult Complaint()
         {
@@ -62,60 +76,46 @@ namespace DB_Project.Controllers
         }
         public ActionResult SignupAction(string email, string name, string usertype, string dateOfBirth, string password)
         {
-            if (Session["uId"] != null)//user already logged in
+            int ret;
+            ret = CRUDuser.SignupFunc(email, name, usertype, dateOfBirth, password);
+            if (ret == 1)//user signed up successfully, goto login page
             {
-                return RedirectToAction(Session["LoginRedirect"].ToString());
+                return RedirectToAction("Login");
+            }
+            else if (ret == -1)//DB connection failed
+            {
+                return RedirectToAction("Error", new { param = -1 });
             }
             else
             {
-                int ret;
-                ret = CRUDuser.SignupFunc(email, name, usertype, dateOfBirth, password);
-                if (ret == 1)//user signed up successfully, goto login page
-                {
-                    return RedirectToAction("Login");
-                }
-                else if (ret == -1)//DB connection failed
-                {
-                    return RedirectToAction("Error", new { param = -1 });
-                }
-                else
-                {
-                    return RedirectToAction("Error", new { param = 3 });
-                }
+                return RedirectToAction("Error", new { param = 3 });
             }
         }
         public ActionResult LoginAction(string email, string password)
         {
-            if (Session["uId"] != null)//user already logged in
+            userLoginStruct u = null;
+            u = CRUDuser.LoginFunc(email, password);
+            //store session info after login
+            if (u.ret != 0 && u.ret != -1)
             {
-                return RedirectToAction(Session["LoginRedirect"].ToString());
+                Session["uId"] = u.id;
+                Session["uType"] = u.type;
+                if (Session["LoginRedirect"] != null)//goto prev page login or signup called from
+                {
+                    return RedirectToAction(Session["LoginRedirect"].ToString());
+                }
+                else//goto homepage if not redirect availabe
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            else if (u.ret == -1)//DB connection failed
+            {
+                return RedirectToAction("Error", new { param = -1 });
             }
             else
             {
-                userLoginStruct u = null;
-                u = CRUDuser.LoginFunc(email, password);
-                //store session info after login
-                if (u.ret != 0 && u.ret != -1)
-                {
-                    Session["uId"] = u.id;
-                    Session["uType"] = u.type;
-                    if (Session["LoginRedirect"] != null)//goto prev page login or signup called from
-                    {
-                        return RedirectToAction(Session["LoginRedirect"].ToString());
-                    }
-                    else//goto homepage if not redirect availabe
-                    {
-                        return RedirectToAction("Index");
-                    }
-                }
-                else if (u.ret == -1)//DB connection failed
-                {
-                    return RedirectToAction("Error", new { param = -1 });
-                }
-                else
-                {
-                    return RedirectToAction("Error", new { param = 4 });
-                }
+                return RedirectToAction("Error", new { param = 4 });
             }
         }
         public ActionResult test()
