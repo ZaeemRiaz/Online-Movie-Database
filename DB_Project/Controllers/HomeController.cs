@@ -46,8 +46,7 @@ namespace DB_Project.Controllers
             }
             else
             {
-                //TODO: redirect to msg
-                return null;
+                return RedirectToAction("Msg", new { param = 1 });
             }
         }
         public ActionResult ActorDetails()

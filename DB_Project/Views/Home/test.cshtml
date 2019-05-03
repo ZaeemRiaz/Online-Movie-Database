@@ -13,4 +13,8 @@
 {
     ViewBag.Base64String = "data:image/png;base64," + Convert.ToBase64String(Model.picture2, 0, Model.picture2.Length);
 }*@
-<img src="~/Content/Images/1.jpeg" alt="pic" width="104" height="142">
+@{ 
+    int i = 1;
+    string st = i.ToString()+".jpeg";
+}
+<img src="~/Content/Images/@st" alt="pic" width="104" height="142">
