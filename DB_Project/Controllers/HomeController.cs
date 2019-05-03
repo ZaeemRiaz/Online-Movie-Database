@@ -11,21 +11,49 @@ namespace DB_Project.Controllers
 {
     public class HomeController : Controller
     {
-        //GET: Home
-        public ActionResult Index()
+        //ActionResults with Views
+        public ActionResult ActorDetails()
         {
-            return View();
+            int actorId = 1;
+            Actor a = CRUDactor.DisplayActorFunc(actorId);
+            return View(a);
         }
-        public ActionResult Signup()
+        public ActionResult AddMovie()
         {
-            if (Session["uId"] != null)//user already logged in
+            if (Session["uType"] == null)//user already logged in
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                if (Session["uType"].ToString() == "A")//admin
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+        }
+        public ActionResult Complaint()
+        {
+            if (Session["uId"] == null)//user not logged in
+            {
+                return RedirectToAction("Login");
             }
             else
             {
                 return View();
             }
+        }
+        public ActionResult Error(int param)
+        {
+            return View(param);
+        }
+        public ActionResult Index()
+        {
+            return View();
         }
         public ActionResult Login()
         {
@@ -38,11 +66,26 @@ namespace DB_Project.Controllers
                 return View();
             }
         }
-        public ActionResult Complaint()
+        public ActionResult MovieDetails(int movieID)
         {
-            if (Session["uId"] == null)//user not logged in
+            if (movieID != 0)
             {
-                return RedirectToAction("Login");
+                movieDetailStruct mdstruct = new movieDetailStruct();
+                mdstruct.movieDetail = CRUDmovie.MovieDetailFunc(movieID);
+                mdstruct.cast = CRUDactor.MovieCastFunc(movieID);
+                mdstruct.commentList = CRUDcomment.MovieCommentFunc(movieID);
+                return View(mdstruct);
+            }
+            else
+            {
+                return RedirectToAction("Error", new { param = 1 });
+            }
+        }
+        public ActionResult Signup()
+        {
+            if (Session["uId"] != null)//user already logged in
+            {
+                return RedirectToAction("Index");
             }
             else
             {
@@ -68,49 +111,8 @@ namespace DB_Project.Controllers
                 }
             }
         }
-        public ActionResult AddMovie()
-        {
-            if (Session["uType"] == null)//user already logged in
-            {
-                return RedirectToAction("Login");
-            }
-            else
-            {
-                if (Session["uType"].ToString() == "A")//admin
-                {
-                    return View();
-                }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
-            }
-        }
-        public ActionResult MovieDetails(int movieID)
-        {
-            if (movieID != 0)
-            {
-                movieDetailStruct mdstruct = new movieDetailStruct();
-                mdstruct.movieDetail = CRUDmovie.MovieDetailFunc(movieID);
-                mdstruct.cast = CRUDactor.MovieCastFunc(movieID);
-                mdstruct.commentList = CRUDcomment.MovieCommentFunc(movieID);
-                return View(mdstruct);
-            }
-            else
-            {
-                return RedirectToAction("Error", new { param = 1 });
-            }
-        }
-        public ActionResult ActorDetails()
-        {
-            int actorId = 1;
-            Actor a = CRUDactor.DisplayActorFunc(actorId);
-            return View(a);
-        }
-        public ActionResult Error(int param)
-        {
-            return View(param);
-        }
+        
+        //ActionResult without Views
         public ActionResult SignupAction(string email, string name, string usertype, string dateOfBirth, string password)
         {
             int ret;
@@ -155,6 +157,8 @@ namespace DB_Project.Controllers
                 return RedirectToAction("Error", new { param = 4 });
             }
         }
+
+        //Test ActionResult
         public ActionResult test()
         {
             Movie m = CRUDmovie.MovieDetailFunc(1);
@@ -164,7 +168,6 @@ namespace DB_Project.Controllers
         {
             return View();
         }
-
         public ActionResult ImageUpload(HttpPostedFileBase fileToUpload)
         {
             if (fileToUpload != null)
@@ -179,6 +182,8 @@ namespace DB_Project.Controllers
             // Redirect to whereever wanted
             return RedirectToAction("Index");
         }
+
+        //JsonResults
         public JsonResult CheckEmailAvailable(string email)
         {
             int ret = CRUDuser.EmailAvailableFunc(email);
