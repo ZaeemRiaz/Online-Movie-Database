@@ -53,13 +53,13 @@ textarea {
 }
 
 .btn {
-    width: 50px;
-    height: 20px;
-    font-family: "Trebuchet MS", Helvetica, sans-serif;
-    color: #FFF;
-    font-weight: bold;
-    background-color: #6CF;
-    margin-left: 10px;
-    float: left;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: left;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 }
 
