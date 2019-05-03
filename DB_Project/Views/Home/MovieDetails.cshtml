@@ -18,12 +18,11 @@
     <p>Rating: @Model.movieDetail.rating </p>
     <h2>What is the movie about?</h2>
     <p>Category: @Model.movieDetail.genre</p>
-    <p>@Model.movieDetail.descript</p>
+    <p>Description: @Model.movieDetail.descript</p>
     <!--@Model.movieDetail.movieID <br />-->
     <p>Release Date: @Model.movieDetail.releasedate</p>
-    
 
-    <h3>Rate the movie</h3>
+
     <form action="../../Home/Rating" method="post">
         <fieldset>
             <h2> Rate the movie (1-10) </h2>
@@ -52,12 +51,11 @@
     <h2>The cast includes:</h2>
     @foreach (Actor a in Model.cast)
     {
-        <li> a.name</li>
+    <li> @a.name</li>
         i = i + 1;
     }
 
 
-    <h3>Add Comment on this movie</h3>
     <form action="../../Home/AddComent" method="post">
         <fieldset>
             <h2> Add a comment </h2>
@@ -66,5 +64,12 @@
         </fieldset>
 
     </form>
+
+    <h2>Previous comments are:</h2>
+    @foreach (Comment c in Model.commentList)
+    {
+    <li> @c.userID @c.userName commented at time: @c.dtime: @c.comment</li>
+        i = i + 1;
+    }
 </body>
 </html>
