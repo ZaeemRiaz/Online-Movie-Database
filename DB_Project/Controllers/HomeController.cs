@@ -208,5 +208,13 @@ namespace DB_Project.Controllers
                 return Json(0);
             }
         }
+        public JsonResult SignupAction()
+        {
+            return Json(0);
+        }
+        public JsonResult LoginAction()
+        {
+            return Json(0);
+        }
     }
 }
