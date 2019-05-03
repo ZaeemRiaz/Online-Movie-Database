@@ -151,7 +151,6 @@
     <Content Include="Views\Home\Complaint.cshtml" />
     <Content Include="Views\Home\MovieDetails.cshtml" />
     <Content Include="Views\Home\ActorDetails.cshtml" />
-    <Content Include="Views\Home\MovieCast.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

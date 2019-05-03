@@ -50,10 +50,6 @@ namespace DB_Project.Controllers
             Actor a = CRUDactor.DisplayActorFunc(actorId);
             return View(a);
         }
-        public ActionResult MovieCast()
-        {
-            return View();
-        }
         public ActionResult Msg(int param)
         {
             return View(param);
