@@ -88,5 +88,55 @@ namespace DB_Project.Models
             }
             return result;
         }
+        public static List<Complaint> ShowComplaintFunc()
+        {
+            List<Complaint> cList = new List<Complaint>();
+            //open connection to db
+            string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
+
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command = null;
+            SqlDataReader reader = null;
+
+            //try execution
+            try
+            {
+                connection.Open();
+
+                command = new SqlCommand("all_complaints", connection);
+                reader = command.ExecuteReader();
+                Complaint c;
+                while (reader.Read())
+                {
+                    c = new Complaint();
+                    c.complaintID = reader[0].ToString();
+                    c.userID = reader[1].ToString();
+                    c.dtime = reader[2].ToString();
+                    c.text = reader[3].ToString();
+                    c.status = reader[4].ToString();
+                    cList.Add(c);
+                }
+                return cList;
+            }
+            catch (SqlException ex)//print error message
+            {
+                Console.WriteLine("SQL Error" + ex.Message.ToString());
+                return null;
+            }
+            finally//close connection
+            {
+                // close reader
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+            }
+        }
     }
 }
