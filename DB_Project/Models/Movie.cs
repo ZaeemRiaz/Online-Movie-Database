@@ -14,6 +14,5 @@ namespace DB_Project.Models
         public String genre { get; set; }
         public String releasedate { get; set; }
         public String picture { get; set; }
-        public byte[] picture2 { get; set; }
     }
 }
