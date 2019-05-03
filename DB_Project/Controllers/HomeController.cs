@@ -46,8 +46,7 @@ namespace DB_Project.Controllers
             }
             else
             {
-                //TODO: redirect to msg
-                return null;
+                return RedirectToAction("Msg", new { param = 1 });
             }
         }
         public ActionResult ActorDetails()
@@ -56,7 +55,7 @@ namespace DB_Project.Controllers
             Actor a = CRUDactor.DisplayActorFunc(actorId);
             return View(a);
         }
-        public ActionResult Msg(int param)
+        public ActionResult Error(int param)
         {
             return View(param);
         }
@@ -106,7 +105,6 @@ namespace DB_Project.Controllers
                 }
                 else//print error msg
                 {
-                    u.ret = 2;
                     return RedirectToAction("Msg", new { param = u.ret });
                 }
             }
