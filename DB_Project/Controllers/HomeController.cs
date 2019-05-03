@@ -25,13 +25,19 @@ namespace DB_Project.Controllers
         }
         public ActionResult Complaint()
         {
-            return View();
-        }
-        public ActionResult MovieDetails()
-        {
-            if (Session["MovieID"] != null)
+            if (Session["uId"] == null)//user not logged in
             {
-                int movieID = Int32.Parse(Session["MovieID"].ToString());
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                return View();
+            }
+        }
+        public ActionResult MovieDetails(int movieID)
+        {
+            if (movieID != 0)
+            {
                 movieDetailStruct mdstruct = new movieDetailStruct();
                 mdstruct.movieDetail = CRUDmovie.MovieDetailFunc(movieID);
                 mdstruct.cast = CRUDactor.MovieCastFunc(movieID);
@@ -40,7 +46,7 @@ namespace DB_Project.Controllers
             }
             else
             {
-                //TODO: redirect to appropriate place
+                //TODO: redirect to msg
                 return null;
             }
         }
@@ -104,6 +110,12 @@ namespace DB_Project.Controllers
                     return RedirectToAction("Msg", new { param = u.ret });
                 }
             }
+        }
+
+        public ActionResult test()
+        {
+            Movie m = CRUDmovie.MovieDetailFunc(1);
+            return View(m);
         }
     }
 }

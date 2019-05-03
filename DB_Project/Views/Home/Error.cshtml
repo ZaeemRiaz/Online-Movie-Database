@@ -2,6 +2,14 @@
 @{
     ViewBag.Title = "Msg";
 }
+
+@*
+KEY
+    -1  = DB Connection Failed
+     1  = Movie Details Not Found
+     2  = Actor Details Not Found
+*@
+
 <html>
 <body>
     <br />
@@ -10,29 +18,13 @@
     {
         <p>Connection to Database Failed!</p>
     }
-    else if (Model == 0)
-    {
-        <p>Sign-Up Failed!</p>
-    }
     else if (Model == 1)
     {
-        <p>User Registered!</p>
+        <p>Movie Details Not Found</p>
     }
     else if (Model == 2)
     {
-        <p>Log-In Failed!</p>
-    }
-    else if (Model == 3)
-    {
-        <p>User Logged-In!</p>
-    }
-    else if (Model == 4)
-    {
-        <p>Signup Action Error!</p>
-    }
-    else if (Model == 5)
-    {
-        <p>Login Action Error!</p>
+        <p>Actor Details Not Found</p>
     }
     else
     {

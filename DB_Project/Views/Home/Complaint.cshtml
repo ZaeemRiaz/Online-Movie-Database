@@ -1,28 +1,20 @@
 ﻿<!DOCTYPE html>
 <html>
+<head>
+    <meta charset="utf-8">
+    <title>Complaints</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+</head>
 <body>
-    <h2>Complaint</h2>
-    <form action="../../Home/ComplaintAction" method="post">
-        <fieldset>
-            <legend>Login</legend>
-
-            Text:<br />
-            <input type="text" required name="text" />
-            <br /><br />
-
-            <input type="submit" value="Submit" />
-            <br /><br />
-
-            <p style="display:inline"> Don't have an account?</p>
-            <a href="../../Home/Signup">Create new account</a>
-            <br /><br />
-            <p style="display:inline"> Already have an account?</p>
-            <a href="../../Home/LoginAction">Sign in</a>
-        </fieldset>
-    </form>
-
-    <br /><br />
-    <a href="../../Home/Index">Index</a>
-    <br /><br />
+    <div id="formwrapper">
+        <form action="../../Home/Complaint" method="post" name="loginform">
+            <fieldset>
+                <h1>Register your Complaint</h1>
+                <label for="message">Enter your complaint:</label>
+                <textarea name="message" cols="40" rows="10"> </textarea>
+                <br>
+                <input class="btn" name="submit" type="submit" value="Send">
+            </fieldset>
+        </form>
 </body>
 </html>

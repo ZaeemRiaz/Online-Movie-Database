@@ -1,17 +1,28 @@
 ﻿@using DB_Project.Models
 
-@model Movie
-@*@model List<String>*@
+@model movieDetailStruct
+
 @{
     int i = 1;
 }
-
 <!DOCTYPE html>
 <html>
 <head>
-    <h1>Movie Details</h1>
+    <title>Movie Details</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+
+
+    <h1>@Model.movieDetail.title</h1>
+    <p>Rating: @Model.movieDetail.rating </p>
+    <h2>What is the movie about?</h2>
+    <p>Category: @Model.movieDetail.genre</p>
+    <p>Description: @Model.movieDetail.descript</p>
+    <!--@Model.movieDetail.movieID <br />-->
+    <p>Release Date: @Model.movieDetail.releasedate</p>
+
+
     <form action="../../Home/Rating" method="post">
         <fieldset>
             <h2> Rate the movie (1-10) </h2>
@@ -30,22 +41,19 @@
         </fieldset>
     </form>
 
-    <p>Movie details</p>
-    @Model.movieID <br />
-    @Model.title <br />
-    @Model.rating <br />
-    @Model.descript <br />
-    @Model.genre <br />
-    @Model.releasedate <br />
-    @Model.picture <br />
-
     @*<p>The cast includes:</p>
-    @foreach (String element in Model)
+        @foreach (String element in Model)
+        {
+            <!-- output syntax-->
+            <p> </p>
+            i = i + 1;
+        }*@
+    <h2>The cast includes:</h2>
+    @foreach (Actor a in Model.cast)
     {
-        <!-- output syntax-->
-        <p> </p>
+    <li> @a.name</li>
         i = i + 1;
-    }*@
+    }
 
 
     <form action="../../Home/AddComent" method="post">
@@ -56,5 +64,12 @@
         </fieldset>
 
     </form>
+
+    <h2>Previous comments are:</h2>
+    @foreach (Comment c in Model.commentList)
+    {
+    <li> @c.userID @c.userName commented at time: @c.dtime: @c.comment</li>
+        i = i + 1;
+    }
 </body>
 </html>
