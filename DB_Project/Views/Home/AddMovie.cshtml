@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "AddMovie";
+}
+
+<html>
+<head>
+    <title>Add Movie</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div id="formwrapper">
+        <form action="../../Home/AddMovie" method="post" name="signupform" enctype="multipart/form-data">
+            <fieldset>
+                <h1>Add a movie</h1>
+                <label for="title">Title:</label>
+                <input required name="title" type="text" size="50" maxlength="100">
+                <label for="genre">Genre:</label>
+                <input required name="genre" type="text" size="50" maxlength="100">
+                <label for="date">Date of Release:</label>
+                <input type="date" required name="dateOfBirth" size="50" maxlength="100" />
+                <label for="description">Description:</label>
+                <textarea required name="description" cols="40" rows="10"> </textarea>
+                <p>Select image to upload:</p>
+                <input type="file" name="fileToUpload" id="fileToUpload">
+       
+
+                <input class="btn" name="submit" type="submit" value="Send">
+            </fieldset>
+        </form>
+    </div>
+
+</body>
+</html>
