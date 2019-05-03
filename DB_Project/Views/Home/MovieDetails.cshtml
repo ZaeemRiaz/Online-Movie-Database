@@ -1,11 +1,14 @@
 ﻿@using DB_Project.Models
 
-@model Movie
+@model movieDetailStruct
+
 @*@model List<String>*@
 @{
     int i = 1;
 }
-
+@Model.movieDetail
+@Model.cast[0]
+@Model.commentList[0]
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,13 +34,13 @@
     </form>
 
     <p>Movie details</p>
-    @Model.movieID <br />
-    @Model.title <br />
-    @Model.rating <br />
-    @Model.descript <br />
-    @Model.genre <br />
-    @Model.releasedate <br />
-    @Model.picture <br />
+    @Model.movieDetail.movieID <br />
+    @Model.movieDetail.title <br />
+    @Model.movieDetail.rating <br />
+    @Model.movieDetail.descript <br />
+    @Model.movieDetail.genre <br />
+    @Model.movieDetail.releasedate <br />
+    @Model.movieDetail.picture <br />
 
     @*<p>The cast includes:</p>
     @foreach (String element in Model)
