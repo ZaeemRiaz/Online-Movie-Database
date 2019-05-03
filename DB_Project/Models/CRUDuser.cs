@@ -138,7 +138,7 @@ namespace DB_Project.Models
             }
             return result;
         }
-        public static int EmailNotExistFunc(string email)
+        public static int EmailAvailableFunc(string email)
         {
             //open connection to db
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";

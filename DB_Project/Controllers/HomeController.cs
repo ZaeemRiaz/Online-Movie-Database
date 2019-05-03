@@ -142,5 +142,17 @@ namespace DB_Project.Controllers
             // Redirect to whereever wanted
             return RedirectToAction("Index");
         }
+        public JsonResult CheckEmailAvailable(string email)
+        {
+            int ret = CRUDuser.EmailAvailableFunc(email);
+            if (ret == 1)//email availbale
+            {
+                return Json(1);
+            }
+            else
+            {
+                return Json(0);
+            }
+        }
     }
 }
