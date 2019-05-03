@@ -2,33 +2,30 @@
 @{
     ViewBag.Title = "Login";
 }
-<!DOCTYPE html>
+
 <html>
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+</head>
 <body>
-    <h2>Login into your account</h2>
-    <form action="../../Home/LoginAction" method="post">
-        <fieldset>
-            <legend>Login</legend>
+    @*<center>*@
+        <div id="formwrapper">
+            <form action="../../Home/Login" method="post" name="loginform">
+                <fieldset>
+                    <h1>Sign in to your Account</h1>
+                    <label for="email">Your Email:</label>
+                    <input required name="email" type="text" size="50" maxlength="100">
+                    <label for="password">Password:</label>
+                    <input type="password" required name="password" size="50" maxlength="100">
+                    <br>
+                    <!-- textarea name="message cols="40" rows= 10" </textarea> -->
+                    <br>
+                    <input class="btn" name="submit" type="submit" value="Send">
+                </fieldset>
+            </form>
 
-            Email:<br />
-            <input type="email" required name="email" pattern="[a-z0-9._%+-]+&#64[a-z0-9.-]+\.[a-z]{2,}$" />
-            <br /><br />
-
-            Password:<br />
-            <input type="password" required name="password" />
-            <br /><br />
-
-            <input type="submit" value="Submit" />
-            <br /><br />
-
-            <p style="display:inline"> Don't have an account?</p>
-            <a href="../../Home/Signup">Create new account</a>
-            <br /><br />
-        </fieldset>
-    </form>
-
-    <br /><br />
-    <a href="../../Home/Index">Index</a>
-    <br /><br />
+    @*</center>*@
 </body>
 </html>

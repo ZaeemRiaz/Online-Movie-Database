@@ -3,7 +3,10 @@
 }
 
 #formwrapper {
-    width: 300px;
+    /*width: 300px;*/
+    width: 50vw;
+    margin-left: 24vw;
+    text-align: center;
     height: auto;
     background-color: #F1FBFB;
 }

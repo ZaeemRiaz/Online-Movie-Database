@@ -25,7 +25,14 @@ namespace DB_Project.Controllers
         }
         public ActionResult Complaint()
         {
-            return View();
+            if (Session["uId"] == null)//user not logged in
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                return View();
+            }
         }
         public ActionResult MovieDetails()
         {
@@ -40,7 +47,7 @@ namespace DB_Project.Controllers
             }
             else
             {
-                //TODO: redirect to appropriate place
+                //TODO: redirect to msg
                 return null;
             }
         }
