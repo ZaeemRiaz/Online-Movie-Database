@@ -29,21 +29,26 @@ namespace DB_Project.Controllers
         }
         public ActionResult MovieDetails()
         {
-            //int movieId = 1;
-            Movie m = CRUDmovie.MovieDetailFunc(1);
-            //List<Movie> mList = CRUDmovie.AllMovieFunc();
-           // List<Actor> aList = CRUDactor.MovieCastFunc(movieId);
-            return View(m);
+            if (Session["MovieID"] != null)
+            {
+                int movieID = Int32.Parse(Session["MovieID"].ToString());
+                movieDetailStruct mdstruct = new movieDetailStruct();
+                mdstruct.movieDetail = CRUDmovie.MovieDetailFunc(movieID);
+                mdstruct.cast = CRUDactor.MovieCastFunc(movieID);
+                mdstruct.commentList = CRUDcomment.MovieCommentFunc(movieID);
+                return View(mdstruct);
+            }
+            else
+            {
+                //TODO: redirect to appropriate place
+                return null;
+            }
         }
         public ActionResult ActorDetails()
         {
             int actorId = 1;
             Actor a = CRUDactor.DisplayActorFunc(actorId);
             return View(a);
-        }
-        public ActionResult MovieCast()
-        {
-            return View();
         }
         public ActionResult Msg(int param)
         {

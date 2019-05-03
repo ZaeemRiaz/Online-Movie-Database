@@ -16,7 +16,6 @@ namespace DB_Project.Models
         public Movie movieDetail { get; set; }
         public List<Actor> cast { get; set; }
         public List<Comment> commentList { get; set; }
-        public int rating { get; set; }
     }
     
 }
