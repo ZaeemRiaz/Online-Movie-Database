@@ -37,9 +37,9 @@ namespace DB_Project.Controllers
         }
         public ActionResult ActorDetails()
         {
-            int actorId = 0;
-            Actor actor = CRUDactor.DisplayActorFunc(actorId);
-            return View();
+            int actorId = 1;
+            Actor a = CRUDactor.DisplayActorFunc(actorId);
+            return View(a);
         }
         public ActionResult MovieCast()
         {
@@ -51,37 +51,53 @@ namespace DB_Project.Controllers
         }
         public ActionResult SignupAction(string email, string name, string usertype, string dateOfBirth, string password)
         {
-            int ret;
-            ret = CRUDuser.SignupFunc(email, name, usertype, dateOfBirth, password);
-            if (ret == 1)//user signed up successfully, goto login page
+            if (Session["uId"] != null)//user already logged in
             {
-                return RedirectToAction("Login");
+                return RedirectToAction(Session["LoginRedirect"].ToString());
             }
-            else//print error msg
+            else
             {
-                return RedirectToAction("Msg", new { param = ret });
+                int ret;
+                ret = CRUDuser.SignupFunc(email, name, usertype, dateOfBirth, password);
+                if (ret == 1)//user signed up successfully, goto login page
+                {
+                    return RedirectToAction("Login");
+                }
+                else//print error msg
+                {
+                    return RedirectToAction("Msg", new { param = ret });
+                }
             }
         }
         public ActionResult LoginAction(string email, string password)
         {
-            int ret;
-            ret = CRUDuser.LoginFunc(email, password);
-            if (ret == 1)
+            if (Session["uId"] != null)//user already logged in
             {
-                Session["UserId"] = 12;//user id
-                if (Session["LoginRedirect"] != null)//goto prev page login or signup called from
-                {
-                    return RedirectToAction(Session["LoginRedirect"].ToString());
-                }
-                else//goto homepage if not redirect availabe
-                {
-                    return RedirectToAction("Index");
-                }
+                return RedirectToAction(Session["LoginRedirect"].ToString());
             }
-            else//print error msg
+            else
             {
-                ret = 2;
-                return RedirectToAction("Msg", new { param = ret });
+                userLoginStruct u = null;
+                u = CRUDuser.LoginFunc(email, password);
+                //store session info after login
+                if (u.ret != 0 && u.ret != -1)
+                {
+                    Session["uId"] = u.id;
+                    Session["uType"] = u.type;
+                    if (Session["LoginRedirect"] != null)//goto prev page login or signup called from
+                    {
+                        return RedirectToAction(Session["LoginRedirect"].ToString());
+                    }
+                    else//goto homepage if not redirect availabe
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                else//print error msg
+                {
+                    u.ret = 2;
+                    return RedirectToAction("Msg", new { param = u.ret });
+                }
             }
         }
     }

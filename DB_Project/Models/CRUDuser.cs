@@ -9,18 +9,14 @@ namespace DB_Project.Models
 {
     public class CRUDuser
     {
-        public static int LoginFunc(string email, string password)
+        public static userLoginStruct LoginFunc(string email, string password)
         {
-            //@email varchar(50),
-            //@passcode varchar(50),
-            //@eOUT varchar(50) OUTPUT,
-            //@uTypeOUT varchar(50) OUTPUT
+            userLoginStruct u = null;
             //open connection to db
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
             SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
-            int result = 0;
+            SqlCommand command = null;
 
             //try execution
             try
@@ -33,21 +29,32 @@ namespace DB_Project.Models
                 command.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = email;
                 command.Parameters.Add("@passcode", SqlDbType.VarChar, 50).Value = password;
 
-                command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
+                command.Parameters.Add("@uIDOUT", SqlDbType.Int).Direction = ParameterDirection.Output;
+                command.Parameters.Add("@uTypeOUT", SqlDbType.Char, 1).Direction = ParameterDirection.Output;
 
                 command.ExecuteNonQuery();
-                result = Convert.ToInt32(command.Parameters["@flag"].Value);
+                u = new userLoginStruct();
+                u.ret = Convert.ToInt32(command.Parameters["@uIDOUT"].Value);
+                if (u.ret != 0)
+                {
+                    u.id = u.ret.ToString();
+                    u.type = Convert.ToString(command.Parameters["@uTypeOUT"].Value);
+                }
             }
             catch (SqlException ex)//print error message
             {
                 Console.WriteLine("SQL Error" + ex.Message.ToString());
-                result = -1; //-1 will be interpreted as "error while connecting with the database."
+                u.ret = -1; //-1 will be interpreted as "error while connecting with the database."
             }
             finally//close connection
             {
-                connection.Close();
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
             }
-            return result;
+            return u;
         }
         public static int SignupFunc(string email, string name, string usertype, string dateOfBirth, string password)
         {
@@ -55,7 +62,7 @@ namespace DB_Project.Models
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
             SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
+            SqlCommand command = null;
             int result = 0;
 
             //try execution
@@ -84,7 +91,11 @@ namespace DB_Project.Models
             }
             finally//close connection
             {
-                connection.Close();
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
             }
             return result;
         }
@@ -94,7 +105,7 @@ namespace DB_Project.Models
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
             SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
+            SqlCommand command = null;
             int result = 0;
 
             //try execution
@@ -119,7 +130,11 @@ namespace DB_Project.Models
             }
             finally//close connection
             {
-                connection.Close();
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
             }
             return result;
         }
