@@ -1,8 +1,8 @@
 ﻿@using DB_Project.Models
 
-@Model  Comment
+@model  List<Complaint>
 
-@{ 
+@{
     int i = 1;
 }
 
@@ -13,7 +13,7 @@
 </head>
 <body>
     <h1>Complaints include:</h1>
-    @foreach (Complaint c in Model.complaint)
+    @foreach (Complaint c in Model)
     {
         <p>@c.text and @c.status</p>
         i = i + 1;

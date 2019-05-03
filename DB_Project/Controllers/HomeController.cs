@@ -49,6 +49,43 @@ namespace DB_Project.Controllers
                 return View();
             }
         }
+        public ActionResult ViewComplaints()
+        {
+            if (Session["uType"] == null)//user already logged in
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                if (Session["uType"].ToString() == "A")//admin
+                {
+                    List<Complaint> clist = CRUDcomplaint.ShowComplaintFunc();
+                    return View(clist);
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+        }
+        public ActionResult AddMovie()
+        {
+            if (Session["uType"] == null)//user already logged in
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                if (Session["uType"].ToString() == "A")//admin
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+        }
         public ActionResult MovieDetails(int movieID)
         {
             if (movieID != 0)
@@ -146,6 +183,18 @@ namespace DB_Project.Controllers
         {
             int ret = CRUDuser.EmailAvailableFunc(email);
             if (ret == 1)//email availbale
+            {
+                return Json(1);
+            }
+            else
+            {
+                return Json(0);
+            }
+        }
+        public JsonResult AddComplaint(string message)
+        {
+            int ret = CRUDcomplaint.AddComplaintFunc(Session["uId"].ToString(), message);
+            if (ret == 1)
             {
                 return Json(1);
             }
