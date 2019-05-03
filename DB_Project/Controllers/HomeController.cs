@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using DB_Project.Models;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace DB_Project.Controllers
 {
@@ -117,11 +118,29 @@ namespace DB_Project.Controllers
                 }
             }
         }
-
         public ActionResult test()
         {
             Movie m = CRUDmovie.MovieDetailFunc(1);
             return View(m);
+        }
+        public ActionResult AddImage()
+        {
+            return View();
+        }
+
+        public ActionResult ImageUpload(HttpPostedFileBase fileToUpload)
+        {
+            if (fileToUpload != null)
+            {
+                //change this accordingly with the entered movieID
+                string pic = System.IO.Path.GetFileName(fileToUpload.FileName);
+                //pic = "random.jpg";
+
+                string path = System.IO.Path.Combine(Server.MapPath("~/Content/Images/"), pic);
+                fileToUpload.SaveAs(path);
+            }
+            // Redirect to whereever wanted
+            return RedirectToAction("Index");
         }
     }
 }

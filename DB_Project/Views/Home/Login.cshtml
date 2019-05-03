@@ -10,22 +10,20 @@
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    @*<center>*@
-        <div id="formwrapper">
-            <form action="../../Home/Login" method="post" name="loginform">
-                <fieldset>
-                    <h1>Sign in to your Account</h1>
-                    <label for="email">Your Email:</label>
-                    <input required name="email" type="text" size="50" maxlength="100">
-                    <label for="password">Password:</label>
-                    <input type="password" required name="password" size="50" maxlength="100">
-                    <br>
-                    <!-- textarea name="message cols="40" rows= 10" </textarea> -->
-                    <br>
-                    <input class="btn" name="submit" type="submit" value="Send">
-                </fieldset>
-            </form>
-
-    @*</center>*@
+    <div id="formwrapper">
+        <form action="../../Home/Login" method="post" name="loginform">
+            <fieldset>
+                <h1>Sign in to your Account</h1>
+                <label for="email">Your Email:</label>
+                <input required name="email" type="text" size="50" maxlength="100">
+                <label for="password">Password:</label>
+                <input type="password" required name="password" size="50" maxlength="100">
+                <br>
+                <!-- textarea name="message cols="40" rows= 10" </textarea> -->
+                <br>
+                <input class="btn" name="submit" type="submit" value="Send">
+            </fieldset>
+        </form>
+    </div>
 </body>
 </html>
