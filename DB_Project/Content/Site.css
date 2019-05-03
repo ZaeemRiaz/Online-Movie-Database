@@ -14,7 +14,6 @@ form {
     height: auto;
     background-color: black;
 }
-
 fieldset {
     background-color: #F1FBFB;
     border: solid;
@@ -26,6 +25,13 @@ h1 {
     font-size: 24px;
     color: #000;
 }
+
+h2 {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 20px;
+    color: #000;
+}
+
 
 label {
     width: 250px;
