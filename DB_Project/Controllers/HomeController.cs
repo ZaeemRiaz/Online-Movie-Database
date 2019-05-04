@@ -139,9 +139,9 @@ namespace DB_Project.Controllers
             {
                 Session["uId"] = u.id;
                 Session["uType"] = u.type;
-                if (Session["LoginRedirect"] != null)//goto prev page login or signup called from
+                if (Session["Redirect"] != null)//goto prev page login or signup called from
                 {
-                    return RedirectToAction(Session["LoginRedirect"].ToString());
+                    return RedirectToAction(Session["Redirect"].ToString());
                 }
                 else//goto homepage if not redirect availabe
                 {
@@ -149,6 +149,22 @@ namespace DB_Project.Controllers
                 }
             }
             else if (u.ret == -1)//DB connection failed
+            {
+                return RedirectToAction("Error", new { param = -1 });
+            }
+            else
+            {
+                return RedirectToAction("Error", new { param = 4 });
+            }
+        }
+        public ActionResult AddComplaint(string message)
+        {
+            int ret = CRUDcomplaint.AddComplaintFunc(Session["uId"].ToString(), message);
+            if (ret == 1)
+            {
+                return RedirectToAction("Index");
+            }
+            else if (ret == -1)//DB connection failed
             {
                 return RedirectToAction("Error", new { param = -1 });
             }
@@ -189,17 +205,6 @@ namespace DB_Project.Controllers
             int ret = CRUDuser.EmailAvailableFunc(email);
             return Json(ret);
         }
-        public JsonResult AddComplaint(string message)
-        {
-            int ret = CRUDcomplaint.AddComplaintFunc(Session["uId"].ToString(), message);
-            if (ret == 1)
-            {
-                return Json(1);
-            }
-            else
-            {
-                return Json(0);
-            }
-        }
+       
     }
 }
