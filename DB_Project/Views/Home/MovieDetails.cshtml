@@ -13,8 +13,8 @@
 </head>
 <body>
 
-
-    @if (@Session["uType"].ToString() == "A")
+ 
+    @if (Session["uType"] != null && Session["uType"].ToString() == "A")
     {
         <a href="../../Home/EditMovieDetails">Edit Movie Details</a>
         <br />
