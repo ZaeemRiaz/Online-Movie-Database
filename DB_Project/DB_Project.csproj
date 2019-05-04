@@ -151,12 +151,10 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-    <Content Include="Views\Home\Complaint.cshtml" />
+    <Content Include="Views\Home\AddComplaint.cshtml" />
     <Content Include="Views\Home\MovieDetails.cshtml" />
     <Content Include="Views\Home\ActorDetails.cshtml" />
-    <Content Include="Views\Home\test.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
-    <Content Include="Views\Home\AddImage.cshtml" />
     <Content Include="Views\Home\AddMovie.cshtml" />
     <Content Include="Views\Home\ViewComplaints.cshtml" />
     <Content Include="Views\Home\EditMovieDetails.cshtml" />

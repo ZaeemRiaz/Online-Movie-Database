@@ -1,5 +1,5 @@
 ﻿@using DB_Project.Models
-
+@{Session["Redirect"] = "MovieDetails";}
 @model movieDetailStruct
 
 @{
@@ -14,7 +14,7 @@
 <body>
 
 
-    @if (@Session["uType"].ToString() == "A")
+    @if (Session["uType"] != null && Session["uType"].ToString() == "A")
     {
         <a href="../../Home/EditMovieDetails">Edit Movie Details</a>
         <br />
