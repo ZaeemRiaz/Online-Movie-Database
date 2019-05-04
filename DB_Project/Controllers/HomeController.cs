@@ -82,7 +82,14 @@ namespace DB_Project.Controllers
                 mdstruct.movieDetail = CRUDmovie.MovieDetailFunc(movieID);
                 mdstruct.cast = CRUDactor.MovieCastFunc(movieID);
                 mdstruct.commentList = CRUDcomment.MovieCommentFunc(movieID);
-                return View(mdstruct);
+                if (mdstruct.movieDetail == null)
+                {
+                    return RedirectToAction("Error", new { param = 1 });
+                }
+                else
+                {
+                    return View(mdstruct);
+                }
             }
             else
             {
