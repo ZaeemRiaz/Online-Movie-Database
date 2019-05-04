@@ -1,6 +1,4 @@
-﻿body {
-    background-color: #F1FBFB;
-}
+﻿
 #formwrapper {
     /*width: 300px;*/
     width: 50vw;
@@ -9,6 +7,11 @@
     height: auto;
     background-color: #F1FBFB;
 }
+
+body {
+    background-color: #F1FBFB;
+}
+
 form {
     width: 400px;
     height: auto;
