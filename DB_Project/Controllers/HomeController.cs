@@ -187,18 +187,7 @@ namespace DB_Project.Controllers
         public JsonResult CheckEmailAvailable(string email)
         {
             int ret = CRUDuser.EmailAvailableFunc(email);
-            if (ret == 1)//email availbale
-            {
-                return Json(1);
-            }
-            else if (ret == -1)//server connection failed
-            {
-                return Json(-1);
-            }
-            else//email exists
-            {
-                return Json(0);
-            }
+            return Json(ret);
         }
         public JsonResult AddComplaint(string message)
         {
