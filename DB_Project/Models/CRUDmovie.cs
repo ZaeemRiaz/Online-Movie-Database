@@ -392,7 +392,7 @@ namespace DB_Project.Models
                 command = new SqlCommand("add_movie", connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                command.Parameters.Add("@descript", SqlDbType.VarChar, 300).Value = descript;
+                command.Parameters.Add("@descript", SqlDbType.VarChar, 300).Value = description;
 
                 command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
 
@@ -431,7 +431,7 @@ namespace DB_Project.Models
                 command = new SqlCommand("add_movie", connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                command.Parameters.Add("@releasedate", SqlDbType.VarChar, 10).Value = releasedate;
+                command.Parameters.Add("@releasedate", SqlDbType.VarChar, 10).Value = releaseDate;
 
                 command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
 
