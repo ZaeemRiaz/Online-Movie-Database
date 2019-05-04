@@ -11,31 +11,29 @@ namespace DB_Project.Controllers
 {
     public class HomeController : Controller
     {
-        //GET: Home
-        public ActionResult Index()
+        //ActionResults with Views
+        public ActionResult ActorDetails()
         {
-            return View();
+            int actorId = 1;
+            Actor a = CRUDactor.DisplayActorFunc(actorId);
+            return View(a);
         }
-        public ActionResult Signup()
+        public ActionResult AddMovie()
         {
-            if (Session["uId"] != null)//user already logged in
+            if (Session["uType"] == null)//user already logged in
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Login");
             }
             else
             {
-                return View();
-            }
-        }
-        public ActionResult Login()
-        {
-            if (Session["uId"] != null)//user already logged in
-            {
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View();
+                if (Session["uType"].ToString() == "A")//admin
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
         }
         public ActionResult Complaint()
@@ -43,6 +41,25 @@ namespace DB_Project.Controllers
             if (Session["uId"] == null)//user not logged in
             {
                 return RedirectToAction("Login");
+            }
+            else
+            {
+                return View();
+            }
+        }
+        public ActionResult Error(int param)
+        {
+            return View(param);
+        }
+        public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult Login()
+        {
+            if (Session["uId"] != null)//user already logged in
+            {
+                return RedirectToAction("Index");
             }
             else
             {
@@ -64,16 +81,38 @@ namespace DB_Project.Controllers
                 return RedirectToAction("Error", new { param = 1 });
             }
         }
-        public ActionResult ActorDetails()
+        public ActionResult Signup()
         {
-            int actorId = 1;
-            Actor a = CRUDactor.DisplayActorFunc(actorId);
-            return View(a);
+            if (Session["uId"] != null)//user already logged in
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
         }
-        public ActionResult Error(int param)
+        public ActionResult ViewComplaints()
         {
-            return View(param);
+            if (Session["uType"] == null)//user already logged in
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                if (Session["uType"].ToString() == "A")//admin
+                {
+                    List<Complaint> clist = CRUDcomplaint.ShowComplaintFunc();
+                    return View(clist);
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
         }
+        
+        //ActionResult without Views
         public ActionResult SignupAction(string email, string name, string usertype, string dateOfBirth, string password)
         {
             int ret;
@@ -118,6 +157,8 @@ namespace DB_Project.Controllers
                 return RedirectToAction("Error", new { param = 4 });
             }
         }
+
+        //Test ActionResult
         public ActionResult test()
         {
             Movie m = CRUDmovie.MovieDetailFunc(1);
@@ -127,7 +168,6 @@ namespace DB_Project.Controllers
         {
             return View();
         }
-
         public ActionResult ImageUpload(HttpPostedFileBase fileToUpload)
         {
             if (fileToUpload != null)
@@ -141,6 +181,40 @@ namespace DB_Project.Controllers
             }
             // Redirect to whereever wanted
             return RedirectToAction("Index");
+        }
+
+        //JsonResults
+        public JsonResult CheckEmailAvailable(string email)
+        {
+            int ret = CRUDuser.EmailAvailableFunc(email);
+            if (ret == 1)//email availbale
+            {
+                return Json(1);
+            }
+            else
+            {
+                return Json(0);
+            }
+        }
+        public JsonResult AddComplaint(string message)
+        {
+            int ret = CRUDcomplaint.AddComplaintFunc(Session["uId"].ToString(), message);
+            if (ret == 1)
+            {
+                return Json(1);
+            }
+            else
+            {
+                return Json(0);
+            }
+        }
+        public JsonResult SignupAction()
+        {
+            return Json(0);
+        }
+        public JsonResult LoginAction()
+        {
+            return Json(0);
         }
     }
 }
