@@ -297,7 +297,7 @@ namespace DB_Project.Models
                 }
             }
         }
-        public static int EditMovieTitleFunc(string title)
+        public static int EditMovieTitleFunc(string movieId, string title)
         {
             //open connection to db
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
@@ -311,9 +311,10 @@ namespace DB_Project.Models
             {
                 connection.Open();
 
-                command = new SqlCommand("add_movie", connection);
+                command = new SqlCommand("update_movie_title", connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
+                command.Parameters.Add("@mID", SqlDbType.Int).Value = movieId;
                 command.Parameters.Add("@title", SqlDbType.VarChar, 100).Value = title;
 
                 command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -336,7 +337,7 @@ namespace DB_Project.Models
             }
             return result;
         }
-        public static int EditMovieGenreFunc(string genre)
+        public static int EditMovieGenreFunc(string movieId, string genre)
         {
             //open connection to db
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
@@ -350,9 +351,10 @@ namespace DB_Project.Models
             {
                 connection.Open();
 
-                command = new SqlCommand("add_movie", connection);
+                command = new SqlCommand("update_movie_genre", connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
+                command.Parameters.Add("@mID", SqlDbType.Int).Value = movieId;
                 command.Parameters.Add("@genre", SqlDbType.VarChar, 100).Value = genre;
 
                 command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -375,7 +377,7 @@ namespace DB_Project.Models
             }
             return result;
         }
-        public static int EditMovieDescriptionFunc(string description)
+        public static int EditMovieDescriptionFunc(string movieId, string description)
         {
             //open connection to db
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
@@ -389,9 +391,10 @@ namespace DB_Project.Models
             {
                 connection.Open();
 
-                command = new SqlCommand("add_movie", connection);
+                command = new SqlCommand("update_movie_descript", connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
+                command.Parameters.Add("@mID", SqlDbType.Int).Value = movieId;
                 command.Parameters.Add("@descript", SqlDbType.VarChar, 300).Value = description;
 
                 command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -414,7 +417,7 @@ namespace DB_Project.Models
             }
             return result;
         }
-        public static int EditMovieDateofReleaseFunc(string releaseDate)
+        public static int EditMovieDateofReleaseFunc(string movieId, string releaseDate)
         {
             //open connection to db
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
@@ -428,9 +431,10 @@ namespace DB_Project.Models
             {
                 connection.Open();
 
-                command = new SqlCommand("add_movie", connection);
+                command = new SqlCommand("update_movie_releasedate", connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
+                command.Parameters.Add("@mID", SqlDbType.Int).Value = movieId;
                 command.Parameters.Add("@releasedate", SqlDbType.VarChar, 10).Value = releaseDate;
 
                 command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
