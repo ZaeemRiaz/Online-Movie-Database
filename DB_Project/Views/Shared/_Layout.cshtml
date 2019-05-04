@@ -9,38 +9,17 @@
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
 </head>
 <body>
-    <h1> <a href="../../Home/Index">FilmIndex</a></h1>
-
-    <nav>
-        <img class="panda" src="panda.png">
+    <nav class="bar">
         <ul>
-            <li>
-                <a href="aboutus.html"> ABOUT US  </a>
-
-            </li>
-            <li>
-                <a href=""> OUR WORK  </a>
-
-            </li>
-            <li>
-                <a href=""> TAKE ACTION  </a>
-
-            </li>
-            <li>
-                <a href=""> NEWS ROOM  </a>
-
-            </li>
-            <li>
-                <a href=""> JOBS  </a>
-
-            </li>
-            <li><a href="http://wwf.org.pk/blog/#sthash.AuXlKFfy.dpbs"> BLOG </a></li>
-            <li class="shop"> <a href="http://www.wwfpak.org/shop/"> SHOP </a></li>
-            <li class="donate"> <a href="donation.html"> DONATE </a></li>
+            <li><a href="../../Home/Index"> HOME</a></li>
+            <li><a href=""> SIGN UP</a></li>
+            <li><a href=""> LOG IN</a></li>
         </ul>
+        <form class="searchbox">
+            <input type="text" placeholder="Search Movies... " size="40" maxlength="60">
+            <button>Search</button>
+        </form>
     </nav>
-
-
     @if (@Session["uId"] != null)
     {
         <h2>Account signed in</h2>
