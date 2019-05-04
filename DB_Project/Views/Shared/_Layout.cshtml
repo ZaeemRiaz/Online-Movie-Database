@@ -11,26 +11,55 @@
 <body>
     <h1> <a href="../../Home/Index">FilmIndex</a></h1>
 
+    <nav>
+        <img class="panda" src="panda.png">
+        <ul>
+            <li>
+                <a href="aboutus.html"> ABOUT US  </a>
 
-@if (@Session["uId"] != null)
-{
-    <h2>Account signed in</h2>
-}
-else
-{
-    <h2> <a href="../../Home/Signup">Sign Up</a> | <a href="../../Home/Login">Login</a></h2>
-    <!-- skldjflsdj-->
-}
-<hr>
-<div class="container body-content">
-    @RenderBody()
-    <hr />
-    <footer>
-        <p>FilmIndex</p>
-    </footer>
-</div>
+            </li>
+            <li>
+                <a href=""> OUR WORK  </a>
 
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
+            </li>
+            <li>
+                <a href=""> TAKE ACTION  </a>
+
+            </li>
+            <li>
+                <a href=""> NEWS ROOM  </a>
+
+            </li>
+            <li>
+                <a href=""> JOBS  </a>
+
+            </li>
+            <li><a href="http://wwf.org.pk/blog/#sthash.AuXlKFfy.dpbs"> BLOG </a></li>
+            <li class="shop"> <a href="http://www.wwfpak.org/shop/"> SHOP </a></li>
+            <li class="donate"> <a href="donation.html"> DONATE </a></li>
+        </ul>
+    </nav>
+
+
+    @if (@Session["uId"] != null)
+    {
+        <h2>Account signed in</h2>
+    }
+    else
+    {
+        <h2> <a href="../../Home/Signup">Sign Up</a> | <a href="../../Home/Login">Login</a></h2>
+        <!-- skldjflsdj-->
+    }
+    <hr>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>FilmIndex</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>
