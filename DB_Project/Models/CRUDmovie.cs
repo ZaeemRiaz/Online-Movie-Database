@@ -297,5 +297,161 @@ namespace DB_Project.Models
                 }
             }
         }
+        public static int EditMovieTitleFunc(string title)
+        {
+            //open connection to db
+            string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
+
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command = null;
+            int result = 0;
+
+            //try execution
+            try
+            {
+                connection.Open();
+
+                command = new SqlCommand("add_movie", connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.Add("@title", SqlDbType.VarChar, 100).Value = title;
+
+                command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                command.ExecuteNonQuery();
+                result = Convert.ToInt32(command.Parameters["@flag"].Value);
+            }
+            catch (SqlException ex)//print error message
+            {
+                Console.WriteLine("SQL Error" + ex.Message.ToString());
+                result = -1; //-1 will be interpreted as "error while connecting with the database."
+            }
+            finally//close connection
+            {
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+            }
+            return result;
+        }
+        public static int EditMovieGenreFunc(string genre)
+        {
+            //open connection to db
+            string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
+
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command = null;
+            int result = 0;
+
+            //try execution
+            try
+            {
+                connection.Open();
+
+                command = new SqlCommand("add_movie", connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.Add("@genre", SqlDbType.VarChar, 100).Value = genre;
+
+                command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                command.ExecuteNonQuery();
+                result = Convert.ToInt32(command.Parameters["@flag"].Value);
+            }
+            catch (SqlException ex)//print error message
+            {
+                Console.WriteLine("SQL Error" + ex.Message.ToString());
+                result = -1; //-1 will be interpreted as "error while connecting with the database."
+            }
+            finally//close connection
+            {
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+            }
+            return result;
+        }
+        public static int EditMovieDescriptionFunc(string description)
+        {
+            //open connection to db
+            string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
+
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command = null;
+            int result = 0;
+
+            //try execution
+            try
+            {
+                connection.Open();
+
+                command = new SqlCommand("add_movie", connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.Add("@descript", SqlDbType.VarChar, 300).Value = descript;
+
+                command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                command.ExecuteNonQuery();
+                result = Convert.ToInt32(command.Parameters["@flag"].Value);
+            }
+            catch (SqlException ex)//print error message
+            {
+                Console.WriteLine("SQL Error" + ex.Message.ToString());
+                result = -1; //-1 will be interpreted as "error while connecting with the database."
+            }
+            finally//close connection
+            {
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+            }
+            return result;
+        }
+        public static int EditMovieDateofReleaseFunc(string releaseDate)
+        {
+            //open connection to db
+            string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
+
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command = null;
+            int result = 0;
+
+            //try execution
+            try
+            {
+                connection.Open();
+
+                command = new SqlCommand("add_movie", connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.Add("@releasedate", SqlDbType.VarChar, 10).Value = releasedate;
+
+                command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                command.ExecuteNonQuery();
+                result = Convert.ToInt32(command.Parameters["@flag"].Value);
+            }
+            catch (SqlException ex)//print error message
+            {
+                Console.WriteLine("SQL Error" + ex.Message.ToString());
+                result = -1; //-1 will be interpreted as "error while connecting with the database."
+            }
+            finally//close connection
+            {
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+            }
+            return result;
+        }
     }
 }

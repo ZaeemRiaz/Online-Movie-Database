@@ -177,7 +177,7 @@ namespace DB_Project.Controllers
                 return RedirectToAction("Error", new { param = 5 });
             }
         }
-        public ActionResult AddMovieAction(string title, string genre, string dateOfBirth, string description, HttpPostedFileBase fileToUpload)
+        public ActionResult AddMovieAction(string title, string genre, string releaseDate, string description, HttpPostedFileBase fileToUpload)
         {
             string pic = null;
             if (fileToUpload != null)
@@ -188,7 +188,7 @@ namespace DB_Project.Controllers
                 string path = System.IO.Path.Combine(Server.MapPath("~/Content/Images/"), pic);
                 fileToUpload.SaveAs(path);
             }
-            int ret = CRUDmovie.AddMovieFunc(title, description, genre, dateOfBirth, pic);
+            int ret = CRUDmovie.AddMovieFunc(title, description, genre, releaseDate, pic);
             if (ret == 1)
             {
                 return RedirectToAction("Index");
@@ -200,6 +200,74 @@ namespace DB_Project.Controllers
             else
             {
                 return RedirectToAction("Error", new { param = 4 });
+            }
+        }
+        public ActionResult EditMovieTitleAction(string title)
+        {
+
+            int ret = CRUDmovie.EditMovieTitleFunc(title);
+            if (ret == 1)
+            {
+                return RedirectToAction("Index");
+            }
+            else if (ret == -1)//DB connection failed
+            {
+                return RedirectToAction("Error", new { param = -1 });
+            }
+            else
+            {
+                return RedirectToAction("Error", new { param = 6 });
+            }
+        }
+        public ActionResult EditMovieGenreAction(string genre)
+        {
+
+            int ret = CRUDmovie.EditMovieGenreFunc(genre);
+            if (ret == 1)
+            {
+                return RedirectToAction("Index");
+            }
+            else if (ret == -1)//DB connection failed
+            {
+                return RedirectToAction("Error", new { param = -1 });
+            }
+            else
+            {
+                return RedirectToAction("Error", new { param = 6 });
+            }
+        }
+        public ActionResult EditMovieDescriptionAction(string description)
+        {
+
+            int ret = CRUDmovie.EditMovieDescriptionFunc(description);
+            if (ret == 1)
+            {
+                return RedirectToAction("Index");
+            }
+            else if (ret == -1)//DB connection failed
+            {
+                return RedirectToAction("Error", new { param = -1 });
+            }
+            else
+            {
+                return RedirectToAction("Error", new { param = 6 });
+            }
+        }
+        public ActionResult EditMovieDateofReleaseAction(string releaseDate)
+        {
+
+            int ret = CRUDmovie.EditMovieDateofReleaseFunc(releaseDate);
+            if (ret == 1)
+            {
+                return RedirectToAction("Index");
+            }
+            else if (ret == -1)//DB connection failed
+            {
+                return RedirectToAction("Error", new { param = -1 });
+            }
+            else
+            {
+                return RedirectToAction("Error", new { param = 6 });
             }
         }
 
