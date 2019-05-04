@@ -1,26 +1,30 @@
 ﻿@using DB_Project.Models
 
 @model Actor
+    
+@{Session["Redirect"] = "ActorDetails";}
+
 <html>
 <head>
     <meta charset="utf-8">
     <title> Actor details</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 </head>
+<body>
+    Actor's Details:
+    <br />
+    <br />
+    <br />
 
-Actor's Details:
-<br />
-<br />
-<br />
-
-@Model.actorID
-<br />
-@Model.name
-<br />
-@Model.bdate
-<br />
-@Model.gender
-<br />
-@Model.description
-<br />
+    @Model.actorID
+    <br />
+    @Model.name
+    <br />
+    @Model.bdate
+    <br />
+    @Model.gender
+    <br />
+    @Model.description
+    <br />
+</body>
 </html>

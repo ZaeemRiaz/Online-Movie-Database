@@ -8,6 +8,9 @@ KEY
     -1  = DB Connection Failed
      1  = Movie Details Not Found
      2  = Actor Details Not Found
+     3  = Signup Failed
+     4  = Login Failed
+     5  = >Complaint Registration Failed
 *@
 
 <html>
@@ -34,9 +37,13 @@ KEY
     {
         <p>Login Failed</p>
     }
+    else if (Model == 5)
+    {
+        <p>Complaint Registration Failed</p>
+    }
     else
     {
-        <p>Error!</p>
+        <p>Error! Error Not Found</p>
     }
 </body>
 </html>

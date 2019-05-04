@@ -18,6 +18,17 @@ namespace DB_Project.Controllers
             Actor a = CRUDactor.DisplayActorFunc(actorId);
             return View(a);
         }
+        public ActionResult AddComplaint()
+        {
+            if (Session["uId"] == null)//user not logged in
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                return View();
+            }
+        }
         public ActionResult AddMovie()
         {
             if (Session["uType"] == null)//user already logged in
@@ -36,16 +47,9 @@ namespace DB_Project.Controllers
                 }
             }
         }
-        public ActionResult Complaint()
+        public ActionResult EditMovieDetails(int param)
         {
-            if (Session["uId"] == null)//user not logged in
-            {
-                return RedirectToAction("Login");
-            }
-            else
-            {
-                return View();
-            }
+            return View(param);
         }
         public ActionResult Error(int param)
         {
@@ -157,9 +161,34 @@ namespace DB_Project.Controllers
                 return RedirectToAction("Error", new { param = 4 });
             }
         }
-        public ActionResult AddComplaint(string message)
+        public ActionResult AddComplaintAction(string message)
         {
             int ret = CRUDcomplaint.AddComplaintFunc(Session["uId"].ToString(), message);
+            if (ret == 1)
+            {
+                return RedirectToAction("Index");
+            }
+            else if (ret == -1)//DB connection failed
+            {
+                return RedirectToAction("Error", new { param = -1 });
+            }
+            else
+            {
+                return RedirectToAction("Error", new { param = 5 });
+            }
+        }
+        public ActionResult AddMovieAction(string title, string genre, string dateOfBirth, string description, HttpPostedFileBase fileToUpload)
+        {
+            string pic = null;
+            if (fileToUpload != null)
+            {
+                //change this accordingly with the entered movieID
+                //string pic = System.IO.Path.GetFileName(fileToUpload.FileName);
+                pic = title+".jpg";
+                string path = System.IO.Path.Combine(Server.MapPath("~/Content/Images/"), pic);
+                fileToUpload.SaveAs(path);
+            }
+            int ret = CRUDmovie.AddMovieFunc(title, description, genre, dateOfBirth, pic);
             if (ret == 1)
             {
                 return RedirectToAction("Index");
@@ -174,16 +203,14 @@ namespace DB_Project.Controllers
             }
         }
 
+        //JsonResults
+        public JsonResult CheckEmailAvailable(string email)
+        {
+            int ret = CRUDuser.EmailAvailableFunc(email);
+            return Json(ret);
+        }
+
         //Test ActionResult
-        public ActionResult test()
-        {
-            Movie m = CRUDmovie.MovieDetailFunc(1);
-            return View(m);
-        }
-        public ActionResult AddImage()
-        {
-            return View();
-        }
         public ActionResult ImageUpload(HttpPostedFileBase fileToUpload)
         {
             if (fileToUpload != null)
@@ -199,12 +226,5 @@ namespace DB_Project.Controllers
             return RedirectToAction("Index");
         }
 
-        //JsonResults
-        public JsonResult CheckEmailAvailable(string email)
-        {
-            int ret = CRUDuser.EmailAvailableFunc(email);
-            return Json(ret);
-        }
-       
     }
 }
