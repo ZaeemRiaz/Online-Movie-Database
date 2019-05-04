@@ -1,0 +1,81 @@
+﻿
+<script type="text/javascript">
+    var elems = document.getElementsByClassName('confirmation');
+    var confirmIt = function (e) {
+        if (!confirm('Are you sure?')) e.preventDefault();
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }
+</script>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Edit Movie Details</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+</head>
+
+
+<body>
+
+    @if (@Session["uType"].ToString() == "A")
+    {
+        <a href="../../Home/EditMovieDetails">Edit Movie Details</a>
+        <br />
+        <a href="../../Home/DeleteMovie" class="confirmation">Delete this movie</a>
+    }
+
+    <div id="formwrapper">
+        <form action="../../Home/EditMovieTitle" method="post" name="EditMovieTitle">
+            <fieldset>
+                <h1>Edit Movie Title:</h1>
+                <label for="title">New Title:</label>
+                <input required name="title" type="text" size="50" maxlength="100">
+                <input class="btn" name="submit" type="submit" value="Send">
+            </fieldset>
+        </form>
+    </div>
+    <br />
+    <div id="formwrapper">
+        <form action="../../Home/EditMovieGenre" method="post" name="EditMovieGenre">
+            <fieldset>
+                <h1>Edit Movie Genre:</h1>
+                <label for="genre">New Genre:</label>
+                <input required name="genre" type="text" size="50" maxlength="100">
+                <input class="btn" name="submit" type="submit" value="Send">
+            </fieldset>
+        </form>
+    </div>
+    <br />
+
+    <div id="formwrapper">
+        <form action="../../Home/EditMovieDescription" method="post" name="EditMovieDescription">
+            <fieldset>
+                <h1>Edit Movie Description:</h1>
+                <label for="description">New Description:</label>
+                <textarea required name="description" cols="40" rows="10"> </textarea>
+                <br />
+                <input class="btn" name="submit" type="submit" value="Send">
+            </fieldset>
+        </form>
+    </div>
+    <br />
+
+    <div id="formwrapper">
+        <form action="../../Home/EditMovieDateofRelease" method="post" name="EditMovieDateofRelease">
+            <fieldset>
+                <h1>Edit Movie Date of Release:</h1>
+                <label for="date">New Date of Release:</label>
+                <input type="date" required name="dateOfBirth" size="50" maxlength="100" />
+                <br />
+                <input class="btn" name="submit" type="submit" value="Send">
+            </fieldset>
+        </form>
+    </div>
+    <br />
+
+</body>
+
+</html>
