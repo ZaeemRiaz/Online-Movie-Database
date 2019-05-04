@@ -9,28 +9,36 @@
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
 </head>
 <body>
-    <h1> <a href="../../Home/Index">FilmIndex</a></h1>
+    <nav class="bar">
+        <ul>
+            <li><a href="../../Home/Index"> HOME</a></li>
+            <li><a href=""> SIGN UP</a></li>
+            <li><a href=""> LOG IN</a></li>
+        </ul>
+        <form class="searchbox">
+            <input type="text" placeholder="Search Movies... " size="40" maxlength="60">
+            <button>Search</button>
+        </form>
+    </nav>
+    @if (@Session["uId"] != null)
+    {
+        <h2>Account signed in</h2>
+    }
+    else
+    {
+        <h2> <a href="../../Home/Signup">Sign Up</a> | <a href="../../Home/Login">Login</a></h2>
+        <!-- skldjflsdj-->
+    }
+    <hr>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>FilmIndex</p>
+        </footer>
+    </div>
 
-
-@if (@Session["uId"] != null)
-{
-    <h2>Account signed in</h2>
-}
-else
-{
-    <h2> <a href="../../Home/Signup">Sign Up</a> | <a href="../../Home/Login">Login</a></h2>
-    <!-- skldjflsdj-->
-}
-<hr>
-<div class="container body-content">
-    @RenderBody()
-    <hr />
-    <footer>
-        <p>FilmIndex</p>
-    </footer>
-</div>
-
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>
