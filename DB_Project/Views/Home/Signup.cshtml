@@ -2,41 +2,6 @@
 @{
     ViewBag.Title = "Signup";
 }
-<script>
-
-    function validateform()
-    {
-	    var name=document.signupform.name.value;
-	    var email=document.signupform.email.value;
-	    var password=document.signupform.password.value;
-
-        if (name == "" || email == "" || password == "")
-        {
-  		    alert("Name, Email or Password can't be blank");
-  		    return false;
-	    }
-	
-    }
-    function EmailAvailable()
-    {
-        $.post("@Url.Action("CheckEmailAvailable", "Home")",
-            {
-                userdata: $("#email").val()
-            },
-            function (data)
-            {
-                if (data == 0)
-                {
-                    alert("email already taken");
-                }
-            }
-            )
-    }
-    function SignupFunc(email, name, usertype, dateOfBirth, password)
-    {
-
-    }
-</script>
 <!doctype html>
 <html>
 <head>
@@ -51,7 +16,7 @@
             <fieldset>
                 <h1>Create new account</h1>
                 <label for="email">Your Email:</label>
-                <input name="email" type="email" size="50" maxlength="100" pattern="[a-z0-9._%+-]+&#64[a-z0-9.-]+\.[a-z]{2,50}$" onchange="EmailAvailable()">
+                <input name="email" type="email" id="email" size="50" maxlength="100" pattern="[a-z0-9._%+-]+&#64[a-z0-9.-]+\.[a-z]{2,50}$" onchange="EmailAvailable()">
                 <label for="name">Your Name:</label>
                 <input name="name" type="text" size="50" maxlength="100" pattern="[A-Za-z ]{3,100}">
                 <label for="password">Password:</label>
@@ -74,3 +39,39 @@
     </div>
 </body>
 </html>
+
+<script>
+
+    function validateform()
+    {
+	    var name=document.signupform.name.value;
+	    var email=document.signupform.email.value;
+	    var password=document.signupform.password.value;
+
+        if (name == "" || email == "" || password == "")
+        {
+  		    alert("Name, Email or Password can't be blank");
+  		    return false;
+	    }
+	
+    }
+    function EmailAvailable()
+    {
+        $.post("@Url.Action("CheckEmailAvailable", "Home")",
+            {
+                email: $("#email").val()
+            },
+            function (data)
+            {
+                if (data == 0)
+                {
+                    alert("email already taken");
+                }
+            }
+            )
+    }
+    function SignupFunc(email, name, usertype, dateOfBirth, password)
+    {
+
+    }
+</script>
