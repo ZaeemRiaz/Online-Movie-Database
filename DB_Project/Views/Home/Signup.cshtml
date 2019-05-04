@@ -18,17 +18,17 @@
                 <label for="email">Your Email:</label>
                 <input name="email" type="email" id="email" size="50" maxlength="100" pattern="[a-z0-9._%+-]+&#64[a-z0-9.-]+\.[a-z]{2,50}$" onchange="EmailAvailable()">
                 <label for="name">Your Name:</label>
-                <input name="name" type="text" size="50" maxlength="100" pattern="[A-Za-z ]{3,100}">
+                <input name="name" type="text" id="name" size="50" maxlength="100" pattern="[A-Za-z ]{3,100}">
                 <label for="password">Password:</label>
-                <input type="password" required name="password" size="50" maxlength="100" accesskey="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,50}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+                <input type="password" required name="password" id="password" size="50" maxlength="100" accesskey="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,50}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
                 <label for="Account Type:">Your Account Type:</label>
-                <select name="usertype">
+                <select name="usertype" id="usertype">
                     <option value="U" selected>User</option>
                     <option value="A">Administrator</option>
                 </select>
                 <br>
                 <label for="date">Date of Birth:</label>
-                <input type="date" required name="dateOfBirth" size="50" maxlength="100" />
+                <input type="date" required name="dateOfBirth"  id="dateOfBirth" size="50" maxlength="100" />
                 <br>
                 <!-- textarea name="message cols="40" rows= 10" </textarea> -->
                 <br>
@@ -65,7 +65,11 @@
             {
                 if (data == 0)
                 {
-                    alert("email already taken");
+                    alert("Email Already Taken");
+                }
+                if (data == -1)
+                {
+                    alert("Server Connection Failed");
                 }
             }
             )

@@ -191,7 +191,11 @@ namespace DB_Project.Controllers
             {
                 return Json(1);
             }
-            else
+            else if (ret == -1)//server connection failed
+            {
+                return Json(-1);
+            }
+            else//email exists
             {
                 return Json(0);
             }
@@ -207,14 +211,6 @@ namespace DB_Project.Controllers
             {
                 return Json(0);
             }
-        }
-        public JsonResult SignupAction()
-        {
-            return Json(0);
-        }
-        public JsonResult LoginAction()
-        {
-            return Json(0);
         }
     }
 }
