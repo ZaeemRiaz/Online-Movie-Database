@@ -52,6 +52,7 @@ namespace DB_Project.Controllers
         }
         public ActionResult EditMovieDetails(int param)
         {
+            Session["movieID"] = param; 
             return View(param);
         }
         public ActionResult Error(int param)
@@ -208,7 +209,7 @@ namespace DB_Project.Controllers
         public ActionResult EditMovieTitleAction(string title)
         {
 
-            int ret = CRUDmovie.EditMovieTitleFunc(title);
+            int ret = CRUDmovie.EditMovieTitleFunc(Session["movieID"].ToString(), title);
             if (ret == 1)
             {
                 return RedirectToAction("Index");
@@ -225,7 +226,7 @@ namespace DB_Project.Controllers
         public ActionResult EditMovieGenreAction(string genre)
         {
 
-            int ret = CRUDmovie.EditMovieGenreFunc(genre);
+            int ret = CRUDmovie.EditMovieGenreFunc(Session["movieID"].ToString(), genre);
             if (ret == 1)
             {
                 return RedirectToAction("Index");
@@ -242,7 +243,7 @@ namespace DB_Project.Controllers
         public ActionResult EditMovieDescriptionAction(string description)
         {
 
-            int ret = CRUDmovie.EditMovieDescriptionFunc(description);
+            int ret = CRUDmovie.EditMovieDescriptionFunc(Session["movieID"].ToString(), description);
             if (ret == 1)
             {
                 return RedirectToAction("Index");
@@ -259,7 +260,7 @@ namespace DB_Project.Controllers
         public ActionResult EditMovieDateofReleaseAction(string releaseDate)
         {
 
-            int ret = CRUDmovie.EditMovieDateofReleaseFunc(releaseDate);
+            int ret = CRUDmovie.EditMovieDateofReleaseFunc(Session["movieID"].ToString(), releaseDate);
             if (ret == 1)
             {
                 return RedirectToAction("Index");
