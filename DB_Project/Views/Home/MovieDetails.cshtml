@@ -1,5 +1,4 @@
 ﻿@using DB_Project.Models
-@{Session["Redirect"] = "MovieDetails";}
 @model movieDetailStruct
 
 @{
@@ -17,7 +16,7 @@
     {
         if (Session["uType"].ToString() == "A")
         {
-            <a href="../../Home/EditMovieDetails">Edit Movie Details</a>
+            <a href="../../Home/EditMovieDetails?movieID=@Model.movieDetail.movieID">Edit Movie Details</a>
             <br />
             <a href="../../Home/DeleteMovie" onclick="return confirm('Are you sure that you want to delete this movie?')">Delete this movie</a>
         }
@@ -33,7 +32,7 @@
     <p>Description: @Model.movieDetail.descript</p>
     <!--@Model.movieDetail.movieID <br />-->
     <p>Release Date: @Model.movieDetail.releasedate</p>
-
+    <img src=@Model.movieDetail.picture alt="Picture" width="104" height="142">
 
     <form action="../../Home/Rating" method="post">
         <fieldset>
@@ -73,6 +72,7 @@
             <h2> Add a comment </h2>
             <p>Comment:</p>
             <input type="text" requried name="comment">
+            <input type="submit" value="Submit">
         </fieldset>
 
     </form>

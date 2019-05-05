@@ -50,10 +50,24 @@ namespace DB_Project.Controllers
                 }
             }
         }
-        public ActionResult EditMovieDetails(int param)
+        public ActionResult EditMovieDetails(int movieID)
         {
-            Session["movieID"] = param; 
-            return View(param);
+            if (Session["uType"] == null)//user already logged in
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                if (Session["uType"].ToString() == "A")//admin
+                {
+                    Session["movieID"] = movieID;
+                    return View(movieID);
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
         }
         public ActionResult Error(int param)
         {
@@ -281,7 +295,23 @@ namespace DB_Project.Controllers
                 return RedirectToAction("Error", new { param = 6 });
             }
         }
+        public ActionResult DeletMovieAction(string releaseDate)
+        {
 
+            int ret = CRUDmovie.EditMovieDateofReleaseFunc(Session["movieID"].ToString(), releaseDate);
+            if (ret == 1)
+            {
+                return RedirectToAction("Index");
+            }
+            else if (ret == -1)//DB connection failed
+            {
+                return RedirectToAction("Error", new { param = -1 });
+            }
+            else
+            {
+                return RedirectToAction("Error", new { param = 6 });
+            }
+        }
         //JsonResults
         public JsonResult CheckEmailAvailable(string email)
         {
