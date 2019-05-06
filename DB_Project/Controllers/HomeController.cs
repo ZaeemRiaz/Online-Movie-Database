@@ -420,6 +420,29 @@ namespace DB_Project.Controllers
                 }
             }
         }
+        public ActionResult AddCommentAction(string movieID, string comment)
+        {
+            if (Session["uId"] == null)//user not logged in
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                int ret = CRUDcomment.AddCommentFunc(movieID, Session["uId"].ToString(), comment);
+                if (ret == 1)//user signed up successfully, goto login page
+                {
+                    return RedirectToAction("MovieDetails", new { param = Int32.Parse(movieID) });
+                }
+                else if (ret == -1)//DB connection failed
+                {
+                    return RedirectToAction("Error", new { param = -1 });
+                }
+                else
+                {
+                    return RedirectToAction("Error", new { param = 3 });
+                }
+            }
+        }
 
         //JsonResults
         public JsonResult CheckEmailAvailable(string email)
