@@ -58,7 +58,7 @@ namespace DB_Project.Models
                 }
             }
         }
-        public static int DelActorFunc(string actorId)
+        public static int DelActorFunc(string actorID)
         {
             //open connection to db
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
@@ -75,7 +75,7 @@ namespace DB_Project.Models
                 command = new SqlCommand("delete_actor", connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                command.Parameters.Add("@aID", SqlDbType.VarChar, 100).Value = actorId;
+                command.Parameters.Add("@aID", SqlDbType.VarChar, 100).Value = actorID;
 
                 command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
 
@@ -189,7 +189,7 @@ namespace DB_Project.Models
                 }
             }
         }
-        public static List<Actor> MovieCastFunc(string movieId)
+        public static List<Actor> MovieCastFunc(string movieID)
         {
             List<Actor> aList = new List<Actor>();
             //open connection to db
@@ -206,7 +206,59 @@ namespace DB_Project.Models
 
                 command = new SqlCommand("cast_movie", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add("@mID", SqlDbType.Int).Value = movieId;
+                command.Parameters.Add("@mID", SqlDbType.Int).Value = movieID;
+                reader = command.ExecuteReader();
+                Actor a;
+                while (reader.Read())
+                {
+                    a = new Actor();
+                    a.actorID = reader[0].ToString();
+                    a.name = reader[1].ToString();
+                    a.bdate = reader[2].ToString();
+                    a.gender = reader[3].ToString();
+                    a.description = reader[4].ToString();
+                    aList.Add(a);
+                }
+                return aList;
+            }
+            catch (SqlException ex)//print error message
+            {
+                Console.WriteLine("SQL Error" + ex.Message.ToString());
+                return null;
+            }
+            finally//close connection
+            {
+                // close reader
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+            }
+        }
+        public static List<Actor> RemainingActorsFunc(string movieID)
+        {
+            List<Actor> aList = new List<Actor>();
+            //open connection to db
+            string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
+
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command = null;
+            SqlDataReader reader = null;
+
+            //try execution
+            try
+            {
+                connection.Open();
+
+                command = new SqlCommand("remaining_actors", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@mID", SqlDbType.Int).Value = movieID;
                 reader = command.ExecuteReader();
                 Actor a;
                 while (reader.Read())

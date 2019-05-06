@@ -17,5 +17,9 @@ namespace DB_Project.Models
         public List<Actor> cast { get; set; }
         public List<Comment> commentList { get; set; }
     }
-    
+    public class editMovieStruct
+    {
+        public string movieID { get; set; }
+        public List<Actor> raList { get; set; }
+    }
 }
