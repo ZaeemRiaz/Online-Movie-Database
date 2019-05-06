@@ -374,7 +374,7 @@ namespace DB_Project.Controllers
             {
                 if (Session["uType"].ToString() == "A")//admin
                 {
-                    int ret = CRUDmovie.EditMovieDateofReleaseFunc(Session["movieID"].ToString(), releaseDate);
+                    int ret = CRUDmovie.DelMovieFunc(movieID);
                     if (ret == 1)
                     {
                         return RedirectToAction("Index");
