@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Movie Details</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     @if (Session["uType"] != null)
@@ -26,17 +27,13 @@
 
     <div class="ding">
         <h1>@Model.movieDetail.title</h1>
-        <div class="dang">
-            <h1>@Model.movieDetail.rating/10 </h1>
-        </div>
-        <h2>What is the movie about?</h2>
-        <p>Category: @Model.movieDetail.genre</p>
-        <p>Description: @Model.movieDetail.descript</p>
-        <!--@Model.movieDetail.movieID <br />-->
-        <p>Release Date: @Model.movieDetail.releasedate</p>
+        <h2>Rated @Model.movieDetail.rating/10 </h2>
+        <h2>Release Date: @Model.movieDetail.releasedate</h2>
+        <h2>Category: @Model.movieDetail.genre</h2>
+        <h3>@Model.movieDetail.descript</h3>
         <img src=@Model.movieDetail.picture alt="Movie Picture" width="250" height="500">
 
-        <form action="../../Home/AddRatingAction?movieID=@Model.movieDetail.movieID" method="post">
+        <form action="../../Home/AddRatingAction" method="post">
             <fieldset>
                 <h2> Rate the movie (1-10) </h2>
                 <input type="radio" name="Rating" value=1>1
@@ -57,17 +54,17 @@
         <h2>The cast includes:</h2>
         @foreach (Actor a in Model.cast)
         {
-            <li> @a.name</li>
+            <h3><a href="../../Home/ViewActor/?@a.actorID">@a.name</a></h3>
             i = i + 1;
         }
 
 
-        <form action="../../Home/AddCommentAction?movieID=@Model.movieDetail.movieID" method="post">
+        <form action="../../Home/AddCommentAction" method="post">
             <fieldset>
                 <h2> Add a comment </h2>
 
-                <textarea name="comment" cols="40" rows="5"> </textarea>
-                <input type="submit" value="Comment Now">
+                <textarea name="message" cols="40" rows="5"> </textarea>
+                <input type="submit" value="Comment">
             </fieldset>
 
         </form>
@@ -76,7 +73,9 @@
 
         @foreach (Comment c in Model.commentList)
         {
-            <li> @c.userID @c.userName commented at time: @c.dtime: @c.comment</li>
+            <h3>@c.userName  commented: </h3> 
+            <h4>@c.comment</h4>
+            <p>@c.dtime</p>
             i = i + 1;
         }
     </div>

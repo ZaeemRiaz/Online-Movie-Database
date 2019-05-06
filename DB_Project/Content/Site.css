@@ -20,26 +20,32 @@ form {
     padding-left: 60px;
 }
 
-.dang {
-    float: right;
-}
 
 fieldset {
-    background: #FBEAEB;
-    border: 0 0 0 0;
+    background-color: lightblue ;
     border-radius: 15px 15px 15px 15px;
     padding-bottom: 10px;
 }
 
 h1 {
     font-family: "Trebuchet MS", Helvetica, sans-serif;
-    font-size: 24px;
+    font-size: 20px;
     color: #000;
 }
 
 h2 {
     font-family: "Trebuchet MS", Helvetica, sans-serif;
-    font-size: 20px;
+    font-size: 16px;
+    color: #2F3C7E;
+}
+h3 {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 14px;
+    color: #2F3C7E;
+}
+h4 {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 12px;
     color: #2F3C7E;
 }
 
@@ -82,9 +88,8 @@ body {
     background-color: #FBEAEB;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background: url(https://images.unsplash.com/photo-1543536448-d209d2d13a1c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80);
-    background-repeat: no-repeat;
-    background-size: cover;
+    //background: url(https://images.unsplash.com/photo-1543536448-d209d2d13a1c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80);
+    //background-size: cover;
 }
 
 * {
