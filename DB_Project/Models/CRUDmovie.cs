@@ -65,7 +65,6 @@ namespace DB_Project.Models
         }
         public static int DelMovieFunc(string movieId)
         {
-            int mID = Int32.Parse(movieId);
             //open connection to db
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
@@ -81,7 +80,7 @@ namespace DB_Project.Models
                 command = new SqlCommand("delete_movie", connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                command.Parameters.Add("@mID", SqlDbType.Int).Value = mID;
+                command.Parameters.Add("@mID", SqlDbType.Int).Value = movieId;
 
                 command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
 
@@ -148,7 +147,6 @@ namespace DB_Project.Models
         }
         public static Movie MovieDetailFunc(string movieId)
         {
-            int mID = Int32.Parse(movieId);
             //open connection to db
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
@@ -163,7 +161,7 @@ namespace DB_Project.Models
 
                 command = new SqlCommand("movie_details", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add("@input", SqlDbType.Int).Value = mID;
+                command.Parameters.Add("@input", SqlDbType.Int).Value = movieId;
                 reader = command.ExecuteReader();
                 Movie m = null;
                 if (reader.Read())

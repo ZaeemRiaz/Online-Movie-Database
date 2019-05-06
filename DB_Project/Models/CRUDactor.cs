@@ -60,7 +60,6 @@ namespace DB_Project.Models
         }
         public static int DelActorFunc(string actorId)
         {
-            int aID = Int32.Parse(actorId);
             //open connection to db
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
 
@@ -76,7 +75,7 @@ namespace DB_Project.Models
                 command = new SqlCommand("delete_actor", connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                command.Parameters.Add("@aID", SqlDbType.VarChar, 100).Value = aID;
+                command.Parameters.Add("@aID", SqlDbType.VarChar, 100).Value = actorId;
 
                 command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
 
@@ -142,7 +141,6 @@ namespace DB_Project.Models
         }
         public static Actor DisplayActorFunc(string actorId)
         {
-            int aID = Int32.Parse(actorId);
             Actor a = null;
             //open connection to db
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
@@ -158,7 +156,7 @@ namespace DB_Project.Models
 
                 command = new SqlCommand("actor_details", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add("@input", SqlDbType.Int).Value = aID;
+                command.Parameters.Add("@input", SqlDbType.Int).Value = actorId;
                 reader = command.ExecuteReader();
                 if (reader.Read())
                 {
@@ -193,7 +191,6 @@ namespace DB_Project.Models
         }
         public static List<Actor> MovieCastFunc(string movieId)
         {
-            int mID = Int32.Parse(movieId);
             List<Actor> aList = new List<Actor>();
             //open connection to db
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
@@ -209,7 +206,7 @@ namespace DB_Project.Models
 
                 command = new SqlCommand("cast_movie", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add("@mID", SqlDbType.Int).Value = mID;
+                command.Parameters.Add("@mID", SqlDbType.Int).Value = movieId;
                 reader = command.ExecuteReader();
                 Actor a;
                 while (reader.Read())

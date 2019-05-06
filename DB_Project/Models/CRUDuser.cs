@@ -18,6 +18,7 @@ namespace DB_Project.Models
             SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = null;
 
+            u = new userLoginStruct();
             //try execution
             try
             {
@@ -33,7 +34,6 @@ namespace DB_Project.Models
                 command.Parameters.Add("@uTypeOUT", SqlDbType.Char, 1).Direction = ParameterDirection.Output;
 
                 command.ExecuteNonQuery();
-                u = new userLoginStruct();
                 u.ret = Convert.ToInt32(command.Parameters["@uIDOUT"].Value);
                 if (u.ret != 0)
                 {

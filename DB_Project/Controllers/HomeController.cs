@@ -15,7 +15,14 @@ namespace DB_Project.Controllers
         public ActionResult ActorDetails(string actorID)
         {
             Actor a = CRUDactor.DisplayActorFunc(actorID);
-            return View(a);
+            if (a != null)//actor found
+            {
+                return View(a);
+            }
+            else//actor not found
+            {
+                return RedirectToAction("Error", new { param = 8 });
+            }
         }
         public ActionResult AddComplaint()
         {
@@ -65,7 +72,7 @@ namespace DB_Project.Controllers
                 }
             }
         }
-        public ActionResult Error(string param)
+        public ActionResult Error(int param)
         {
             return View(param);
         }
@@ -92,18 +99,18 @@ namespace DB_Project.Controllers
                 mdstruct.movieDetail = CRUDmovie.MovieDetailFunc(movieID);
                 mdstruct.cast = CRUDactor.MovieCastFunc(movieID);
                 mdstruct.commentList = CRUDcomment.MovieCommentFunc(movieID);
-                if (mdstruct.movieDetail == null)
-                {
-                    return RedirectToAction("Error", new { param = "1" });
-                }
-                else
+                if (mdstruct.movieDetail != null)//movie found
                 {
                     return View(mdstruct);
+                }
+                else//movie not found
+                {
+                    return RedirectToAction("Error", new { param = 1 });
                 }
             }
             else
             {
-                return RedirectToAction("Error", new { param = "1" });
+                return RedirectToAction("Error", new { param = 1 });
             }
         }
         public ActionResult Signup()
@@ -148,11 +155,11 @@ namespace DB_Project.Controllers
             }
             else if (ret == -1)//DB connection failed
             {
-                return RedirectToAction("Error", new { param = "-1" });
+                return RedirectToAction("Error", new { param = -1 });
             }
             else
             {
-                return RedirectToAction("Error", new { param = "3" });
+                return RedirectToAction("Error", new { param = 3 });
             }
         }
         public ActionResult LoginAction(string email, string password)
@@ -175,11 +182,11 @@ namespace DB_Project.Controllers
             }
             else if (u.ret == -1)//DB connection failed
             {
-                return RedirectToAction("Error", new { param = "-1" });
+                return RedirectToAction("Error", new { param = -1 });
             }
             else
             {
-                return RedirectToAction("Error", new { param = "4" });
+                return RedirectToAction("Error", new { param = 4 });
             }
         }
         public ActionResult AddComplaintAction(string message)
@@ -197,11 +204,11 @@ namespace DB_Project.Controllers
                 }
                 else if (ret == -1)//DB connection failed
                 {
-                    return RedirectToAction("Error", new { param = "-1" });
+                    return RedirectToAction("Error", new { param = -1 });
                 }
                 else
                 {
-                    return RedirectToAction("Error", new { param = "5" });
+                    return RedirectToAction("Error", new { param = 5 });
                 }
             }
         }
@@ -231,11 +238,11 @@ namespace DB_Project.Controllers
                     }
                     else if (ret == -1)//DB connection failed
                     {
-                        return RedirectToAction("Error", new { param = "-1" });
+                        return RedirectToAction("Error", new { param = -1 });
                     }
                     else//add movie failed
                     {
-                        return RedirectToAction("Error", new { param = "4" });
+                        return RedirectToAction("Error", new { param = 4 });
                     }
                 }
                 else//user not admin
@@ -261,11 +268,11 @@ namespace DB_Project.Controllers
                     }
                     else if (ret == -1)//DB connection failed
                     {
-                        return RedirectToAction("Error", new { param = "-1" });
+                        return RedirectToAction("Error", new { param = -1 });
                     }
                     else
                     {
-                        return RedirectToAction("Error", new { param = "9" });
+                        return RedirectToAction("Error", new { param = 9 });
                     }
                 }
                 else//user not admin
@@ -291,11 +298,11 @@ namespace DB_Project.Controllers
                     }
                     else if (ret == -1)//DB connection failed
                     {
-                        return RedirectToAction("Error", new { param = "-1" });
+                        return RedirectToAction("Error", new { param = -1 });
                     }
                     else
                     {
-                        return RedirectToAction("Error", new { param = "9" });
+                        return RedirectToAction("Error", new { param = 9 });
                     }
                 }
                 else//user not admin
@@ -321,11 +328,11 @@ namespace DB_Project.Controllers
                     }
                     else if (ret == -1)//DB connection failed
                     {
-                        return RedirectToAction("Error", new { param = "-1" });
+                        return RedirectToAction("Error", new { param = -1 });
                     }
                     else
                     {
-                        return RedirectToAction("Error", new { param = "9" });
+                        return RedirectToAction("Error", new { param = 9 });
                     }
                 }
                 else//user not admin
@@ -351,11 +358,11 @@ namespace DB_Project.Controllers
                     }
                     else if (ret == -1)//DB connection failed
                     {
-                        return RedirectToAction("Error", new { param = "-1" });
+                        return RedirectToAction("Error", new { param = -1 });
                     }
                     else
                     {
-                        return RedirectToAction("Error", new { param = "9" });
+                        return RedirectToAction("Error", new { param = 9 });
                     }
                 }
                 else//user not admin
@@ -381,11 +388,11 @@ namespace DB_Project.Controllers
                     }
                     else if (ret == -1)//DB connection failed
                     {
-                        return RedirectToAction("Error", new { param = "-1" });
+                        return RedirectToAction("Error", new { param = -1 });
                     }
                     else
                     {
-                        return RedirectToAction("Error", new { param = "10" });
+                        return RedirectToAction("Error", new { param = 10 });
                     }
                 }
                 else//user not admin
@@ -409,11 +416,11 @@ namespace DB_Project.Controllers
                 }
                 else if (ret == -1)//DB connection failed
                 {
-                    return RedirectToAction("Error", new { param = "-1" });
+                    return RedirectToAction("Error", new { param = -1 });
                 }
                 else
                 {
-                    return RedirectToAction("Error", new { param = "7" });
+                    return RedirectToAction("Error", new { param = 7 });
                 }
             }
         }
@@ -432,11 +439,11 @@ namespace DB_Project.Controllers
                 }
                 else if (ret == -1)//DB connection failed
                 {
-                    return RedirectToAction("Error", new { param = "-1" });
+                    return RedirectToAction("Error", new { param = -1 });
                 }
                 else
                 {
-                    return RedirectToAction("Error", new { param = "8" });
+                    return RedirectToAction("Error", new { param = 8 });
                 }
             }
         }
