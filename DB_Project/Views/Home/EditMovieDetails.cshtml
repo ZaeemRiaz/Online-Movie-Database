@@ -79,11 +79,11 @@
     <!-- discuss with Zaeem-->
     <h2>Add cast:</h2>
 
-    <form action="../../Home/AddActorAction?movieID=@Model.movieID&actorID="actor" method="post">
+    <form action="../../Home/AddActorAction?movieID=@Model.movieID" method="post">
         
         <fieldset>
             <h2> Add cast from drop down list</h2>
-            <select name="actor" id="actor">
+            <select name="actorID" id="actorID">
                 @foreach (Actor a in Model.raList)
                 {
                     <option value="a.actorID">a.name</option>
