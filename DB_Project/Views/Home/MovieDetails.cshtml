@@ -54,7 +54,7 @@
         <h2>The cast includes:</h2>
         @foreach (Actor a in Model.cast)
         {
-            <h3><a href="../../Home/MovieDetails?actorID=@a.actorID">@a.name</a></h3>
+            <h3><a href="../../Home/ActorDetails?actorID=@a.actorID">@a.name</a></h3>
             i = i + 1;
         }
 
