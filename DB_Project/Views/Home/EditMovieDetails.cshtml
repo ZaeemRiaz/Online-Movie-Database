@@ -1,6 +1,9 @@
 ﻿@using DB_Project.Models
 
 @model editMovieStruct
+    @{ 
+        int i = 1;
+    }
 
 <script type="text/javascript">
     var elems = document.getElementsByClassName('confirmation');
@@ -72,7 +75,31 @@
     </div>
     <br />
 
-    <h1><a href="../../Home/EditCast">Edit Cast</a></h1>
+    <!--NEED TO ADD NEW STUFF HERE!!!-->
+    <!-- discuss with Zaeem-->
+    <h2>Add cast:</h2>
+
+    <form action="../../Home/AddActorAction?movieID=@Model.movieID&actorID="actor" method="post">
+        
+        <fieldset>
+            <h2> Add cast from drop down list</h2>
+            <select name="actor" id="actor">
+                @foreach (Actor a in Model.raList)
+                {
+                    <option value="a.actorID">a.name</option>
+                    i = i + 1;
+                }
+            </select>
+            <br>
+        </fieldset>
+    </form>
+
+ 
+
+
+
+
+    <h2><a href="../../Home/EditCast?movieID=@Model.movieID">Edit Cast</a></h2>
 
 </body>
 
