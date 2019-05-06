@@ -20,9 +20,6 @@ form {
     padding-left: 60px;
 }
 
-.dang {
-    float: right;
-}
 
 fieldset {
     background-color: lightblue ;
@@ -32,13 +29,23 @@ fieldset {
 
 h1 {
     font-family: "Trebuchet MS", Helvetica, sans-serif;
-    font-size: 24px;
+    font-size: 20px;
     color: #000;
 }
 
 h2 {
     font-family: "Trebuchet MS", Helvetica, sans-serif;
-    font-size: 20px;
+    font-size: 16px;
+    color: #2F3C7E;
+}
+h3 {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 14px;
+    color: #2F3C7E;
+}
+h4 {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 12px;
     color: #2F3C7E;
 }
 

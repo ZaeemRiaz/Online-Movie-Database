@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Movie Details</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     @if (Session["uType"] != null)
@@ -26,10 +27,8 @@
 
     <div class="ding">
         <h1>@Model.movieDetail.title</h1>
-        <h1>Rated @Model.movieDetail.rating/10 </h1>
+        <h2>Rated @Model.movieDetail.rating/10 </h2>
         <h2>Release Date: @Model.movieDetail.releasedate</h2>
-
-        <h2>What is the movie about?</h2>
         <h2>Category: @Model.movieDetail.genre</h2>
         <h3>@Model.movieDetail.descript</h3>
         <img src=@Model.movieDetail.picture alt="Movie Picture" width="250" height="500">
