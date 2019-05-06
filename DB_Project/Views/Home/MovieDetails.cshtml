@@ -17,9 +17,17 @@
     {
         if (Session["uType"].ToString() == "A")
         {
-            <a href="../../Home/EditMovieDetails?movieID=@Model.movieDetail.movieID">edit Movie Details</a>
+            <a href="../../Home/EditMovieDetails?movieID=@Model.movieDetail.movieID">Edit Movie Details</a>
             <br />
             <a href="../../Home/DeleteMovieAction?movieID=@Model.movieDetail.movieID" onclick="return confirm('Are you sure that you want to delete this movie?')">Delete this movie</a>
+
+            <form action="EditMovieDetails?movieID=@Model.movieDetail.movieID" class="searchbox">
+                <button>Search</button>
+            </form>
+            <form action="../../Home/DeleteMovieAction?movieID=@Model.movieDetail.movieID" class="searchbox">
+                <button>Search</button>
+            </form>
+
         }
     }
     <!--temp-->
@@ -27,7 +35,14 @@
 
     <div class="ding">
         <h1>@Model.movieDetail.title</h1>
-        <h2>Rated @Model.movieDetail.rating/10 </h2>
+        @if (Model.movieDetail.rating == "0")
+        {
+            <h2>Rated 0/10 </h2>
+        }
+        else
+        {
+            <h2>Rated @Model.movieDetail.rating/10 </h2>
+        }
         <h2>Release Date: @Model.movieDetail.releasedate</h2>
         <h2>Category: @Model.movieDetail.genre</h2>
         <h3>@Model.movieDetail.descript</h3>
@@ -73,7 +88,7 @@
 
         @foreach (Comment c in Model.commentList)
         {
-            <h3>@c.userName  commented: </h3> 
+            <h3>@c.userName  commented: </h3>
             <h4>@c.comment</h4>
             <p>@c.dtime</p>
             i = i + 1;

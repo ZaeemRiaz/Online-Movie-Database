@@ -156,10 +156,8 @@
     <Content Include="Views\Home\AddMovie.cshtml" />
     <Content Include="Views\Home\ViewComplaints.cshtml" />
     <Content Include="Views\Home\EditMovieDetails.cshtml" />
-    <Content Include="Views\Home\SearchMovies.cshtml" />
     <Content Include="Views\Home\MovieResults.cshtml" />
     <Content Include="Views\Home\AddActor.cshtml" />
-    <Content Include="Views\Home\EditCast.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
