@@ -428,11 +428,5 @@ namespace DB_Project.Controllers
             return Json(ret);
         }
 
-        //Test ActionResult
-        public ActionResult ImageUpload(HttpPostedFileBase fileToUpload)
-        {
-           
-        }
-
     }
 }
