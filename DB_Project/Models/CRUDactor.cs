@@ -58,7 +58,7 @@ namespace DB_Project.Models
                 }
             }
         }
-        public static int DelActorFunc(int actorId)
+        public static int DelActorFunc(string actorId)
         {
             //open connection to db
             string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
@@ -139,7 +139,7 @@ namespace DB_Project.Models
             }
             return result;
         }
-        public static Actor DisplayActorFunc(int actorId)
+        public static Actor DisplayActorFunc(string actorId)
         {
             Actor a = null;
             //open connection to db
@@ -189,7 +189,7 @@ namespace DB_Project.Models
                 }
             }
         }
-        public static List<Actor> MovieCastFunc(int movieId)
+        public static List<Actor> MovieCastFunc(string movieId)
         {
             List<Actor> aList = new List<Actor>();
             //open connection to db

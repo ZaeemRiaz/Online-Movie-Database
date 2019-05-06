@@ -1,4 +1,4 @@
-﻿@model int
+﻿@model Nullable<int>
 @{
     ViewBag.Title = "Msg";
 }
@@ -12,6 +12,8 @@ KEY
      4  = Login Failed
      5  = Complaint Registration Failed
      6  = Edit Movie Failed
+     7  = Rating Failed
+     8  = Comment Failed
 *@
 
 <html>
@@ -20,35 +22,51 @@ KEY
     <br />
     @if (Model == -1)
     {
-        <p>Connection to Database Failed!</p>
+    <p>Connection to Database Failed!</p>
     }
     else if (Model == 1)
     {
-        <p>Movie Details Not Found</p>
+    <p>Movie Details Not Found</p>
     }
     else if (Model == 2)
     {
-        <p>Actor Details Not Found</p>
+    <p>Actor Details Not Found</p>
     }
     else if (Model == 3)
     {
-        <p>Signup Failed</p>
+    <p>Signup Failed</p>
     }
     else if (Model == 4)
     {
-        <p>Login Failed</p>
+    <p>Login Failed</p>
     }
     else if (Model == 5)
     {
-        <p>Complaint Registration Failed</p>
+    <p>Complaint Registration Failed</p>
     }
     else if (Model == 6)
     {
-        <p>Edit Movie Failed</p>
+    <p>Edit Movie Failed</p>
+    }
+    else if (Model == 7)
+    {
+    <p>Rating Failed</p>
+    }
+    else if (Model == 8)
+    {
+    <p>Comment Failed</p>
+    }
+    else if (Model == 9)
+    {
+    <p>Edit Failed</p>
+    }
+    else if (Model == 10)
+    {
+    <p>Delete Movie Failed</p>
     }
     else
     {
-        <p>Error! Error Not Found</p>
+    <p>Error! Error Not Found</p>
     }
 </body>
 </html>

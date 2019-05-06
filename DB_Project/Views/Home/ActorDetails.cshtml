@@ -11,20 +11,20 @@
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    Actor's Details:
-    <br />
-    <br />
-    <br />
+    <h2>
+        Name: @Model.name
+    </h2>
 
-    @Model.actorID
-    <br />
-    @Model.name
-    <br />
-    @Model.bdate
-    <br />
-    @Model.gender
-    <br />
-    @Model.description
-    <br />
+    <h2>
+        Gender: @Model.gender
+    </h2>
+
+    <h2>
+        Date of Birth: @Model.bdate
+    </h2>
+
+    <h2>
+        Description: @Model.description
+    </h2>
 </body>
 </html>

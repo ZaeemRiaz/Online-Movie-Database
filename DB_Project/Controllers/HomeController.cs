@@ -12,14 +12,20 @@ namespace DB_Project.Controllers
     public class HomeController : Controller
     {
         //ActionResults with Views
-        public ActionResult ActorDetails(int actorId)
+        public ActionResult ActorDetails(string actorID)
         {
-            Actor a = CRUDactor.DisplayActorFunc(actorId);
-            return View(a);
+            Actor a = CRUDactor.DisplayActorFunc(actorID);
+            if (a != null)//actor found
+            {
+                return View(a);
+            }
+            else//actor not found
+            {
+                return RedirectToAction("Error", new { param = 2 });
+            }
         }
         public ActionResult AddComplaint()
         {
-            /*
             if (Session["uId"] == null)//user not logged in
             {
                 return RedirectToAction("Login");
@@ -28,8 +34,6 @@ namespace DB_Project.Controllers
             {
                 return View();
             }
-            */
-            return View();
         }
         public ActionResult AddMovie()
         {
@@ -49,7 +53,7 @@ namespace DB_Project.Controllers
                 }
             }
         }
-        public ActionResult EditMovieDetails(int movieID)
+        public ActionResult EditMovieDetails(string movieID)
         {
             if (Session["uType"] == null)//user not logged in
             {
@@ -68,7 +72,7 @@ namespace DB_Project.Controllers
                 }
             }
         }
-        public ActionResult Error(int param)
+        public ActionResult Error(Nullable<int> param)
         {
             return View(param);
         }
@@ -87,21 +91,21 @@ namespace DB_Project.Controllers
                 return View();
             }
         }
-        public ActionResult MovieDetails(int movieID)
+        public ActionResult MovieDetails(string movieID)
         {
-            if (movieID != 0)
+            if (movieID != "0")
             {
                 movieDetailStruct mdstruct = new movieDetailStruct();
                 mdstruct.movieDetail = CRUDmovie.MovieDetailFunc(movieID);
                 mdstruct.cast = CRUDactor.MovieCastFunc(movieID);
                 mdstruct.commentList = CRUDcomment.MovieCommentFunc(movieID);
-                if (mdstruct.movieDetail == null)
-                {
-                    return RedirectToAction("Error", new { param = 1 });
-                }
-                else
+                if (mdstruct.movieDetail != null)//movie found
                 {
                     return View(mdstruct);
+                }
+                else//movie not found
+                {
+                    return RedirectToAction("Error", new { param = 1 });
                 }
             }
             else
@@ -268,7 +272,7 @@ namespace DB_Project.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Error", new { param = 6 });
+                        return RedirectToAction("Error", new { param = 9 });
                     }
                 }
                 else//user not admin
@@ -298,7 +302,7 @@ namespace DB_Project.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Error", new { param = 6 });
+                        return RedirectToAction("Error", new { param = 9 });
                     }
                 }
                 else//user not admin
@@ -328,7 +332,7 @@ namespace DB_Project.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Error", new { param = 6 });
+                        return RedirectToAction("Error", new { param = 9 });
                     }
                 }
                 else//user not admin
@@ -358,7 +362,7 @@ namespace DB_Project.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Error", new { param = 6 });
+                        return RedirectToAction("Error", new { param = 9 });
                     }
                 }
                 else//user not admin
@@ -367,7 +371,7 @@ namespace DB_Project.Controllers
                 }
             }
         }
-        public ActionResult DeletMovieAction(string releaseDate)
+        public ActionResult DeletMovieAction(string movieID)
         {
             if (Session["uType"] == null)//user not logged in
             {
@@ -377,7 +381,7 @@ namespace DB_Project.Controllers
             {
                 if (Session["uType"].ToString() == "A")//admin
                 {
-                    int ret = CRUDmovie.EditMovieDateofReleaseFunc(Session["movieID"].ToString(), releaseDate);
+                    int ret = CRUDmovie.DelMovieFunc(movieID);
                     if (ret == 1)
                     {
                         return RedirectToAction("Index");
@@ -388,7 +392,7 @@ namespace DB_Project.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Error", new { param = 6 });
+                        return RedirectToAction("Error", new { param = 10 });
                     }
                 }
                 else//user not admin
@@ -408,7 +412,7 @@ namespace DB_Project.Controllers
                 int ret = CRUDrating.AddRatingFunc(movieID, Session["uId"].ToString(), rating);
                 if (ret == 1)//user signed up successfully, goto login page
                 {
-                    return RedirectToAction("MovieDetails", new { param = Int32.Parse(movieID)});
+                    return RedirectToAction("MovieDetails", new { movieID = movieID});
                 }
                 else if (ret == -1)//DB connection failed
                 {
@@ -416,7 +420,7 @@ namespace DB_Project.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Error", new { param = 3 });
+                    return RedirectToAction("Error", new { param = 7 });
                 }
             }
         }
@@ -431,7 +435,7 @@ namespace DB_Project.Controllers
                 int ret = CRUDcomment.AddCommentFunc(movieID, Session["uId"].ToString(), comment);
                 if (ret == 1)//user signed up successfully, goto login page
                 {
-                    return RedirectToAction("MovieDetails", new { param = Int32.Parse(movieID) });
+                    return RedirectToAction("MovieDetails", new { movieID = movieID });
                 }
                 else if (ret == -1)//DB connection failed
                 {
@@ -439,7 +443,7 @@ namespace DB_Project.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Error", new { param = 3 });
+                    return RedirectToAction("Error", new { param = 8 });
                 }
             }
         }
@@ -450,6 +454,5 @@ namespace DB_Project.Controllers
             int ret = CRUDuser.EmailAvailableFunc(email);
             return Json(ret);
         }
-
     }
 }

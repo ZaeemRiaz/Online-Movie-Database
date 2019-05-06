@@ -50,7 +50,7 @@ namespace DB_Project.Models
             }
             return result;
         }
-        public static List<Comment> MovieCommentFunc(int movieID)
+        public static List<Comment> MovieCommentFunc(string movieID)
         {
             List<Comment> cList = new List<Comment>();
             //open connection to db
