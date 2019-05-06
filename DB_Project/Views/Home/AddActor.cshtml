@@ -1,0 +1,30 @@
+﻿<html>
+<head>
+    <title>Add New Actor</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+    <div id="formwrapper">
+        <form action="../../Home/AddActorAction" method="post" name="addactoraction" enctype="multipart/form-data">
+            <fieldset>
+                <h1>Add an actor</h1>
+                <label for="name">Name:</label>
+                <input required name="name" type="text" size="50" maxlength="100">
+                <label for="date">Date of Birth:</label>
+                <input type="date" required name="bdate" size="50" maxlength="100" />
+                <select name="gender" id="gender">
+                    <option value="M" selected>Male</option>
+                    <option value="F">Female</option>
+                </select>
+                <br>
+                <label for="description">Description:</label>
+                <textarea required name="description" cols="40" rows="10"> </textarea>
+                <input class="btn" name="submit" type="submit" value="Send">
+            </fieldset>
+        </form>
+    </div>
+
+
+</body>
+</html>
