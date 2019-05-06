@@ -32,7 +32,14 @@ namespace DB_Project.Controllers
             }
             else
             {
-                return View();
+                if (Session["uType"].ToString() == "A")//admin account
+                {
+                    return RedirectToAction("Index");
+                }
+                else//user account
+                {
+                    return View();
+                }
             }
         }
         public ActionResult AddMovie()
