@@ -1,0 +1,31 @@
+﻿@using DB_Project.Models
+@model List<Actor>
+@{
+    int i = 1;
+}
+
+
+
+<html>
+<head>
+    <title>Edit Cast</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <form action="../../Home/AddActorAction" method="post">
+        <fieldset>
+            <h2> Add cast from drop down list</h2>
+            <select name="actor" id="actor">
+            @foreach (Actor a in Model)
+            {
+                <option value="a.actorID">a.name</option>
+                i = i + 1;
+            }
+            </select>
+            <br>
+        </fieldset>
+    </form>
+
+</body>
+</html>
