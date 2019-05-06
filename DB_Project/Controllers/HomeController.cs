@@ -145,8 +145,9 @@ namespace DB_Project.Controllers
                 }
             }
         }
-        public ActionResult MovieResults(List<Movie> mList)
+        public ActionResult MovieResults()
         {
+            var mList = TempData["mList"] as List<Movie>;
             if (mList != null) 
             {
                 return View(mList);
@@ -389,7 +390,7 @@ namespace DB_Project.Controllers
                 }
             }
         }
-        public ActionResult DeletMovieAction(string movieID)
+        public ActionResult DeleteMovieAction(string movieID)
         {
             if (Session["uType"] == null)//user not logged in
             {
@@ -468,17 +469,20 @@ namespace DB_Project.Controllers
         public ActionResult TopMoviesAction()
         {
             List<Movie> mList = CRUDmovie.TopMovieFunc();
-            return RedirectToAction("MovieResults", new { mList = mList });
+            TempData["mList"] = mList;
+            return RedirectToAction("MovieResults");
         }
         public ActionResult AllMoviesAction()
         {
             List<Movie> mList = CRUDmovie.AllMovieFunc();
-            return RedirectToAction("MovieResults", new { mList = mList });
+            TempData["mList"] = mList;
+            return RedirectToAction("MovieResults");
         }
         public ActionResult SearchMoviesAction(string text)
         {
             List<Movie> mList = CRUDmovie.SearchMovieFunc(text);
-            return RedirectToAction("MovieResults", new { mList = mList });
+            TempData["mList"] = mList;
+            return RedirectToAction("MovieResults");
         }
         public ActionResult LogoutAction()
         {
