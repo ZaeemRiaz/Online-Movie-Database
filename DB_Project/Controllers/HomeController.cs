@@ -248,6 +248,7 @@ namespace DB_Project.Controllers
                         pic = title + ".jpg";
                         string path = System.IO.Path.Combine(Server.MapPath("~/Content/Images/"), pic);
                         fileToUpload.SaveAs(path);
+                        pic = "\\Content\\Images\\" + pic;
                     }
                     int ret = CRUDmovie.AddMovieFunc(title, description, genre, releaseDate, pic);
                     if (ret == 1)//successfully added movie
