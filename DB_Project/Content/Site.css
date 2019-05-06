@@ -8,17 +8,27 @@
 }
 
 
-form{
+form {
     width: 400px;
     height: auto;
-    background-color: black;
+}
+
+.ding {
+    background-color: #FBEAEB;
+    width: 500px;
+    padding-left: 60px;
+}
+
+.dang {
+    float: right;
 }
 
 fieldset {
-    background: rgba(255, 255, 255, 0.8);
-    border: solid;
+    background: #FBEAEB;
+    border: 0 0 0 0;
     padding-bottom: 10px;
 }
+
 h1 {
     font-family: "Trebuchet MS", Helvetica, sans-serif;
     font-size: 24px;
@@ -28,7 +38,7 @@ h1 {
 h2 {
     font-family: "Trebuchet MS", Helvetica, sans-serif;
     font-size: 20px;
-    color: red;
+    color: #2F3C7E;
 }
 
 
@@ -44,7 +54,6 @@ label {
 }
 
 input {
-    
     border: thin solid black;
     margin-bottom: 10px;
 }
@@ -58,7 +67,7 @@ textarea {
     background-color: orange; /* Green */
     border: none;
     color: white;
-    padding-bottom:  30px ;
+    padding-bottom: 30px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -68,11 +77,9 @@ textarea {
 }
 
 body {
-    background-color: white;
+    background-color: #FBEAEB;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-image: url(https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80) ;
-    background-size: cover;
 }
 
 * {

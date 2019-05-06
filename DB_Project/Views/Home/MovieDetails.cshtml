@@ -2,16 +2,16 @@
 @model movieDetailStruct
 
 @{
-    int i = 1;
+                /**/
+
+                int i = 1;
 }
 <!DOCTYPE html>
 <html>
 <head>
     <title>Movie Details</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-
     @if (Session["uType"] != null)
     {
         if (Session["uType"].ToString() == "A")
@@ -24,64 +24,61 @@
 
 
 
+    <div class="ding">
+        <h1>@Model.movieDetail.title</h1>
+        <div class="dang">
+            <h1>@Model.movieDetail.rating/10 </h1>
+        </div>
+        <h2>What is the movie about?</h2>
+        <p>Category: @Model.movieDetail.genre</p>
+        <p>Description: @Model.movieDetail.descript</p>
+        <!--@Model.movieDetail.movieID <br />-->
+        <p>Release Date: @Model.movieDetail.releasedate</p>
+        <img src=@Model.movieDetail.picture alt="Movie Picture" width="250" height="500">
 
-    <h1>@Model.movieDetail.title</h1>
-    <p>Rating: @Model.movieDetail.rating </p>
-    <h2>What is the movie about?</h2>
-    <p>Category: @Model.movieDetail.genre</p>
-    <p>Description: @Model.movieDetail.descript</p>
-    <!--@Model.movieDetail.movieID <br />-->
-    <p>Release Date: @Model.movieDetail.releasedate</p>
-    <img src=@Model.movieDetail.picture alt="Picture" width="104" height="142">
+        <form action="../../Home/Rating" method="post">
+            <fieldset>
+                <h2> Rate the movie (1-10) </h2>
+                <input type="radio" name="Rating" value=1>1
+                <input type="radio" name="Rating" value=2>2
+                <input type="radio" name="Rating" value=3>3
+                <input type="radio" name="Rating" value=4>4
+                <input type="radio" name="Rating" value=5>5
+                <input type="radio" name="Rating" value=6>6
+                <input type="radio" name="Rating" value=7>7
+                <input type="radio" name="Rating" value=8>8
+                <input type="radio" name="Rating" value=9>9
+                <input type="radio" name="Rating" value=10>10
+                <br />
+                <input type="submit" value="Rate Now">
+            </fieldset>
+        </form>
 
-    <form action="../../Home/Rating" method="post">
-        <fieldset>
-            <h2> Rate the movie (1-10) </h2>
-            <input type="radio" name="Rating" value=1>1
-            <input type="radio" name="Rating" value=2>2
-            <input type="radio" name="Rating" value=3>3
-            <input type="radio" name="Rating" value=4>4
-            <input type="radio" name="Rating" value=5>5
-            <input type="radio" name="Rating" value=6>6
-            <input type="radio" name="Rating" value=7>7
-            <input type="radio" name="Rating" value=8>8
-            <input type="radio" name="Rating" value=9>9
-            <input type="radio" name="Rating" value=10>10
-            <br />
-            <input type="submit" value="Submit">
-        </fieldset>
-    </form>
-
-    @*<p>The cast includes:</p>
-        @foreach (String element in Model)
+        <h2>The cast includes:</h2>
+        @foreach (Actor a in Model.cast)
         {
-            <!-- output syntax-->
-            <p> </p>
+            <li> @a.name</li>
             i = i + 1;
-        }*@
-    <h2>The cast includes:</h2>
-    @foreach (Actor a in Model.cast)
-    {
-        <li> @a.name</li>
-        i = i + 1;
-    }
+        }
 
 
-    <form action="../../Home/AddComent" method="post">
-        <fieldset>
-            <h2> Add a comment </h2>
-            <p>Comment:</p>
-            <input type="text" requried name="comment">
-            <input type="submit" value="Submit">
-        </fieldset>
+        <form action="../../Home/AddComent" method="post">
+            <fieldset>
+                <h2> Add a comment </h2>
 
-    </form>
+                <textarea name="message" cols="40" rows="5"> </textarea>
+                <input type="submit" value="Comment Now">
+            </fieldset>
 
-    <h2>Previous comments are:</h2>
-    @foreach (Comment c in Model.commentList)
-    {
-        <li> @c.userID @c.userName commented at time: @c.dtime: @c.comment</li>
-        i = i + 1;
-    }
+        </form>
+
+        <h2>Previous comments are:</h2>
+
+        @foreach (Comment c in Model.commentList)
+        {
+            <li> @c.userID @c.userName commented at time: @c.dtime: @c.comment</li>
+            i = i + 1;
+        }
+    </div>
 </body>
 </html>
