@@ -63,8 +63,11 @@ namespace DB_Project.Controllers
             {
                 if (Session["uType"].ToString() == "A")//admin
                 {
-                    Session["movieID"] = movieID;
-                    return View(movieID);
+                    //Session["movieID"] = movieID;
+                    editMovieStruct emstruct = new editMovieStruct();
+                    emstruct.movieID = movieID;
+                    emstruct.raList = CRUDactor.RemainingActorsFunc(movieID);
+                    return View(emstruct);
                 }
                 else//user not admin
                 {
@@ -143,7 +146,23 @@ namespace DB_Project.Controllers
                 }
             }
         }
+        public ActionResult MovieResults(List<Movie> mList)
+        {
+            if (mList != null) 
+            {
+                return View(mList);
+            }
+            else
+            {
+                return RedirectToAction("Error", new { param = 11 });
+            }
+        }
+        public ActionResult AddActor()
+        {
+            return View();
+        }
         
+
         //ActionResult without Views
         public ActionResult SignupAction(string email, string name, string usertype, string dateOfBirth, string password)
         {
@@ -446,6 +465,36 @@ namespace DB_Project.Controllers
                     return RedirectToAction("Error", new { param = 8 });
                 }
             }
+        }
+        public ActionResult TopMoviesAction()
+        {
+            List<Movie> mList = CRUDmovie.TopMovieFunc();
+            return RedirectToAction("MovieResults", new { mList = mList });
+        }
+        public ActionResult AllMoviesAction()
+        {
+            List<Movie> mList = CRUDmovie.AllMovieFunc();
+            return RedirectToAction("MovieResults", new { mList = mList });
+        }
+        public ActionResult SearchMoviesAction(string text)
+        {
+            List<Movie> mList = CRUDmovie.SearchMovieFunc(text);
+            return RedirectToAction("MovieResults", new { mList = mList });
+        }
+        public ActionResult LogoutAction()
+        {
+            Session["uId"] = null;
+            Session["uType"] = null;
+            return RedirectToAction("Index");
+        }
+        public ActionResult AddActorAction(string name, string bdate, string gender, string descript)
+        {
+
+            return null;
+        }
+        public ActionResult AddCastAction()
+        {
+            return null;
         }
 
         //JsonResults

@@ -1,4 +1,7 @@
-﻿@model int
+﻿@using DB_Project.Models
+
+@model editMovieStruct
+
 <script type="text/javascript">
     var elems = document.getElementsByClassName('confirmation');
     var confirmIt = function (e) {
@@ -21,7 +24,7 @@
 <body>
 
     <div id="formwrapper">
-        <form action="../../Home/EditMovieTitleAction?movieID=@Model" method="post" name="EditMovieTitle">
+        <form action="../../Home/EditMovieTitleAction?movieID=@Model.movieID" method="post" name="EditMovieTitle">
             <fieldset>
                 <h1>Edit Movie Title:</h1>
                 <label for="title">New Title:</label>
@@ -32,7 +35,7 @@
     </div>
     <br />
     <div id="formwrapper">
-        <form action="../../Home/EditMovieGenreAction?movieID=@Model" method="post" name="EditMovieGenre">
+        <form action="../../Home/EditMovieGenreAction?movieID=@Model.movieID" method="post" name="EditMovieGenre">
             <fieldset>
                 <h1>Edit Movie Genre:</h1>
                 <label for="genre">New Genre:</label>
@@ -44,7 +47,7 @@
     <br />
 
     <div id="formwrapper">
-        <form action="../../Home/EditMovieDescriptionAction?movieID=@Model" method="post" name="EditMovieDescription">
+        <form action="../../Home/EditMovieDescriptionAction?movieID=@Model.movieID" method="post" name="EditMovieDescription">
             <fieldset>
                 <h1>Edit Movie Description:</h1>
                 <label for="description">New Description:</label>
@@ -57,7 +60,7 @@
     <br />
 
     <div id="formwrapper">
-        <form action="../../Home/EditMovieDateofReleaseAction?movieID=@Model" method="post" name="EditMovieDateofRelease">
+        <form action="../../Home/EditMovieDateofReleaseAction?movieID=@Model.movieID" method="post" name="EditMovieDateofRelease">
             <fieldset>
                 <h1>Edit Movie Date of Release:</h1>
                 <label for="date">New Date of Release:</label>
