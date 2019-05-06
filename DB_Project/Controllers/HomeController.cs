@@ -610,7 +610,37 @@ namespace DB_Project.Controllers
                 }
             }
         }
-        
+        public ActionResult ResolveComplaintAction(string complaintID)
+        {
+            if (Session["uType"] == null)//user not logged in
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                if (Session["uType"].ToString() == "A")//admin
+                {
+                    int ret = CRUDcomplaint.ChangeComplaintFunc(complaintID);
+                    if (ret == 1)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else if (ret == -1)//DB connection failed
+                    {
+                        return RedirectToAction("Error", new { param = -1 });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Error", new { param = 15 });
+                    }
+                }
+                else//user not admin
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+        }
+
         //JsonResults
         public JsonResult CheckEmailAvailable(string email)
         {
