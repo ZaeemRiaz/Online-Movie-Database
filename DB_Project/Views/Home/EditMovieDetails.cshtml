@@ -86,7 +86,7 @@
             <select name="actorID" id="actorID">
                 @foreach (Actor a in Model.raList)
                 {
-                    <option value="a.actorID">a.name</option>
+                    <option value="a.actorID">@a.name</option>
                     i = i + 1;
                 }
             </select>

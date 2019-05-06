@@ -123,7 +123,7 @@ namespace DB_Project.Models
                 command.Parameters.Add("@descript", SqlDbType.VarChar, 300).Value = descript;
                 command.Parameters.Add("@genre", SqlDbType.VarChar, 100).Value = genre;
                 command.Parameters.Add("@releasedate", SqlDbType.VarChar, 10).Value = releasedate;
-                command.Parameters.Add("@pic", SqlDbType.VarChar, 10).Value = picture;
+                command.Parameters.Add("@pic", SqlDbType.VarChar, 300).Value = picture;
 
                 command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
 
