@@ -364,7 +364,7 @@ namespace DB_Project.Controllers
                 }
             }
         }
-        public ActionResult DeletMovieAction(string releaseDate)
+        public ActionResult DeletMovieAction(string movieID)
         {
             if (Session["uType"] == null)//user not logged in
             {
