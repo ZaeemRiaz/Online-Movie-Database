@@ -21,7 +21,7 @@ namespace DB_Project.Controllers
             }
             else//actor not found
             {
-                return RedirectToAction("Error", new { param = 8 });
+                return RedirectToAction("Error", new { param = 2 });
             }
         }
         public ActionResult AddComplaint()

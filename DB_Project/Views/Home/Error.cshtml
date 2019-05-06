@@ -20,54 +20,63 @@ KEY
 <body>
     <br />
     <br />
-    @if (Model == -1)
+    @try
     {
-        <p>Connection to Database Failed!</p>
+        if (Model == -1)
+        {
+            <p>Connection to Database Failed!</p>
+        }
+        else if (Model == 1)
+        {
+            <p>Movie Details Not Found</p>
+        }
+        else if (Model == 2)
+        {
+            <p>Actor Details Not Found</p>
+        }
+        else if (Model == 3)
+        {
+            <p>Signup Failed</p>
+        }
+        else if (Model == 4)
+        {
+            <p>Login Failed</p>
+        }
+        else if (Model == 5)
+        {
+            <p>Complaint Registration Failed</p>
+        }
+        else if (Model == 6)
+        {
+            <p>Edit Movie Failed</p>
+        }
+        else if (Model == 7)
+        {
+            <p>Rating Failed</p>
+        }
+        else if (Model == 8)
+        {
+            <p>Comment Failed</p>
+        }
+        else if (Model == 9)
+        {
+            <p>Edit Failed</p>
+        }
+        else if (Model == 10)
+        {
+            <p>Delete Movie Failed</p>
+        }
+        else
+        {
+            <p>Error! Error Not Found</p>
+        }
     }
-    else if (Model == 1)
-    {
-        <p>Movie Details Not Found</p>
-    }
-    else if (Model == 2)
-    {
-        <p>Actor Details Not Found</p>
-    }
-    else if (Model == 3)
-    {
-        <p>Signup Failed</p>
-    }
-    else if (Model == 4)
-    {
-        <p>Login Failed</p>
-    }
-    else if (Model == 5)
-    {
-        <p>Complaint Registration Failed</p>
-    }
-    else if (Model == 6)
-    {
-        <p>Edit Movie Failed</p>
-    }
-    else if (Model == 7)
-    {
-        <p>Rating Failed</p>
-    }
-    else if (Model == 8)
-    {
-        <p>Comment Failed</p>
-    }
-    else if (Model == 9)
-    {
-        <p>Edit Failed</p>
-    }
-    else if (Model == 10)
-    {
-        <p>Delete Movie Failed</p>
-    }
-    else
+    catch (Exception)
     {
         <p>Error! Error Not Found</p>
+        throw;
     }
+
 </body>
 </html>
 
