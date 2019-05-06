@@ -15,7 +15,12 @@
     <h1>Complaints include:</h1>
     @foreach (Complaint c in Model)
     {
-        <p>@c.text and @c.status</p>
+        <h3>@c.userID commented:</h3>
+        <h4>@c.text (at @c.dtime)</h4>
+        if (c.status != "Resolved")
+        {
+            <h4> <a href="../../Home/ResolveComplaintAction?complaintID=@c.complaintID">RESOLVE NOW!!!</a></h4>
+        }
         i = i + 1;
     }
 </body>
