@@ -145,8 +145,9 @@ namespace DB_Project.Controllers
                 }
             }
         }
-        public ActionResult MovieResults(List<Movie> mList)
+        public ActionResult MovieResults()
         {
+            var mList = TempData["mList"] as List<Movie>;
             if (mList != null) 
             {
                 return View(mList);
@@ -390,7 +391,7 @@ namespace DB_Project.Controllers
                 }
             }
         }
-        public ActionResult DeletMovieAction(string movieID)
+        public ActionResult DeleteMovieAction(string movieID)
         {
             if (Session["uType"] == null)//user not logged in
             {
@@ -469,17 +470,20 @@ namespace DB_Project.Controllers
         public ActionResult TopMoviesAction()
         {
             List<Movie> mList = CRUDmovie.TopMovieFunc();
-            return RedirectToAction("MovieResults", new { mList = mList });
+            TempData["mList"] = mList;
+            return RedirectToAction("MovieResults");
         }
         public ActionResult AllMoviesAction()
         {
             List<Movie> mList = CRUDmovie.AllMovieFunc();
-            return RedirectToAction("MovieResults", new { mList = mList });
+            TempData["mList"] = mList;
+            return RedirectToAction("MovieResults");
         }
         public ActionResult SearchMoviesAction(string text)
         {
             List<Movie> mList = CRUDmovie.SearchMovieFunc(text);
-            return RedirectToAction("MovieResults", new { mList = mList });
+            TempData["mList"] = mList;
+            return RedirectToAction("MovieResults");
         }
         public ActionResult LogoutAction()
         {
@@ -607,7 +611,37 @@ namespace DB_Project.Controllers
                 }
             }
         }
-        
+        public ActionResult ResolveComplaintAction(string complaintID)
+        {
+            if (Session["uType"] == null)//user not logged in
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                if (Session["uType"].ToString() == "A")//admin
+                {
+                    int ret = CRUDcomplaint.ChangeComplaintFunc(complaintID);
+                    if (ret == 1)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else if (ret == -1)//DB connection failed
+                    {
+                        return RedirectToAction("Error", new { param = -1 });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Error", new { param = 15 });
+                    }
+                }
+                else//user not admin
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+        }
+
         //JsonResults
         public JsonResult CheckEmailAvailable(string email)
         {

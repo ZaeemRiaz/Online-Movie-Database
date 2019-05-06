@@ -16,7 +16,6 @@
     @foreach (Movie m in Model)
     {
         <h2><a href="../../Home/MovieDetails?movieID=@m.movieID"> @m.title</a></h2>
-        <img src="@m.picture" alt="Movie names" height="100" width="100"/>
         i = i + 1;
     }
 </body>
