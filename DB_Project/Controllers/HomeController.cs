@@ -72,7 +72,7 @@ namespace DB_Project.Controllers
                 }
             }
         }
-        public ActionResult Error(int param)
+        public ActionResult Error(Nullable<int> param)
         {
             return View(param);
         }
@@ -454,6 +454,5 @@ namespace DB_Project.Controllers
             int ret = CRUDuser.EmailAvailableFunc(email);
             return Json(ret);
         }
-
     }
 }
