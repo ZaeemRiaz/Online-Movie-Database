@@ -36,7 +36,7 @@
         <p>Release Date: @Model.movieDetail.releasedate</p>
         <img src=@Model.movieDetail.picture alt="Movie Picture" width="250" height="500">
 
-        <form action="../../Home/AddRatingAction" method="post">
+        <form action="../../Home/AddRatingAction?movieID=@Model.movieDetail.movieID" method="post">
             <fieldset>
                 <h2> Rate the movie (1-10) </h2>
                 <input type="radio" name="Rating" value=1>1
@@ -62,11 +62,11 @@
         }
 
 
-        <form action="../../Home/AddCommentAction" method="post">
+        <form action="../../Home/AddCommentAction?movieID=@Model.movieDetail.movieID" method="post">
             <fieldset>
                 <h2> Add a comment </h2>
 
-                <textarea name="message" cols="40" rows="5"> </textarea>
+                <textarea name="comment" cols="40" rows="5"> </textarea>
                 <input type="submit" value="Comment Now">
             </fieldset>
 
