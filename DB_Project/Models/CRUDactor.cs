@@ -75,7 +75,7 @@ namespace DB_Project.Models
                 command = new SqlCommand("delete_actor", connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                command.Parameters.Add("@aID", SqlDbType.VarChar, 100).Value = actorID;
+                command.Parameters.Add("@aID", SqlDbType.Int).Value = actorID;
 
                 command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
 
@@ -114,10 +114,10 @@ namespace DB_Project.Models
                 command = new SqlCommand("add_actor", connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                command.Parameters.Add("@title", SqlDbType.VarChar, 100).Value = name;
-                command.Parameters.Add("@descript", SqlDbType.VarChar, 10).Value = bdate;
-                command.Parameters.Add("@genre", SqlDbType.Char).Value = gender;
-                command.Parameters.Add("@releasedate", SqlDbType.VarChar, 300).Value = descript;
+                command.Parameters.Add("@name", SqlDbType.VarChar, 100).Value = name;
+                command.Parameters.Add("@bdate", SqlDbType.VarChar, 10).Value = bdate;
+                command.Parameters.Add("@gender", SqlDbType.Char).Value = gender;
+                command.Parameters.Add("@descript", SqlDbType.VarChar, 300).Value = descript;
 
                 command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
 
@@ -289,6 +289,86 @@ namespace DB_Project.Models
                     connection.Close();
                 }
             }
+        }
+        public static int AddCastFunc(string movieID, string actorID)
+        {
+            //open connection to db
+            string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
+
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command = null;
+            int result = 0;
+
+            //try execution
+            try
+            {
+                connection.Open();
+
+                command = new SqlCommand("add_cast", connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.Add("@mID", SqlDbType.Int).Value = movieID;
+                command.Parameters.Add("@aID", SqlDbType.Int).Value = actorID;
+
+                command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                command.ExecuteNonQuery();
+                result = Convert.ToInt32(command.Parameters["@flag"].Value);
+            }
+            catch (SqlException ex)//print error message
+            {
+                Console.WriteLine("SQL Error" + ex.Message.ToString());
+                result = -1; //-1 will be interpreted as "error while connecting with the database."
+            }
+            finally//close connection
+            {
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+            }
+            return result;
+        }
+        public static int DelCastFunc(string movieID, string actorID)
+        {
+            //open connection to db
+            string connectionString = @"Data Source=localhost;Initial Catalog=muz;Integrated Security=True;";
+
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command = null;
+            int result = 0;
+
+            //try execution
+            try
+            {
+                connection.Open();
+
+                command = new SqlCommand("delete_cast", connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.Add("@mID", SqlDbType.Int).Value = movieID;
+                command.Parameters.Add("@aID", SqlDbType.Int).Value = actorID;
+
+                command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                command.ExecuteNonQuery();
+                result = Convert.ToInt32(command.Parameters["@flag"].Value);
+            }
+            catch (SqlException ex)//print error message
+            {
+                Console.WriteLine("SQL Error" + ex.Message.ToString());
+                result = -1; //-1 will be interpreted as "error while connecting with the database."
+            }
+            finally//close connection
+            {
+                // close connection
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+            }
+            return result;
         }
     }
 }

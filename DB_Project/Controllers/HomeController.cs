@@ -63,7 +63,6 @@ namespace DB_Project.Controllers
             {
                 if (Session["uType"].ToString() == "A")//admin
                 {
-                    //Session["movieID"] = movieID;
                     editMovieStruct emstruct = new editMovieStruct();
                     emstruct.movieID = movieID;
                     emstruct.raList = CRUDactor.RemainingActorsFunc(movieID);
@@ -261,7 +260,7 @@ namespace DB_Project.Controllers
                     }
                     else//add movie failed
                     {
-                        return RedirectToAction("Error", new { param = 4 });
+                        return RedirectToAction("Error", new { param = 13 });
                     }
                 }
                 else//user not admin
@@ -270,7 +269,7 @@ namespace DB_Project.Controllers
                 }
             } 
         }
-        public ActionResult EditMovieTitleAction(string title)
+        public ActionResult EditMovieTitleAction(string movieID, string title)
         {
             if (Session["uType"] == null)//user not logged in
             {
@@ -280,7 +279,7 @@ namespace DB_Project.Controllers
             {
                 if (Session["uType"].ToString() == "A")//admin
                 {
-                    int ret = CRUDmovie.EditMovieTitleFunc(Session["movieID"].ToString(), title);
+                    int ret = CRUDmovie.EditMovieTitleFunc(movieID, title);
                     if (ret == 1)
                     {
                         return RedirectToAction("Index");
@@ -300,7 +299,7 @@ namespace DB_Project.Controllers
                 }
             }
         }
-        public ActionResult EditMovieGenreAction(string genre)
+        public ActionResult EditMovieGenreAction(string movieID, string genre)
         {
             if (Session["uType"] == null)//user not logged in
             {
@@ -310,7 +309,7 @@ namespace DB_Project.Controllers
             {
                 if (Session["uType"].ToString() == "A")//admin
                 {
-                    int ret = CRUDmovie.EditMovieGenreFunc(Session["movieID"].ToString(), genre);
+                    int ret = CRUDmovie.EditMovieGenreFunc(movieID, genre);
                     if (ret == 1)
                     {
                         return RedirectToAction("Index");
@@ -330,7 +329,7 @@ namespace DB_Project.Controllers
                 }
             }
         }
-        public ActionResult EditMovieDescriptionAction(string description)
+        public ActionResult EditMovieDescriptionAction(string movieID, string description)
         {
             if (Session["uType"] == null)//user not logged in
             {
@@ -340,7 +339,7 @@ namespace DB_Project.Controllers
             {
                 if (Session["uType"].ToString() == "A")//admin
                 {
-                    int ret = CRUDmovie.EditMovieDescriptionFunc(Session["movieID"].ToString(), description);
+                    int ret = CRUDmovie.EditMovieDescriptionFunc(movieID, description);
                     if (ret == 1)
                     {
                         return RedirectToAction("Index");
@@ -360,7 +359,7 @@ namespace DB_Project.Controllers
                 }
             }
         }
-        public ActionResult EditMovieDateofReleaseAction(string releaseDate)
+        public ActionResult EditMovieDateofReleaseAction(string movieID, string releaseDate)
         {
             if (Session["uType"] == null)//user not logged in
             {
@@ -370,7 +369,7 @@ namespace DB_Project.Controllers
             {
                 if (Session["uType"].ToString() == "A")//admin
                 {
-                    int ret = CRUDmovie.EditMovieDateofReleaseFunc(Session["movieID"].ToString(), releaseDate);
+                    int ret = CRUDmovie.EditMovieDateofReleaseFunc(movieID, releaseDate);
                     if (ret == 1)
                     {
                         return RedirectToAction("Index");
@@ -489,14 +488,125 @@ namespace DB_Project.Controllers
         }
         public ActionResult AddActorAction(string name, string bdate, string gender, string descript)
         {
-
-            return null;
+            if (Session["uType"] == null)//user not logged in
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                if (Session["uType"].ToString() == "A")//admin
+                {
+                    int ret = CRUDactor.AddActorFunc(name, bdate, gender, descript);
+                    if (ret == 1)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else if (ret == -1)//DB connection failed
+                    {
+                        return RedirectToAction("Error", new { param = -1 });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Error", new { param =  12});
+                    }
+                }
+                else//user not admin
+                {
+                    return RedirectToAction("Index");
+                }
+            }
         }
-        public ActionResult AddCastAction()
+        public ActionResult AddCastAction(string movieID, string actorID)
         {
-            return null;
+            if (Session["uType"] == null)//user not logged in
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                if (Session["uType"].ToString() == "A")//admin
+                {
+                    int ret = CRUDactor.AddCastFunc(movieID, actorID);
+                    if (ret == 1)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else if (ret == -1)//DB connection failed
+                    {
+                        return RedirectToAction("Error", new { param = -1 });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Error", new { param = 14 });
+                    }
+                }
+                else//user not admin
+                {
+                    return RedirectToAction("Index");
+                }
+            }
         }
-
+        public ActionResult DelCastAction(string movieID, string actorID)
+        {
+            if (Session["uType"] == null)//user not logged in
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                if (Session["uType"].ToString() == "A")//admin
+                {
+                    int ret = CRUDactor.DelCastFunc(movieID, actorID);
+                    if (ret == 1)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else if (ret == -1)//DB connection failed
+                    {
+                        return RedirectToAction("Error", new { param = -1 });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Error", new { param = 14 });
+                    }
+                }
+                else//user not admin
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+        }
+        public ActionResult DelActorAction(string actorID)
+        {
+            if (Session["uType"] == null)//user not logged in
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                if (Session["uType"].ToString() == "A")//admin
+                {
+                    int ret = CRUDactor.DelActorFunc(actorID);
+                    if (ret == 1)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else if (ret == -1)//DB connection failed
+                    {
+                        return RedirectToAction("Error", new { param = -1 });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Error", new { param = 12 });
+                    }
+                }
+                else//user not admin
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+        }
+        
         //JsonResults
         public JsonResult CheckEmailAvailable(string email)
         {
