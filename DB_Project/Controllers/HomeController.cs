@@ -12,9 +12,9 @@ namespace DB_Project.Controllers
     public class HomeController : Controller
     {
         //ActionResults with Views
-        public ActionResult ActorDetails(string actorId)
+        public ActionResult ActorDetails(string actorID)
         {
-            Actor a = CRUDactor.DisplayActorFunc(actorId);
+            Actor a = CRUDactor.DisplayActorFunc(actorID);
             return View(a);
         }
         public ActionResult AddComplaint()
@@ -65,7 +65,7 @@ namespace DB_Project.Controllers
                 }
             }
         }
-        public ActionResult Error(int param)
+        public ActionResult Error(string param)
         {
             return View(param);
         }
@@ -94,7 +94,7 @@ namespace DB_Project.Controllers
                 mdstruct.commentList = CRUDcomment.MovieCommentFunc(movieID);
                 if (mdstruct.movieDetail == null)
                 {
-                    return RedirectToAction("Error", new { param = 1 });
+                    return RedirectToAction("Error", new { param = "1" });
                 }
                 else
                 {
@@ -103,7 +103,7 @@ namespace DB_Project.Controllers
             }
             else
             {
-                return RedirectToAction("Error", new { param = 1 });
+                return RedirectToAction("Error", new { param = "1" });
             }
         }
         public ActionResult Signup()
@@ -148,11 +148,11 @@ namespace DB_Project.Controllers
             }
             else if (ret == -1)//DB connection failed
             {
-                return RedirectToAction("Error", new { param = -1 });
+                return RedirectToAction("Error", new { param = "-1" });
             }
             else
             {
-                return RedirectToAction("Error", new { param = 3 });
+                return RedirectToAction("Error", new { param = "3" });
             }
         }
         public ActionResult LoginAction(string email, string password)
@@ -175,11 +175,11 @@ namespace DB_Project.Controllers
             }
             else if (u.ret == -1)//DB connection failed
             {
-                return RedirectToAction("Error", new { param = -1 });
+                return RedirectToAction("Error", new { param = "-1" });
             }
             else
             {
-                return RedirectToAction("Error", new { param = 4 });
+                return RedirectToAction("Error", new { param = "4" });
             }
         }
         public ActionResult AddComplaintAction(string message)
@@ -197,11 +197,11 @@ namespace DB_Project.Controllers
                 }
                 else if (ret == -1)//DB connection failed
                 {
-                    return RedirectToAction("Error", new { param = -1 });
+                    return RedirectToAction("Error", new { param = "-1" });
                 }
                 else
                 {
-                    return RedirectToAction("Error", new { param = 5 });
+                    return RedirectToAction("Error", new { param = "5" });
                 }
             }
         }
@@ -231,11 +231,11 @@ namespace DB_Project.Controllers
                     }
                     else if (ret == -1)//DB connection failed
                     {
-                        return RedirectToAction("Error", new { param = -1 });
+                        return RedirectToAction("Error", new { param = "-1" });
                     }
                     else//add movie failed
                     {
-                        return RedirectToAction("Error", new { param = 4 });
+                        return RedirectToAction("Error", new { param = "4" });
                     }
                 }
                 else//user not admin
@@ -261,11 +261,11 @@ namespace DB_Project.Controllers
                     }
                     else if (ret == -1)//DB connection failed
                     {
-                        return RedirectToAction("Error", new { param = -1 });
+                        return RedirectToAction("Error", new { param = "-1" });
                     }
                     else
                     {
-                        return RedirectToAction("Error", new { param = 6 });
+                        return RedirectToAction("Error", new { param = "9" });
                     }
                 }
                 else//user not admin
@@ -291,11 +291,11 @@ namespace DB_Project.Controllers
                     }
                     else if (ret == -1)//DB connection failed
                     {
-                        return RedirectToAction("Error", new { param = -1 });
+                        return RedirectToAction("Error", new { param = "-1" });
                     }
                     else
                     {
-                        return RedirectToAction("Error", new { param = 6 });
+                        return RedirectToAction("Error", new { param = "9" });
                     }
                 }
                 else//user not admin
@@ -321,11 +321,11 @@ namespace DB_Project.Controllers
                     }
                     else if (ret == -1)//DB connection failed
                     {
-                        return RedirectToAction("Error", new { param = -1 });
+                        return RedirectToAction("Error", new { param = "-1" });
                     }
                     else
                     {
-                        return RedirectToAction("Error", new { param = 6 });
+                        return RedirectToAction("Error", new { param = "9" });
                     }
                 }
                 else//user not admin
@@ -351,11 +351,11 @@ namespace DB_Project.Controllers
                     }
                     else if (ret == -1)//DB connection failed
                     {
-                        return RedirectToAction("Error", new { param = -1 });
+                        return RedirectToAction("Error", new { param = "-1" });
                     }
                     else
                     {
-                        return RedirectToAction("Error", new { param = 6 });
+                        return RedirectToAction("Error", new { param = "9" });
                     }
                 }
                 else//user not admin
@@ -381,11 +381,11 @@ namespace DB_Project.Controllers
                     }
                     else if (ret == -1)//DB connection failed
                     {
-                        return RedirectToAction("Error", new { param = -1 });
+                        return RedirectToAction("Error", new { param = "-1" });
                     }
                     else
                     {
-                        return RedirectToAction("Error", new { param = 6 });
+                        return RedirectToAction("Error", new { param = "10" });
                     }
                 }
                 else//user not admin
@@ -409,11 +409,11 @@ namespace DB_Project.Controllers
                 }
                 else if (ret == -1)//DB connection failed
                 {
-                    return RedirectToAction("Error", new { param = -1 });
+                    return RedirectToAction("Error", new { param = "-1" });
                 }
                 else
                 {
-                    return RedirectToAction("Error", new { param = 7 });
+                    return RedirectToAction("Error", new { param = "7" });
                 }
             }
         }
@@ -432,11 +432,11 @@ namespace DB_Project.Controllers
                 }
                 else if (ret == -1)//DB connection failed
                 {
-                    return RedirectToAction("Error", new { param = -1 });
+                    return RedirectToAction("Error", new { param = "-1" });
                 }
                 else
                 {
-                    return RedirectToAction("Error", new { param = 8 });
+                    return RedirectToAction("Error", new { param = "8" });
                 }
             }
         }
