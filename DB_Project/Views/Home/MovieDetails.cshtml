@@ -63,9 +63,17 @@
         @foreach (Actor a in Model.cast)
         {
             <h3><a href="../../Home/ActorDetails?actorID=@a.actorID">@a.name</a></h3>
+            @if (@Session["uId"] != null)
+            {
+                if (@Session["uType"].ToString() == "A")
+                {
+                   <p><a href="../../Home/DelCastAction?movieID=@Model.movieDetail.movieID&actorID=@a.actorID">Remove this actor from cast</a></p>
+                   <br />
+                }
+            }
+
             i = i + 1;
         }
-
 
         <form action="../../Home/AddCommentAction?movieID=@Model.movieDetail.movieID" method="post">
             <fieldset>
