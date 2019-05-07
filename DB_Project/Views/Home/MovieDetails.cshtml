@@ -63,7 +63,7 @@
         @foreach (Actor a in Model.cast)
         {
             <h3><a href="../../Home/ActorDetails?actorID=@a.actorID">@a.name</a></h3>
-            @if (@Session["uId"] != null)
+            if (@Session["uId"] != null)
             {
                 if (@Session["uType"].ToString() == "A")
                 {
