@@ -13,7 +13,6 @@
     <nav class="bar">
         <ul>
             <li><a href="../../Home/Index"> Index</a></li>
-            <li><a href="../../Home/AddComplaint">Complaint</a></li>
 
         </ul>
         <form action="../../Home/SearchMoviesAction" class="searchbox">
@@ -26,7 +25,7 @@
     </nav>
     @if (@Session["uId"] != null)
     {
-        <h2 style="margin-left:50px;">Account signed in</h2>
+        <h2 style="margin-left:50px;">Account signed in <a href="../../Home/LogoutAction">LOGOUT</a></h2>
     }
     else
     {

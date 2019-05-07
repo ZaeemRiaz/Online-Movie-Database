@@ -7,43 +7,44 @@
 <html>
 
 <head>
-    <title>index</title>
+    <title>Index</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-    <h2>Home Page</h2>
-    <br />
-    <a href="../../Home/ActorDetails?actorID=1">ActorDetails</a>
-    <br />
-    <br />
-    <a href="../../Home/AddComplaint">AddComplaint</a>
-    <br />
-    <br />
-    <a href="../../Home/AddMovie">AddMovie</a>
-    <br />
-    <br />
-    <a href="../../Home/EditMovieDetails?movieID=1">EditMovieDetails</a>
-    <br />
-    <br />
-    <a href="../../Home/Error">Error</a>
-    <br />
-    <br />
-    <a href="../../Home/Index">Index</a>
-    <br />
-    <br />
-    <a href="../../Home/LogIn">Login</a>
-    <br />
-    <br />
-    <a href="../../Home/MovieDetails?movieID=1">MovieDetails</a>
-    <br />
-    <br />
-    <a href="../../Home/SignUp">Signup</a>
-    <br />
-    <br />
-    <a href="../../Home/ViewComplaints">ViewComplaints</a>
-    <br />
-    <br />
+    @if (@Session["uId"] != null)
+    {
+        if (@Session["uType"].ToString() == "A")
+        {
+            <h2>Administrator's view</h2>
+            <br />
+            <br />
+            <a href="../../Home/AddMovie">AddMovie</a>
+            <br />
+            <br />
+            <a href="../../Home/ViewComplaints">ViewComplaints</a>
+            <br />
+            <br />
+            <a href="../../Home/AllMoviesAction">View All Movies</a>
+            <br />
+            <br />
+            <a href="../../Home/TopMoviesAction">View Top Rated Movies</a>
+        }
+        else
+        {
+            <h2>User's view</h2>
+            <br />
+            <br />
+            <a href="../../Home/AddComplaint">AddComplaint</a>
+            <br />
+            <br />
+            <a href="../../Home/AllMoviesAction">View All Movies</a>
+            <br />
+            <br />
+            <a href="../../Home/TopMoviesAction">View Top Rated Movies</a>
+        }
+    }
+
 </body>
 
 </html>
