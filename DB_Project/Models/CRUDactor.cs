@@ -214,9 +214,6 @@ namespace DB_Project.Models
                     a = new Actor();
                     a.actorID = reader[0].ToString();
                     a.name = reader[1].ToString();
-                    a.bdate = reader[2].ToString();
-                    a.gender = reader[3].ToString();
-                    a.description = reader[4].ToString();
                     aList.Add(a);
                 }
                 return aList;
@@ -307,8 +304,8 @@ namespace DB_Project.Models
                 command = new SqlCommand("add_cast", connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                command.Parameters.Add("@mID", SqlDbType.Int).Value = movieID;
-                command.Parameters.Add("@aID", SqlDbType.Int).Value = actorID;
+                command.Parameters.Add("@mID", SqlDbType.Int).Value = Convert.ToInt32(movieID);
+                command.Parameters.Add("@aID", SqlDbType.Int).Value = Convert.ToInt32(actorID);
 
                 command.Parameters.Add("@flag", SqlDbType.Int).Direction = ParameterDirection.Output;
 
